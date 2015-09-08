@@ -1,0 +1,51 @@
+#! /bin/sh
+# chkconfig: 2345 99 01
+# description: Rserve, /etc/init.d/rserve
+# processname: rserve
+# ========================
+
+<% if @osfamily == 'redhat' %>
+    # Source function library.
+    . /etc/rc.d/init.d/functions
+<% end %>
+
+DAEMON="Rserve"
+USER="rserve"
+LOG="/var/log/rserve/Rserve.log"
+
+case "$1" in
+    start)
+        echo -n "Starting ${DAEMON} daemon: "
+        su $USER -c "/usr/bin/R CMD ${DAEMON} >> ${LOG}"
+        echo "."
+    ;;
+    stop)
+        echo -n "Stopping ${DAEMON} daemon: "
+        killall -s 9 $DAEMON
+        echo "."
+    ;;
+    status)
+        ps cax | grep $DAEMON
+        if [ $? = 0 ] ; then
+            echo -n "Status ${DAEMON} daemon: running"
+            echo "."
+            exit 0
+        else
+            echo -n "Status ${DAEMON} daemon: not running"
+            echo "."
+            exit 2
+        fi
+    ;;
+    restart)
+        echo -n "Stopping ${DAEMON} daemon: "
+        killall -s 9 $DAEMON
+        echo -n "Starting ${DAEMON} daemon: "
+        su $USER -c "/usr/bin/R CMD ${DAEMON} >> ${LOG}"
+        echo "."
+    ;;
+    *)
+        echo "Usage: /etc/init.d/rserve {start|stop|status|restart}"
+        exit 1
+esac
+
+exit 0

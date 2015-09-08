@@ -1,0 +1,40 @@
+#
+# This configures the R applications served by rApache.
+#
+
+DocumentRoot "<%= scope.lookupvar('iqss::tworavens::parent_dir') %>"
+<Directory "<%= scope.lookupvar('iqss::tworavens::parent_dir') %>">
+  Options -Indexes +FollowSymLinks +MultiViews
+  AllowOverride None
+  <% if scope.lookupvar('::apache::apache_version') == '2.2' %>
+  Order allow,deny
+  Allow from all
+  <%else%>
+  Require all granted
+  <% end %>
+</Directory>
+
+
+
+
+RSourceOnStartup "<%= scope.lookupvar('iqss::tworavens::dataexplore_dir') %>/rook/rooksource.R"
+
+<Location /custom/zeligapp>
+        SetHandler r-handler
+        RFileEval <%= scope.lookupvar('iqss::tworavens::dataexplore_dir') %>/rook/rookzelig.R:Rook::Server$call(zelig.app)
+</Location>
+
+<Location /custom/subsetapp>
+        SetHandler r-handler
+        RFileEval <%= scope.lookupvar('iqss::tworavens::dataexplore_dir') %>/rook/rooksubset.R:Rook::Server$call(subset.app)
+</Location>
+
+<Location /custom/transformapp>
+        SetHandler r-handler
+        RFileEval <%= scope.lookupvar('iqss::tworavens::dataexplore_dir') %>/rook/rooktransform.R:Rook::Server$call(transform.app)
+</Location>
+
+<Location /custom/dataapp>
+        SetHandler r-handler
+        RFileEval <%= scope.lookupvar('iqss::tworavens::dataexplore_dir') %>/rook/rookdata.R:Rook::Server$call(data.app)
+</Location>

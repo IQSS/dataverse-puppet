@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# asadmin
+#
+# Path to the asadmin Utility
+# The asadmin utility is located in the as-install/bin directory. To run the asadmin utility without specifying the path, ensure that this directory is in your path.
+
+p=$(pwd)
+cd "<%= scope.lookupvar('iqss::dataverse::glassfish_parent_dir') %>/glassfish-<%= scope.lookupvar('iqss::dataverse::glassfish_version') %>/glassfish/bin/"
+sudo -u <%= scope.lookupvar('iqss::dataverse::glassfish_user')%> ./asadmin "$@"
+cd $p

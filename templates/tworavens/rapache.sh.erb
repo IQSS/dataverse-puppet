@@ -1,0 +1,45 @@
+#!/bin/bash
+#
+# rapache.sh
+#
+# Builds the R mod for Apache2 and installs it.
+
+
+VERSION="<%= scope.lookupvar('iqss::tworavens::rapache_version') %>"
+LIB_R="<%= scope.lookupvar('iqss::params::mod_r_so_file') %>"
+
+
+build_dir=/tmp/rapache
+if [ -d $build_dir ] ; then
+    rm -rf $build_dir
+fi
+mkdir -p $build_dir
+
+cd $build_dir
+wget -O v${VERSION}.zip "https://github.com/jeffreyhorner/rapache/archive/v${VERSION}.zip"
+unzip "v${VERSION}.zip"
+cd rapache-${VERSION}
+./configure --with-apache2-apxs=/usr/bin/apxs2 --with-R=/usr/bin/R
+if [[ $? != 0 ]] ; then
+    echo "configure failure."
+    exit 1
+fi
+
+make
+if [[ $? != 0 ]] ; then
+    echo "make failure."
+    exit 1
+fi
+
+make install
+if [[ $? != 0 ]] ; then
+    echo "make install failure."
+    exit 1
+fi
+
+if [ ! -f $LIB_R ] ; then
+    echo "Unable to create: ${LIB_R}"
+    exit 1
+fi
+
+exit 0

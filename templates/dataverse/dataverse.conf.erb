@@ -1,0 +1,40 @@
+<% if scope.lookupvar('iqss::dataverse::allow_http') %>
+<VirtualHost *:80>
+
+    ServerName <%= scope.lookupvar('iqss::dataverse::dataverse_fqdn') %>
+    CustomLog <%= scope.lookupvar('::apache::logroot') %>/access.log combined
+    ErrorLog <%= scope.lookupvar('::apache::logroot') %>/error.log
+
+
+    # In case we run TwoRavens on the same machine we do not want to pass that to Glassfish
+    ProxyPassMatch ^/dataexplore/ !
+
+    include "/opt/dataverse/*.conf"
+
+</VirtualHost>
+<% else %>
+<VirtualHost *:80>
+    ServerName <%= scope.lookupvar('iqss::dataverse::dataverse_fqdn') %>
+    Redirect permanent / <%= scope.lookupvar('iqss::dataverse::dataverse_site_url') %>/
+</VirtualHost>
+<% end %>
+
+Listen 443
+<VirtualHost *:443>
+
+    ServerName <%= scope.lookupvar('iqss::dataverse::dataverse_fqdn') %>
+    CustomLog <%= scope.lookupvar('::apache::logroot') %>/ssl-access.log combined
+    ErrorLog <%= scope.lookupvar('::apache::logroot') %>/ssl-error.log
+
+    SSLEngine on
+    SSLCertificateKeyFile <%= scope.lookupvar('::apache::default_ssl_key') %>
+    SSLCertificateFile <%= scope.lookupvar('::apache::default_ssl_cert') %>
+
+
+    # In case we run TwoRavens on the same machine we do not want to pass that to Glassfish
+    ProxyPassMatch ^/dataexplore/ !
+
+    include "/opt/dataverse/*.conf"
+
+
+</VirtualHost>
