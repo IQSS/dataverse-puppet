@@ -8,6 +8,7 @@
  - Create this change.log.
  - Change in metadata.json to reflect new repo.
  - Provision a RServe class and configuration file.
+ - RServe will start on boot.
  - Specify R packages with a version to ensure we have installed it.
  - Run the database and api scripts to populate dataverse.
  - When provisioning all on one machine, ensure the database is setup before dataverse attempts to populate the database.
