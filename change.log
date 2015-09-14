@@ -1,0 +1,14 @@
+[BRANCH RELEASE] [date]
+ - [New or deprecated item.]
+
+0.1.0 July 2015
+ - Inception.
+
+4.0.1 September 2015
+ - Create this change.log.
+ - Change in metadata.json to reflect new repo.
+ - Provision a RServe class and configuration file.
+ - Specify R packages with a version to ensure we have installed it.
+ - Run the database and api scripts to populate dataverse.
+ - When provisioning all on one machine, ensure the database is setup before dataverse attempts to populate the database.
+ - Append to the readme.

@@ -33,6 +33,7 @@ class iqss::dataverse (
   anchor { 'iqss::dataverse::start': }->
   class { 'iqss::dataverse::install': }->
   class { 'iqss::dataverse::config': }->
+  class { 'iqss::dataverse::reload': }->
   class { 'iqss::dataverse::war': }->
   class { 'iqss::dataverse::deploy': }->
   class { 'iqss::dataverse::vhost': }->

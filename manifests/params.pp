@@ -43,9 +43,9 @@ class iqss::params inherits iqss::globals {
   $dataverse_files_directory                        = '/home/glassfish/dataverse/files'
   $dataverse_fqdn                                   = $iqss::globals::dataverse_fqdn
   $dataverse_port                                   = $iqss::globals::dataverse_port
-  $dataverse_rserve_host                            =  $iqss::globals::dataverse_fqdn
+  $dataverse_rserve_host                            = $iqss::globals::dataverse_fqdn
   $dataverse_rserve_port                            = '6311'
-  $dataverse_rserve_password                        = 'rserve'
+  $dataverse_rserve_password                        = $iqss::globals::rserve_pwd
   $dataverse_rserve_user                            = 'rserve'
   $dataverse_site_url                               = "https://${dataverse_fqdn}:9999"
   $doi_baseurlstring                                = 'https://ezid.cdlib.org'
@@ -66,11 +66,50 @@ class iqss::params inherits iqss::globals {
   $glassfish_user                                   = 'glassfish'
   $glassfish_version                                = '4.1'
   $repository                                       = 'https://github.com/IQSS/dataverse/releases/download/v4.0.1/dataverse-4.0.1.war'
-  $rserve_packages_r                                = [ 'devtools', 'DescTools', 'R2HTML', 'Rserve', 'VGAM', 'AER', 'dplyr', 'quantreg', 'geepack', 'maxLik', 'Amelia', 'Rook', 'jsonlite', 'rjson' ]
-  $rserve_packages_zelig                            = 'https://github.com/IQSS/Zelig/archive/master.zip'
+
+  $rpackager_packages                               = {
+    'AER'       => { version => '1.2-4' },
+    'Amelia'    => { version => '1.7.3' },
+    'DescTools' => { version => '0.99.13' },
+    'devtools'  => { version => '1.9.1' },
+    'dplyr'     => { version => '0.4.3' },
+    'geepack'   => { version => '1.2-0' },
+    'jsonlite'  => { version => '0.9.17' },
+    'maxLik'    => { version => '1.2-4' },
+    'quantreg'  => { version => '5.19' },
+    'Rook'      => { version => '1.1-1' },
+    'rjson'     => { version => '0.2.15' },
+    'Rserve'    => { version => '1.7-3' },
+    'R2HTML'    => { version => '2.3.1' },
+    'VGAM'      => { version => '0.9-8' }
+  }
+  $rpackager_packages_zelig                         = 'https://github.com/IQSS/Zelig/archive/master.zip'
+  $rpackager_repo                                   = 'http://cran.r-project.org'
+
+  $rserve_auth                                      = 'required'
+  $rserve_chroot                                    = undef
+  $rserve_encoding                                  = 'utf8'
+  $rserve_eval                                      = undef
+  $rserve_fileio                                    = 'enable'
+  $rserve_gid                                       = 97
+  $rserve_interactive                               = 'yes'
+  $rserve_maxinbuf                                  = 262144
+  $rserve_maxsendbuf                                = 0
   $rserve_user                                      = 'rserve'
+  $rserve_plaintext                                 = 'disable'
+  $rserve_port                                      = 6311
+  $rserve_pwd                                       = $iqss::globals::rserve_pwd
+  $rserve_pwdfile                                   = '/etc/Rserv.pwd'
+  $rserve_remote                                    = 'enable'
+  $rserve_socket                                    = undef
+  $rserve_sockmod                                   = 0
+  $rserve_source                                    = undef
+  $rserve_su                                        = undef
+  $rserve_uid                                       = 97
+  $rserve_umask                                     = 0
+  $rserve_workdir                                   = '/tmp/Rserv'
+
   $trigger                                          = '*/3'
-  $rserve_package_repo                              = 'http://cran.r-project.org'
   $solr_core                                        = 'collection1'
   $solr_url                                         = 'http://archive.apache.org/dist/lucene/solr'
   $solr_version                                     = '4.6.0'
@@ -111,7 +150,7 @@ class iqss::params inherits iqss::globals {
         'apache::mod::reqtimeout',
         'apache::mod::rewrite',
         'apache::mod::setenvif']
-      $rserve_rstudio_libraries = [
+      $rpackager_rstudio_libraries = [
         'R', 'R-devel', 'libapreq2', 'libcurl-devel', 'libxml2-devel', 'openssl-devel', 'libXt-devel', 'mesa-libGL-devel', 'mesa-libGLU-devel', 'libpng-devel'
       ]
       $shibboleth_lib = '/usr/lib64/shibboleth/mod_shib_22.so'
@@ -120,7 +159,7 @@ class iqss::params inherits iqss::globals {
     'debian': {
       $solr_required_packages = ['openjdk-7-jre']
       $solr_java_home = '/usr/lib/jvm/java-7-openjdk-amd64/jre'
-      $rserve_rstudio_libraries = $::lsbdistcodename ? {
+      $rpackager_rstudio_libraries = $::lsbdistcodename ? {
         'trusty' => [
           'r-base', 'r-base-core', 'libcurl4-openssl-dev', 'libpq-dev', 'libxml2-dev', 'libcurl4-gnutls-dev', 'libapreq2-3'
         ],

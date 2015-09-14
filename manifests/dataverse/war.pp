@@ -36,12 +36,10 @@ class iqss::dataverse::war {
       'clone the repository':
         command => '/usr/bin/git clone git@github.com:IQSS/dataverse.git',
         cwd     => '/dataverse' ;
-    }
-
-    exec {
+    }->exec {
       'build the war': # We assume as we run 'local' this is the root of the code base in /dataverse
         command => "/usr/bin/mvn clean package && rsync -av /dataverse/target/${dataverse_filename} /usr/src/dataverse.war",
-        cwd     => '/dataverse'
+        cwd     => '/dataverse' ;
     }
 
   } else {

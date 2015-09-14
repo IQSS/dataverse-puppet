@@ -1,4 +1,4 @@
-class iqss::rserve::repo {
+class iqss::rpackager::repo {
 
   case $::osfamily {
     'redhat': {
@@ -17,7 +17,6 @@ class iqss::rserve::repo {
         key_server => 'keyserver.ubuntu.com',
       }
     }
-
   }
 
 }

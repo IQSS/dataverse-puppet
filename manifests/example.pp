@@ -1,21 +1,20 @@
-package {
-  ['unzip']:
-    ensure => installed,
-}
-
 class {
 # The global settings
   'iqss::globals':
-    require => Package['unzip'],
     ensure  => present;
 }
 
 class {
   [
     'iqss::database',
-    'iqss::dataverse',
+    'iqss::rserve',
     'iqss::solr',
     'iqss::tworavens'
   ]:
     require => Class['iqss::globals'];
+}
+
+class {
+  'iqss::dataverse':
+    require => Class['iqss::database']; # We will make sure to install dataverse after the database installation.
 }

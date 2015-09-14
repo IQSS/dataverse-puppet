@@ -1,3 +1,4 @@
+# Install the shared settings and base libraries.
 class iqss::globals (
   $apache2_default_vhost       = false,
   $apache2_default_ssl_vhost   = false,
@@ -12,4 +13,10 @@ class iqss::globals (
   $database_port               = '5432',
   $database_user               = 'dvnApp',
   $ensure                      = 'present',
-) {}
+  $rserve_pwd                  = 'rserve'
+) {
+  package {
+    ['unzip']:
+      ensure => installed,
+  }
+}
