@@ -155,6 +155,7 @@ class iqss::params inherits iqss::globals {
       ]
       $shibboleth_lib = '/usr/lib64/shibboleth/mod_shib_22.so'
       $mod_r_so_file  = '/etc/httpd/modules/mod_R.so'
+      $r_site_library = '/usr/lib64/R/library'
     }
     'debian': {
       $solr_required_packages = ['openjdk-7-jre']
@@ -173,6 +174,7 @@ class iqss::params inherits iqss::globals {
         /(precise|default)/ => '/usr/lib/apache2/modules/mod_shib_22.so'
       }
       $mod_r_so_file = '/usr/lib/apache2/modules/mod_R.so'
+      $r_site_library = '/usr/local/lib/R/site-library'
 
       $apache_mods = $::lsbdistcodename ? {
         'trusty' => [

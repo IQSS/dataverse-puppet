@@ -71,7 +71,7 @@
 # $ vagrant reload
 #
 #
-# 3. Out of memory when installing R packages dataverse::r.
+# 3. Out of memory when installing R packages.
 # Suggestion: increase the 'v.customize ["modifyvm", :id, "--memory", "2048"]' setting.
 #
 #

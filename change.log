@@ -10,6 +10,7 @@
  - Provision a RServe class and configuration file.
  - RServe will start on boot.
  - Specify R packages with a version to ensure we have installed it.
+ - Ensure the R library path is set diffently for Centos-6 and Debian
  - Run the database and api scripts to populate dataverse.
  - When provisioning all on one machine, ensure the database is setup before dataverse attempts to populate the database.
  - Append to the readme.
