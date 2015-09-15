@@ -121,7 +121,7 @@ class iqss::params inherits iqss::globals {
   $solr_jetty_user                                  = 'solr'
   $solr_solr_home                                   = "${solr_solr_parent_dir}/example/solr"
   $tworavens_domain                                 = $iqss::globals::dataverse_fqdn
-  $tworavens_package                                = 'https://github.com/IQSS/TwoRavens/archive/v0.1.zip'
+  $tworavens_package                                = 'https://github.com/IQSS/TwoRavens/archive/master.zip'
   $tworavens_parent_dir                             = '/var/www/html'
   $tworavens_port                                   = '9999'
   $tworavens_protocol                               = 'https'
