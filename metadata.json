@@ -1,5 +1,5 @@
 {
-    "name": "dataverse-puppet",
+    "name": "iqss-iqss",
     "version": "4.0.1",
     "author": "Lucien van Wouw",
     "summary": "This module will install and configure the IQSS Dataverse application.",
