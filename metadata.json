@@ -1,6 +1,6 @@
 {
-    "name": "lwo-dataverse",
-    "version": "0.1.0",
+    "name": "dataverse-puppet",
+    "version": "4.0.1",
     "author": "Lucien van Wouw",
     "summary": "This module will install and configure the IQSS Dataverse application.",
     "license": "GPL-3.0",
