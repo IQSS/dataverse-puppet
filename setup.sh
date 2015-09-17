@@ -92,6 +92,7 @@ function main {
         puppet module install rfletcher-jq --version 0.0.2
         puppet module install camptocamp-archive --version 0.7.4
         puppet module install jefferyb-shibboleth --version 0.3.1
+        #install_module iqss "iqss-iqss-4.0.1.tar.gz" "https://github.com/IQSS/dataverse-puppet/archive/4.0.1-dev.tar.gz"
 
         touch $FIRSTRUN
     else

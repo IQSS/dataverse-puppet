@@ -5,9 +5,4 @@ class iqss::rpackager::install {
       ensure => installed,
   }
 
-  file {
-    '/opt/rpackager/':
-      ensure => directory ;
-  }
-
 }
