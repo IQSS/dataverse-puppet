@@ -8,6 +8,9 @@ class {
   'iqss::solr':      # Solr
 }->class {
   'iqss::dataverse': # Dataverse
-} ->class {
+}
+
+class {
   'iqss::tworavens': # TwoRavens add-on
+    require => Class['iqss::globals'];
 }

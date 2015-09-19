@@ -11,18 +11,21 @@ class iqss::dataverse::deploy {
   }
 
 
+  # Placing a firstrun file is kind of a workaround the problem: how do we know our dataverse is populated with data ?
   exec {
     'ingest sql':
-      command => 'sudo -u dvnApp psql dvndb -f reference_data.sql',
+      command => 'sudo -u dvnApp psql dvndb -f reference_data.sql && touch /opt/reference_data.sql.firstrun',
       cwd     => '/opt/dataverse/scripts/database/',
       onlyif  => 'test -f /usr/bin/psql', # Typically these sql installation commands will not work if the database is not on this machine.
+      unless  => 'test -f /opt/reference_data.sql.firstrun', # We do not want to repeat the insert on every run.',
       path    => $path ;
   }
 
   exec {
     'ingest api':
-      command => '/opt/dataverse/scripts/api/setup-all.sh && /opt/dataverse/scripts/api/post-install-api-block.sh',
+      command => '/opt/dataverse/scripts/api/setup-all.sh && /opt/dataverse/scripts/api/post-install-api-block.sh && touch /opt/setup-all.sh.firstrun',
       cwd     => '/opt/dataverse/scripts/api/',
+      unless  => 'test -f /opt/setup-all.sh.firstrun',
       path    => $path ;
   }
 

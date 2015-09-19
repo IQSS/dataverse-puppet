@@ -2,10 +2,17 @@
 #
 # setup.sh
 #
+# Usage: ./setup [operating system] [environment] [puppetmaster]
+#
+#
 # Ensure that the packager manager's latest repository settings are up to date.
 # Install the required puppet modules to provision the dataverse components.
+# Maybe we will use Puppet library for that later on.
 #
-# Usage: ./setup [operating system] [environment]
+#
+# Example: ./setup centos-6
+#          Will install dataverse by pulling the dataverse module from github and run it.
+#
 #
 # This script will set an empty file '/opt/firstrun'
 # Once there, future vagrant provisioning skip the update steps.
@@ -19,9 +26,19 @@ fi
 
 ENVIRONMENT=$2
 if [ -z "$ENVIRONMENT" ] ; then
-    echo "environment not specified."
-    exit 1
+    ENVIRONMENT="development"
+    echo "Environment not specified. Assumping ${ENVIRONMENT}"
 fi
+
+PUPPETMASTER=$3
+if [ -z "$PUPPETMASTER" ] ; then
+    PUPPETMASTER="masterless"
+    echo "Assuming this is to be a setup for a clean node, without a puppet master."
+fi
+
+
+# Working directory
+WD=/opt
 
 
 # puppet_config
@@ -49,30 +66,46 @@ function install_module {
     repo=$3
 
     m=/etc/puppet/modules/$name
-    if [ -d $m ] ; then rm -rf $m ; fi
-    wget -O /tmp/$package $repo
-    puppet module install /tmp/$package
-    rm -f /tmp/$package
+    if [ -d $m ] ; then sudo rm -rf $m ; fi
+    sudo wget -O /tmp/$package $repo
+    sudo puppet module install /tmp/$package
+    sudo rm -f /tmp/$package
 }
 
 function main {
 
-    puppet_config
+
+    if [ ! -d $WD ] ; then
+      sudo mkdir -p $WD
+    fi
+    cd $WD
+
 
     # We will only update and install in the first provisioning step.
     # If ever you need to update again
-    FIRSTRUN=/opt/firstrun
+    FIRSTRUN=$WD/firstrun
     if [ ! -f $FIRSTRUN ] ; then
 
-        # Before we continue let us ensure we run the latests packages at the first run.
+        # Before we continue let us ensure we have puppet and run the latests packages at the first run.
         case $OPERATING_SYSTEM in
             centos*)
-                yum update
-                yum -y install unzip
+                sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
+                sudo yum -y update
             ;;
-            ubuntu*)
-                apt-get update
-                apt-get -y install unzip
+            ubuntu-12|precise)
+                sudo wget https://apt.puppetlabs.com/puppetlabs-release-precise.deb
+                sudo dpkg -i puppetlabs-release-precise.deb
+                sudo apt-get -y update
+            ;;
+            ubuntu-14|trusty)
+                sudo wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+                sudo dpkg -i puppetlabs-release-trusty.deb
+                sudo apt-get -y update
+            ;;
+            ubuntu-15|vivid)
+                sudo wget https://apt.puppetlabs.com/puppetlabs-release-vivid.deb
+                sudo dpkg -i puppetlabs-release-vivid.deb
+                sudo apt-get -y update
             ;;
             *)
                 echo "Operating system ${OPERATING_SYSTEM} not supported."
@@ -81,20 +114,23 @@ function main {
         esac
 
 
-        # Get the most recent puppet agent.
         sudo puppet resource package puppet ensure=latest
 
+        puppet_config
 
         # Install the non forged modules we need. We should use puppet library for this.
         install_module glassfish "fatmcgav-glassfish-0.6.0.tar.gz" "https://github.com/IISH/fatmcgav-glassfish/archive/dataverse.tar.gz"
-        puppet module install puppetlabs-postgresql --version 4.3.0
-        puppet module install puppetlabs-apache --version 1.5.0
-        puppet module install rfletcher-jq --version 0.0.2
-        puppet module install camptocamp-archive --version 0.7.4
-        puppet module install jefferyb-shibboleth --version 0.3.1
-        #install_module iqss "iqss-iqss-4.0.1.tar.gz" "https://github.com/IQSS/dataverse-puppet/archive/4.0.1-dev.tar.gz"
+        sudo puppet module install puppetlabs-postgresql --version 4.3.0
+        sudo puppet module install puppetlabs-apache --version 1.5.0
+        sudo puppet module install rfletcher-jq --version 0.0.2
+        sudo puppet module install camptocamp-archive --version 0.7.4
+        sudo puppet module install jefferyb-shibboleth --version 0.3.1
+        if [ $PUPPETMASTER == "masterless" ] ; then
+            install_module iqss "iqss-iqss-4.0.1.tar.gz" "https://github.com/IQSS/dataverse-puppet/archive/4.0.1.tar.gz"
+            sudo puppet apply /etc/puppet/modules/iqss/manifests/example.pp --debug
+        fi
 
-        touch $FIRSTRUN
+        sudo touch $FIRSTRUN
     else
         echo "Repositories are already updated and puppet modules are installed. To update and reinstall, remove the file ${FIRSTRUN}"
     fi

@@ -140,16 +140,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 end
 
-config.vm.synced_folder ".", "/etc/puppet/modules/iqss"
+#config.vm.synced_folder ".", "/etc/puppet/modules/iqss"
 
 
-    config.vm.provision 'shell', path: 'setup.sh', args: [operating_system, environment]
+    config.vm.provision 'shell', path: 'setup.sh', args: [operating_system, environment, 'vagrant']
     # Vagrant/Puppet docs:
-    #   http://docs.vagrantup.com/v2/provisioning/puppet_apply.html
-    config.vm.provision :puppet do |puppet|
-      puppet.manifest_file = 'example.pp'
-      puppet.options = "--verbose --debug --environment #{environment} --reports none"
-    end
+    # http://docs.vagrantup.com/v2/provisioning/puppet_apply.html
+    # config.vm.provision :puppet do |puppet|
+    #  puppet.manifest_file = 'example.pp'
+    #  puppet.options = "--verbose --debug --environment #{environment} --reports none"
+    #end
 
 
 end

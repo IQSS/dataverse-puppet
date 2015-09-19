@@ -1,7 +1,7 @@
 class iqss::dataverse::war {
 
 # We only need maven for the development environment
-  if $iqss::dataverse::repository == 'local' {
+  if $iqss::dataverse::repository == 'git' {
 
     archive { 'maven3':
       ensure           => present,

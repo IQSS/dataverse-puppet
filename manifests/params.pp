@@ -47,7 +47,7 @@ class iqss::params inherits iqss::globals {
   $dataverse_rserve_port                            = '6311'
   $dataverse_rserve_password                        = $iqss::globals::rserve_pwd
   $dataverse_rserve_user                            = 'rserve'
-  $dataverse_site_url                               = "https://${dataverse_fqdn}:9999"
+  $dataverse_site_url                               = "https://${dataverse_fqdn}:${dataverse_port}"
   $doi_baseurlstring                                = 'https://ezid.cdlib.org'
   $doi_password                                     = 'apitest'
   $doi_username                                     = 'apitest'
@@ -78,9 +78,9 @@ class iqss::params inherits iqss::globals {
     'maxLik'    => { version => '1.2-4' },
     'quantreg'  => { version => '5.19' },
     'Rook'      => { version => '1.1-1' },
-    'rjson'     => { version => '0.2.15' },
     'Rserve'    => { version => '1.7-3' },
     'R2HTML'    => { version => '2.3.1' },
+    'rjson'     => { version => '0.2.15' },
     'VGAM'      => { version => '0.9-8' }
   }
   $rpackager_packages_zelig                         = 'https://github.com/IQSS/Zelig/archive/master.zip'
@@ -162,10 +162,10 @@ class iqss::params inherits iqss::globals {
       $solr_java_home = '/usr/lib/jvm/java-7-openjdk-amd64/jre'
       $rpackager_rstudio_libraries = $::lsbdistcodename ? {
         'trusty' => [
-          'r-base', 'r-base-core', 'libcurl4-openssl-dev', 'libpq-dev', 'libxml2-dev', 'libcurl4-gnutls-dev', 'libapreq2-3'
+          'r-base', 'r-base-core', 'r-base-dev', 'libcurl4-openssl-dev', 'libpq-dev', 'libxml2-dev', 'libcurl4-gnutls-dev', 'libapreq2-3'
         ],
         /(precise|default)/ => [
-          'r-base', 'r-base-core', 'libcurl4-openssl-dev', 'libpq-dev', 'libxml2-dev', 'libcurl4-gnutls-dev', 'libapreq2', 'libglu1-mesa-dev', 'freeglut3-dev', 'mesa-common-dev'
+          'r-base', 'r-base-core', 'r-base-dev', 'libcurl4-openssl-dev', 'libpq-dev', 'libxml2-dev', 'libcurl4-gnutls-dev', 'libapreq2', 'libglu1-mesa-dev', 'freeglut3-dev', 'mesa-common-dev'
         ],
       }
 
