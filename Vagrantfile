@@ -143,7 +143,7 @@ end
     config.vm.synced_folder ".", "/etc/puppet/modules/iqss"
 
 
-    config.vm.provision 'shell', path: 'setup.sh', args: [operating_system, environment]
+    config.vm.provision 'shell', path: 'example/setup.sh', args: [operating_system, environment]
     # Vagrant/Puppet docs:
     # http://docs.vagrantup.com/v2/provisioning/puppet_apply.html
     config.vm.provision :puppet do |puppet|
