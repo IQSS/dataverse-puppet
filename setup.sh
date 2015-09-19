@@ -2,7 +2,7 @@
 #
 # setup.sh
 #
-# Usage: ./setup [operating system] [environment] [puppetmaster]
+# Usage: ./setup [operating system] [environment]
 #
 #
 # Ensure that the packager manager's latest repository settings are up to date.
@@ -10,7 +10,7 @@
 # Maybe we will use Puppet library for that later on.
 #
 #
-# Example: ./setup centos-6
+# Example: ./setup centos-6 masterless
 #          Will install dataverse by pulling the dataverse module from github and run it.
 #
 #
@@ -28,12 +28,6 @@ ENVIRONMENT=$2
 if [ -z "$ENVIRONMENT" ] ; then
     ENVIRONMENT="development"
     echo "Environment not specified. Assumping ${ENVIRONMENT}"
-fi
-
-PUPPETMASTER=$3
-if [ -z "$PUPPETMASTER" ] ; then
-    PUPPETMASTER="masterless"
-    echo "Assuming this is to be a setup for a clean node, without a puppet master."
 fi
 
 
@@ -127,12 +121,19 @@ function main {
         sudo puppet module install jefferyb-shibboleth --version 0.3.1
         if [ $PUPPETMASTER == "masterless" ] ; then
             install_module iqss "iqss-iqss-4.0.1.tar.gz" "https://github.com/IQSS/dataverse-puppet/archive/4.0.1.tar.gz"
-            sudo puppet apply /etc/puppet/modules/iqss/manifests/example.pp --debug
+            if [ ! -e /etc/puppet/hiera.yaml ] ; then
+                ln -s /etc/puppet/modules/iqss/example/hieradata/hiera.yaml /etc/puppet/hiera.yaml
+            fi
         fi
 
         sudo touch $FIRSTRUN
     else
         echo "Repositories are already updated and puppet modules are installed. To update and reinstall, remove the file ${FIRSTRUN}"
+    fi
+
+    if [ $ENVIRONMENT == "masterless" ] ; then
+        echo "Running puppet agent"
+        sudo puppet apply /etc/puppet/modules/iqss/manifests/example.pp --debug
     fi
 }
 
