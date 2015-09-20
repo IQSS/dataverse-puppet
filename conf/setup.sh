@@ -35,6 +35,12 @@ fi
 VAGRANT="0$(facter vagrant)"
 
 
+# Tell:
+echo "OPERATING_SYSTEM=${OPERATING_SYSTEM}"
+echo "ENVIRONMENT=${ENVIRONMENT}"
+echo "VAGRANT=${VAGRANT}"
+
+
 # Working directory
 WD=/opt
 
@@ -89,7 +95,7 @@ function main {
 
         # Before we continue let us ensure we have puppet and run the latests packages at the first run.
         case $OPERATING_SYSTEM in
-            centos*)
+            centos-6)
                 rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
                 yum -y update
             ;;
