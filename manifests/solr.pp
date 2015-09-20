@@ -1,7 +1,7 @@
 class iqss::solr (
   $url                = $iqss::params::solr_url,
   $version            = $iqss::params::solr_version,
-  $solr_parent_dir    = $iqss::params::solr_solr_parent_dir,
+  $parent_dir         = $iqss::params::solr_solr_parent_dir,
   $jetty_user         = $iqss::params::solr_jetty_user,
   $jetty_host         = $iqss::params::solr_jetty_host,
   $jetty_port         = $iqss::params::solr_jetty_port,

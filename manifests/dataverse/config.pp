@@ -7,14 +7,14 @@ class iqss::dataverse::config {
 
   jvmoption {
     [
-      "-Ddataverse.auth.password-reset-timeout-in-minutes=${iqss::dataverse::dataverse_auth_password_reset_timeout_in_minutes}",
-      "-Ddataverse.files.directory=${iqss::dataverse::dataverse_files_directory}",
+      "-Ddataverse.auth.password-reset-timeout-in-minutes=${iqss::dataverse::auth_password_reset_timeout_in_minutes}",
+      "-Ddataverse.files.directory=${iqss::dataverse::files_directory}",
       "-Ddataverse.fqdn=${iqss::params::dataverse_fqdn}" ,
-      "-Ddataverse.rserve.host=${iqss::dataverse::dataverse_rserve_host}" ,
-      "-Ddataverse.rserve.password=${iqss::dataverse::dataverse_rserve_password}" ,
-      "-Ddataverse.rserve.port=${iqss::dataverse::dataverse_rserve_port}" ,
-      "-Ddataverse.rserve.user=${iqss::dataverse::dataverse_rserve_user}" ,
-      "-Ddataverse.siteUrl=${iqss::dataverse::dataverse_site_url}" ,
+      "-Ddataverse.rserve.host=${iqss::dataverse::rserve_host}" ,
+      "-Ddataverse.rserve.password=${iqss::dataverse::rserve_password}" ,
+      "-Ddataverse.rserve.port=${iqss::dataverse::rserve_port}" ,
+      "-Ddataverse.rserve.user=${iqss::dataverse::rserve_user}" ,
+      "-Ddataverse.siteUrl=${iqss::dataverse::site_url}" ,
       "-Ddoi.baseurlstring=${iqss::dataverse::doi_baseurlstring}",
       "-Ddoi.password=${iqss::dataverse::doi_password}",
       "-Ddoi.username=${iqss::dataverse::doi_username}",

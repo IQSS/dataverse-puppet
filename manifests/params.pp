@@ -42,10 +42,12 @@ class iqss::params inherits iqss::globals {
   $dataverse_auth_password_reset_timeout_in_minutes = '60'
   $dataverse_files_directory                        = '/home/glassfish/dataverse/files'
   $dataverse_fqdn                                   = $iqss::globals::dataverse_fqdn
+  $dataverse_package                                = 'dataverse-4.0.1'
   $dataverse_port                                   = $iqss::globals::dataverse_port
+  $dataverse_repository                             = "https://github.com/IQSS/dataverse/releases/download/v4.0.1/${dataverse_package}.war"
   $dataverse_rserve_host                            = $iqss::globals::dataverse_fqdn
-  $dataverse_rserve_port                            = '6311'
   $dataverse_rserve_password                        = $iqss::globals::rserve_pwd
+  $dataverse_rserve_port                            = '6311'
   $dataverse_rserve_user                            = 'rserve'
   $dataverse_site_url                               = "https://${dataverse_fqdn}:${dataverse_port}"
   $doi_baseurlstring                                = 'https://ezid.cdlib.org'
@@ -54,7 +56,7 @@ class iqss::params inherits iqss::globals {
   $ensure                                           = 'present'
   $glassfish_create_domain                          = true
   $glassfish_fromaddress                            = 'do-not-reply@localhost'
-  $glassfish_parent_dir                             = '/usr/local'
+  $glassfish_parent_dir                             = '/home/glassfish'
   $glassfish_domain_name                            = 'domain1'
   $glassfish_jvmoption                              = [ '-XX:MaxPermSize=512m', '-XX:PermSize=256m', '-Xmx1024m', '-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl' ]
   $glassfish_mailhost                               = 'localhost'
@@ -65,7 +67,6 @@ class iqss::params inherits iqss::globals {
   $glassfish_tmp_dir                                = '/opt/glassfish'
   $glassfish_user                                   = 'glassfish'
   $glassfish_version                                = '4.1'
-  $repository                                       = 'https://github.com/IQSS/dataverse/releases/download/v4.0.1/dataverse-4.0.1.war'
 
   $rpackager_packages                               = {
     'AER'       => { version => '1.2-4' },
@@ -78,6 +79,7 @@ class iqss::params inherits iqss::globals {
     'maxLik'    => { version => '1.2-4' },
     'quantreg'  => { version => '5.19' },
     'Rook'      => { version => '1.1-1' },
+    'RCurl'     => { version => '1.95-4.7' },
     'Rserve'    => { version => '1.7-3' },
     'R2HTML'    => { version => '2.3.1' },
     'rjson'     => { version => '0.2.15' },
@@ -112,7 +114,7 @@ class iqss::params inherits iqss::globals {
   $solr_core                                        = 'collection1'
   $solr_url                                         = 'http://archive.apache.org/dist/lucene/solr'
   $solr_version                                     = '4.6.0'
-  $solr_solr_parent_dir                             = "/usr/local/solr-${solr_version}"
+  $solr_solr_parent_dir                             = "/home/solr-${solr_version}"
   $solr_jetty_home                                  = "${solr_solr_parent_dir}/example"
   $solr_jetty_java_options                          = '-Xmx512m'
   $solr_jetty_host                                  = $iqss::globals::dataverse_fqdn

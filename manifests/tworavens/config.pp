@@ -83,7 +83,7 @@ class iqss::tworavens::config {
     'app_ddi production_dataverse_url':
       ensure  => present,
       path    => "${iqss::tworavens::dataexplore_dir}/app_ddi.js",
-      line    => "dataverseurl='${iqss::tworavens::dataverse_fqdn}:${iqss::tworavens::dataverse_port}';",
+      line    => "dataverseurl='${iqss::tworavens::protocol}://${iqss::tworavens::dataverse_fqdn}:${iqss::tworavens::dataverse_port}';",
       match   => 'PRODUCTION_DATAVERSE_URL';
     'app_ddi rappURL':
       ensure  => present,

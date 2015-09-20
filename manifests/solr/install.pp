@@ -25,14 +25,14 @@ class iqss::solr::install {
 ## create a solr user
   user { $iqss::solr::jetty_user:
     ensure     => present,
-    home       => $iqss::solr::solr_parent_dir,
+    home       => $iqss::solr::parent_dir,
     managehome => false,
     shell      => '/bin/bash',
     require    => Anchor['iqss::solr::install::begin'],
   }
 
   $package_solr="solr-${iqss::solr::version}"
-  $target_solr=dirname($iqss::solr::solr_parent_dir)
+  $target_solr=dirname($iqss::solr::parent_dir)
 
   $solr_url = "${iqss::solr::url}/${iqss::solr::version}/$package_solr.zip"
   archive { 'apache-solr':

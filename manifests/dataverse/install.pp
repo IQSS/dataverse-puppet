@@ -57,8 +57,8 @@ class iqss::dataverse::install {
   exec {
     'Create the files directory': # We use an exec rather than a file type, because the path may have subdirectories.
       require          => Class['glassfish'],
-      command          => "/bin/mkdir -p ${iqss::dataverse::dataverse_files_directory} && chown -R ${iqss::dataverse::glassfish_user}:${iqss::dataverse::glassfish_user} ${iqss::dataverse::dataverse_files_directory}",
-      creates          => $iqss::dataverse::dataverse_files_directory;
+      command          => "/bin/mkdir -p ${iqss::dataverse::files_directory} && chown -R ${iqss::dataverse::glassfish_user}:${iqss::dataverse::glassfish_user} ${iqss::dataverse::files_directory}",
+      creates          => $iqss::dataverse::files_directory;
   }
 
 }

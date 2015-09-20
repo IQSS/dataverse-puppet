@@ -1,4 +1,3 @@
 {
-    "iqss::globals::dataverse_fqdn": "%{::fqdn}",
-    "iqss::tworavens::dataverse_site_url": "https://%{::fqdn}:443"
+    "iqss::globals::dataverse_fqdn": "%{::fqdn}"
 }

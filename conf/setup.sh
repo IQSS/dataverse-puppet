@@ -11,7 +11,7 @@
 #
 #
 # Example: ./setup centos-6 masterless
-#          Will install dataverse by pulling the dataverse module from github and run it.
+#          Will install dataverse by pulling the dataverse module from github and run it in the masterless environment.
 #
 #
 # This script will set an empty file '/opt/firstrun'
@@ -63,6 +63,7 @@ function install_module {
     package=$2
     repo=$3
 
+    m=/etc/puppet/modules/$name
     if [ -d $m ] ; then
         echo "There is already a module in ${m}... skipping. If you want to reinstall, remove this module first manually"
     else

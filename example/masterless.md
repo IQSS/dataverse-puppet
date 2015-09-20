@@ -7,7 +7,7 @@ live on the target host.
 
 ###Prerequisites
 
-* The module is tested on Centos 6 and Ubuntu 12 and 14, so make sure that is installed on your host machine.
+* The module is tested on Centos 6 and Ubuntu 12 and 14 with Puppet agent 3.x. Installations on other platforms may fail.
 * It is preferable the machine you are targeting is 'clean': no other software is installed on it. If there is, it probably does not matter,
 but there may be conflicts if you already have R, Java, Glassfish, PostgreSQL or Solr installed.
 

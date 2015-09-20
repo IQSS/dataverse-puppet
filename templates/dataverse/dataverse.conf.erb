@@ -16,7 +16,7 @@ Listen 80
 <% else %>
 <VirtualHost *:80>
     ServerName <%= scope.lookupvar('iqss::dataverse::dataverse_fqdn') %>
-    Redirect permanent / <%= scope.lookupvar('iqss::dataverse::dataverse_site_url') %>/
+    Redirect permanent / <%= scope.lookupvar('iqss::dataverse::site_url') %>/
 </VirtualHost>
 <% end %>
 

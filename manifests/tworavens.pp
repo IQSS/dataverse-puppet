@@ -1,12 +1,12 @@
 class iqss::tworavens (
+  $dataverse_fqdn           = $iqss::params::dataverse_fqdn,
+  $dataverse_port           = $iqss::params::dataverse_port,
   $domain                   = $iqss::params::tworavens_domain,
   $package                  = $iqss::params::tworavens_package, # Do not end this value with a slash
   $parent_dir               = $iqss::params::tworavens_parent_dir, # Do not end this value with a slash
   $port                     = $iqss::params::tworavens_port,
   $protocol                 = $iqss::params::tworavens_protocol,
-  $rapache_version          = $iqss::params::tworavens_rapache_version,
-  $dataverse_fqdn           = $iqss::params::dataverse_fqdn,
-  $dataverse_port           = $iqss::params::dataverse_port
+  $rapache_version          = $iqss::params::tworavens_rapache_version
 ) inherits iqss::params {
 
   $dataexplore_dir = "${parent_dir}/dataexplore"
