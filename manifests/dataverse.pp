@@ -26,7 +26,6 @@ class iqss::dataverse (
   $glassfish_user                                   = $iqss::params::glassfish_user,
   $glassfish_version                                = $iqss::params::glassfish_version,
   $repository                                       = $iqss::params::repository,
-  $trigger                                          = $iqss::params::trigger,
 
 ) inherits iqss::params {
 

@@ -6,7 +6,7 @@ class iqss::globals (
   $apache2_default_confd_files = false,
   $apache2_purge_configs       = true,
   $dataverse_fqdn              = 'localhost',
-  $dataverse_port              = '9999',
+  $dataverse_port              = 443,
   $database_host               = 'localhost',
   $database_name               = 'dvndb',
   $database_password           = 'dvnAppPass',

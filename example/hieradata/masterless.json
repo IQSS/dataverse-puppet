@@ -1,6 +1,0 @@
-{
-    "iqss::globals::dataverse_fqdn": "%{::fqdn}",
-    "iqss::globals::dataverse_port": 443,
-    "iqss::tworavens::dataverse_site_url": "https://%{::fqdn}:443",
-    "iqss::tworavens::port":443
-}

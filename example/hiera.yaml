@@ -1,9 +1,0 @@
----
-:backends:
-  - json
-:json:
-  :datadir: /etc/puppet/modules/iqss/example/hieradata
-:hierarchy:
-  - %{::fqdn}
-  - %{::environment}
-  - defaults

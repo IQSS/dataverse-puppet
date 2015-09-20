@@ -18,26 +18,9 @@
 # 'ubuntu-14' will install Ubuntu 14.04 lts (trusty)
 #
 #
-# PROVISIONER
-# $ export PROVISIONER=dataverse:default:fallback|puppet
-# 'puppet' will let the client puppet distribution do the installation. 'dataverse' or an empty or any other value will
-# use the available setup scripts that are part of the dataverse code do the installation. With puppet you can
-# use hieradata to override the Puppet Dataverse module default settings. A working example is
-# /conf/puppet/hieradata/my_environment.json whose
-# settings are identical to the defaults. For each environment you can add a new hieradata document. E.g.
-# export ENVIRONMENT=my_environment
-#
-#
 # # ENVIRONMENT
 # $ export ENVIRONMENT=development:default)|*
 # You can set any environment, but only 'my_environment' has hieradata in /conf/puppet. Change the value to try out alternative settings.
-#
-#
-# Post installation setup when provisioning with puppet
-# -----------------------------------------------------
-# You need to run the final database and api scripts to populate your dataverse instance:
-# $ sudo -u dvnApp psql dvndb -f /opt/dataverse/scripts/database/reference_data.sql
-# $ /opt/dataverse/scripts/api/setup-all.sh
 #
 #
 # Trouble shooting
@@ -140,15 +123,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 end
 
-    config.vm.synced_folder ".", "/etc/puppet/modules/iqss"
+    config.vm.synced_folder ".", "/etc/puppet/modules/iqss", mount_options: ["dmode=444,fmode=444"]
 
 
-    config.vm.provision 'shell', path: 'example/setup.sh', args: [operating_system, environment]
+    config.vm.provision 'shell', path: 'conf/setup.sh', args: [operating_system, environment]
     # Vagrant/Puppet docs:
     # http://docs.vagrantup.com/v2/provisioning/puppet_apply.html
     config.vm.provision :puppet do |puppet|
+      puppet.hiera_config_path = '/etc/puppet/modules/iqss/conf/hiera.yaml'
       puppet.manifest_file = 'example.pp'
       puppet.options = "--verbose --debug --environment #{environment} --reports none"
+      puppet.facter = {
+          "vagrant" => "1"
+      }
     end
 
 

@@ -31,6 +31,10 @@ if [ -z "$ENVIRONMENT" ] ; then
 fi
 
 
+# Are we running with vagrant ?
+VAGRANT="0$(facter vagrant)"
+
+
 # Working directory
 WD=/opt
 
@@ -119,11 +123,11 @@ function main {
         sudo puppet module install rfletcher-jq --version 0.0.2
         sudo puppet module install camptocamp-archive --version 0.7.4
         sudo puppet module install jefferyb-shibboleth --version 0.3.1
-        if [ $PUPPETMASTER == "masterless" ] ; then
+
+        # When we provision with vagrant, it will set a mount point to the iqss puppet module from the host.
+        # If not then we install the module from the repository.
+        if [ $VAGRANT -eq 0 ] ; then
             install_module iqss "iqss-iqss-4.0.1.tar.gz" "https://github.com/IQSS/dataverse-puppet/archive/4.0.1.tar.gz"
-            if [ ! -e /etc/puppet/hiera.yaml ] ; then
-                ln -s /etc/puppet/modules/iqss/example/hieradata/hiera.yaml /etc/puppet/hiera.yaml
-            fi
         fi
 
         sudo touch $FIRSTRUN
@@ -131,8 +135,13 @@ function main {
         echo "Repositories are already updated and puppet modules are installed. To update and reinstall, remove the file ${FIRSTRUN}"
     fi
 
-    if [ $ENVIRONMENT == "masterless" ] ; then
+    # When we provision with vagrant, it will use puppet to apply the module.
+    # If not then we will apply it manually here.
+    if [ $VAGRANT -eq 0 ] ; then
         echo "Running puppet agent"
+        if [ ! -e /etc/puppet/hiera.yaml ] ; then
+            ln -s /etc/puppet/modules/iqss/conf/hiera.yaml /etc/puppet/hiera.yaml
+        fi
         sudo puppet apply /etc/puppet/modules/iqss/manifests/example.pp --debug
     fi
 }

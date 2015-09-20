@@ -1,0 +1,8 @@
+---
+:backends:
+  - json
+:json:
+  :datadir: /etc/puppet/modules/iqss/conf/hieradata
+:hierarchy:
+  - development
+  - defaults

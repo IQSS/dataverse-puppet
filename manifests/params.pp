@@ -54,7 +54,7 @@ class iqss::params inherits iqss::globals {
   $ensure                                           = 'present'
   $glassfish_create_domain                          = true
   $glassfish_fromaddress                            = 'do-not-reply@localhost'
-  $glassfish_parent_dir                             = '/home/glassfish'
+  $glassfish_parent_dir                             = '/usr/local'
   $glassfish_domain_name                            = 'domain1'
   $glassfish_jvmoption                              = [ '-XX:MaxPermSize=512m', '-XX:PermSize=256m', '-Xmx1024m', '-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl' ]
   $glassfish_mailhost                               = 'localhost'
@@ -109,11 +109,10 @@ class iqss::params inherits iqss::globals {
   $rserve_umask                                     = 0
   $rserve_workdir                                   = '/tmp/Rserv'
 
-  $trigger                                          = '*/3'
   $solr_core                                        = 'collection1'
   $solr_url                                         = 'http://archive.apache.org/dist/lucene/solr'
   $solr_version                                     = '4.6.0'
-  $solr_solr_parent_dir                             = "/home/solr-${solr_version}"
+  $solr_solr_parent_dir                             = "/usr/local/solr-${solr_version}"
   $solr_jetty_home                                  = "${solr_solr_parent_dir}/example"
   $solr_jetty_java_options                          = '-Xmx512m'
   $solr_jetty_host                                  = $iqss::globals::dataverse_fqdn
@@ -123,7 +122,7 @@ class iqss::params inherits iqss::globals {
   $tworavens_domain                                 = $iqss::globals::dataverse_fqdn
   $tworavens_package                                = 'https://github.com/IQSS/TwoRavens/archive/master.zip'
   $tworavens_parent_dir                             = '/var/www/html'
-  $tworavens_port                                   = '9999'
+  $tworavens_port                                   = 443
   $tworavens_protocol                               = 'https'
   $tworavens_rapache_version                        = '1.2.6'
 
