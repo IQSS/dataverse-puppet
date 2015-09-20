@@ -15,12 +15,12 @@ but there may be conflicts if you already have R, Java, Glassfish, PostgreSQL or
 
 Download the setup file from the dataverse-puppet repository with curl or wget and give it executable persmissions:
 
-    $ wget https://github.com/IQSS/dataverse-puppet/blob/4.0.1/setup.sh
-    $ chmod 744 setup
+    $ wget https://raw.githubusercontent.com/IQSS/dataverse-puppet/4.0.1/conf/setup.sh
+    $ sudo chmod 744 setup.sh
     
 Then start it up:
 
-    $ ./setup.sh [your operating system] masterless
+    $ sudo ./setup.sh [your operating system] masterless
     
 Valid os values are 'centos-6', 'ubuntu-12' and 'ubuntu-14'.
 

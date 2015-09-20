@@ -67,9 +67,9 @@ function install_module {
     if [ -d $m ] ; then
         echo "There is already a module in ${m}... skipping. If you want to reinstall, remove this module first manually"
     else
-        sudo wget -O /tmp/$package $repo
-        sudo puppet module install /tmp/$package
-        sudo rm -f /tmp/$package
+        wget -O /tmp/$package $repo
+        puppet module install /tmp/$package
+        rm -f /tmp/$package
     fi
 }
 
@@ -77,7 +77,7 @@ function main {
 
 
     if [ ! -d $WD ] ; then
-      sudo mkdir -p $WD
+      mkdir -p $WD
     fi
     cd $WD
 
@@ -90,23 +90,23 @@ function main {
         # Before we continue let us ensure we have puppet and run the latests packages at the first run.
         case $OPERATING_SYSTEM in
             centos*)
-                sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
-                sudo yum -y update
+                rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
+                yum -y update
             ;;
             ubuntu-12|precise)
-                sudo wget https://apt.puppetlabs.com/puppetlabs-release-precise.deb
-                sudo dpkg -i puppetlabs-release-precise.deb
-                sudo apt-get -y update
+                wget https://apt.puppetlabs.com/puppetlabs-release-precise.deb
+                dpkg -i puppetlabs-release-precise.deb
+                apt-get -y update
             ;;
             ubuntu-14|trusty)
-                sudo wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
-                sudo dpkg -i puppetlabs-release-trusty.deb
-                sudo apt-get -y update
+                wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+                dpkg -i puppetlabs-release-trusty.deb
+                apt-get -y update
             ;;
             ubuntu-15|vivid)
-                sudo wget https://apt.puppetlabs.com/puppetlabs-release-vivid.deb
-                sudo dpkg -i puppetlabs-release-vivid.deb
-                sudo apt-get -y update
+                wget https://apt.puppetlabs.com/puppetlabs-release-vivid.deb
+                dpkg -i puppetlabs-release-vivid.deb
+                apt-get -y update
             ;;
             *)
                 echo "Operating system ${OPERATING_SYSTEM} not supported."
@@ -115,17 +115,17 @@ function main {
         esac
 
 
-        sudo puppet resource package puppet ensure=latest
+        puppet resource package puppet ensure=latest
 
         puppet_config
 
         # Install the non forged modules we need. We should use puppet library for this.
         install_module glassfish "fatmcgav-glassfish-0.6.0.tar.gz" "https://github.com/IISH/fatmcgav-glassfish/archive/dataverse.tar.gz"
-        sudo puppet module install puppetlabs-postgresql --version 4.3.0
-        sudo puppet module install puppetlabs-apache --version 1.5.0
-        sudo puppet module install rfletcher-jq --version 0.0.2
-        sudo puppet module install camptocamp-archive --version 0.7.4
-        sudo puppet module install jefferyb-shibboleth --version 0.3.1
+        puppet module install puppetlabs-postgresql --version 4.3.0
+        puppet module install puppetlabs-apache --version 1.5.0
+        puppet module install rfletcher-jq --version 0.0.2
+        puppet module install camptocamp-archive --version 0.7.4
+        puppet module install jefferyb-shibboleth --version 0.3.1
 
         # When we provision with vagrant, it will set a mount point to the iqss puppet module from the host.
         # If not then we install the module from the repository.
@@ -133,7 +133,7 @@ function main {
             install_module iqss "iqss-iqss-4.0.1.tar.gz" "https://github.com/IQSS/dataverse-puppet/archive/4.0.1.tar.gz"
         fi
 
-        sudo touch $FIRSTRUN
+        touch $FIRSTRUN
     else
         echo "Repositories are already updated and puppet modules are installed. To update and reinstall, remove the file ${FIRSTRUN}"
     fi
@@ -145,7 +145,7 @@ function main {
         if [ ! -e /etc/puppet/hiera.yaml ] ; then
             ln -s /etc/puppet/modules/iqss/conf/hiera.yaml /etc/puppet/hiera.yaml
         fi
-        sudo puppet apply /etc/puppet/modules/iqss/manifests/example.pp --debug
+        puppet apply /etc/puppet/modules/iqss/manifests/example.pp --debug
     fi
 }
 
