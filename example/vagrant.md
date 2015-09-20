@@ -1,8 +1,8 @@
 Apply the dataverse module with vagrant
 =======================================
 
-You can install the applications in a local virtual host on your laptop or PC. In this setup vagrant will use puppet to
-install the required software.
+You can install the applications in a local virtual host on your laptop or PC using vagrant. In this setup vagrant will use puppet to
+install the required software. This is usually something for developers and those who want to explore an out-of-the-box application and see what it does.
 
 ###Prerequisites
 
@@ -15,7 +15,7 @@ And clone [This puppet module](https://github.com/IQSS/dataverse-puppet) from gi
 
 ###Select your operating system
 
-The module is tested on Centos 6 and Ubuntu 12 and 14. To select the operating system, set your environmental variable:
+The module is tested on Centos 6.5 and Ubuntu 12 and 14. To select the operating system, set your environmental variable:
 
     $ export OPERATING_SYSTEM=centos-6:default|ubuntu-12|ubuntu-14
 

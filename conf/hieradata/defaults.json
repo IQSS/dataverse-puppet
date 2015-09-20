@@ -29,6 +29,7 @@
     "iqss::dataverse::auth_password_reset_timeout_in_minutes": "60",
     "iqss::dataverse::files_directory": "/home/glassfish/dataverse/files",
     "iqss::dataverse::package": "dataverse-4.0.1",
+    "iqss::dataverse::port": 443,
     "iqss::dataverse::rserve_host": "localhost",
     "iqss::dataverse::rserve_password": "rserve",
     "iqss::dataverse::rserve_port": "6311",

@@ -3,11 +3,11 @@ Apply the dataverse module with a masterless agent
 
 You can install the applications on host on the internet or on your laptop or PC. In this setup we will install 
 dataverse with a masterless puppet agent. That is: all the configuration, settings ( passwords too ) and the module
-live on the target host.
+live on the target host which lives somewhere on the internet or your intranet so a group of people can take a look at it.
 
 ###Prerequisites
 
-* The module is tested on Centos 6 and Ubuntu 12 and 14 with Puppet agent 3.x. Installations on other platforms may fail.
+* The module is tested on Centos 6.5 and Ubuntu 12 and 14 with Puppet agent 3.x. Installations on other platforms may fail.
 * It is preferable the machine you are targeting is 'clean': no other software is installed on it. If there is, it probably does not matter,
 but there may be conflicts if you already have R, Java, Glassfish, PostgreSQL or Solr installed.
 

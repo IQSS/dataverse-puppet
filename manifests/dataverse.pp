@@ -7,6 +7,7 @@ class iqss::dataverse (
   $ensure                                 = $iqss::params::ensure,
   $files_directory                        = $iqss::params::dataverse_files_directory,
   $package                                = $iqss::params::dataverse_package,
+  $port                                   = $iqss::params::dataverse_port,
   $repository                             = $iqss::params::dataverse_repository,
   $rserve_host                            = $iqss::params::dataverse_rserve_host,
   $rserve_password                        = $iqss::params::dataverse_rserve_password,

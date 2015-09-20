@@ -14,3 +14,4 @@
  - Run the database and api scripts to populate dataverse.
  - When provisioning all on one machine, ensure the database is setup before dataverse attempts to populate the database.
  - Append to the readme.
+ - Show some examples to provision with Vagrant and for a standalone server

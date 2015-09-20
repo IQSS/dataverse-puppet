@@ -20,8 +20,8 @@ Listen 80
 </VirtualHost>
 <% end %>
 
-Listen 443
-<VirtualHost *:443>
+Listen <%= scope.lookupvar('iqss::dataverse::port') %>
+<VirtualHost *:<%= scope.lookupvar('iqss::dataverse::port') %>>
 
     ServerName <%= scope.lookupvar('iqss::dataverse::dataverse_fqdn') %>
     CustomLog <%= scope.lookupvar('::apache::logroot') %>/ssl-access.log combined
