@@ -57,17 +57,19 @@ function puppet_config {
 
 
 # install_module
-# Pull a module from git and install it.
+# Pull a module from git and install it. If it is already there we will not do anything.
 function install_module {
     name=$1
     package=$2
     repo=$3
 
-    m=/etc/puppet/modules/$name
-    if [ -d $m ] ; then sudo rm -rf $m ; fi
-    sudo wget -O /tmp/$package $repo
-    sudo puppet module install /tmp/$package
-    sudo rm -f /tmp/$package
+    if [ -d $m ] ; then
+        echo "There is already a module in ${m}... skipping. If you want to reinstall, remove this module first manually"
+    else
+        sudo wget -O /tmp/$package $repo
+        sudo puppet module install /tmp/$package
+        sudo rm -f /tmp/$package
+    fi
 }
 
 function main {

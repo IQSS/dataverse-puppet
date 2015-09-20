@@ -7,26 +7,39 @@ live on the target host.
 
 ###Prerequisites
 
-The module is tested on Centos 6 and Ubuntu 12 and 14, so make sure that is installed on your host machine.
+* The module is tested on Centos 6 and Ubuntu 12 and 14, so make sure that is installed on your host machine.
+* It is preferable the machine you are targeting is 'clean': no other software is installed on it. If there is, it probably does not matter,
+but there may be conflicts if you already have R, Java, Glassfish, PostgreSQL or Solr installed.
 
 ###Install the setup file
 
-Download the setup file from the dataverse-puppet repository with curl or wget:
+Download the setup file from the dataverse-puppet repository with curl or wget and give it executable persmissions:
 
     $ wget https://github.com/IQSS/dataverse-puppet/blob/4.0.1/setup.sh
+    $ chmod 744 setup
     
 Then start it up:
 
-    $ chmod 744 setup
     $ ./setup.sh [your operating system] masterless
     
 Valid os values are 'centos-6', 'ubuntu-12' and 'ubuntu-14'.
+
+###Explanation: where do the settings come from ?
+
+Default settings like passwords and file locations are hard wired in the puppet module code.
+
+You can override those settings when declaring a class in the example: /etc/puppet/modules/iqss/manifests/example.pp
+
+Another way to try out settings is the hieradata. As you specified the environment parameter as 'masterless', the configuration in
+
+    /etc/puppet/modules/iqss/conf/hieradata/masterless.json
+    
+will overrule default settings.
 
 ###Post installation
  
 The installation is finished when you see lots of blue lines. Typically, it may take another two minutes for dataverse to
 startup before you can use it.
-
 
 ### Trouble shooting
 
