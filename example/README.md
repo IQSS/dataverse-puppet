@@ -5,14 +5,7 @@ These are demonstrations how to apply the dataverse module in different kinds of
 
 For detailed information on puppet see [PuppetLabs:https://puppetlabs.com/].
 
-###Apply the dataverse module with vagrant
+* [Apply the dataverse module with vagrant](vagrant.md)
+* [Apply the dataverse module with a masterless agent](masterless.md)
+* [Apply the dataverse module in a clustered environment](master-agent.md)
 
-[vagrant.md:vagrant.md]
-
-###Apply the dataverse module with a masterless agent
-
-[masterless.md:masterless.md]
-
-###Apply the dataverse module in a clustered environment
-
-This requires a [master-agent setup:master-agent.md]. It will be written down provided there is enough interest expressed.

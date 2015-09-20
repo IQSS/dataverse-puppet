@@ -8,10 +8,10 @@ install the required software.
 
 Download and install
 
-* [Virtual box:https://www.virtualbox.org/]
-* [Vagrant v2:https://docs.vagrantup.com/]
+* [Virtual box](https://www.virtualbox.org/)
+* [Vagrant v2](https://docs.vagrantup.com/)
 
-And clone [This puppet module from github:https://github.com/IQSS/dataverse-puppet] from github.
+And clone [This puppet module](https://github.com/IQSS/dataverse-puppet) from github.
 
 ###Select your operating system
 
@@ -50,7 +50,7 @@ You can ssh to the vagrant machine from the dataverse-puppet folder with:
 
 ####1. Error: 'A host only network interface... via DHCP....'
 
-[See issue github.com/mitchellh/vagrant/3341:https://github.com/mitchellh/vagrant/issues/3083]
+[See issue github.com/mitchellh/vagrant/3341](https://github.com/mitchellh/vagrant/issues/3083)
 
 If you get this error it means you have a conflict between two DHCP providers: your host machine and virtualbox which
 runs the virtual box. Suggestion: disable the virtualbox DHCP provider on your host:
@@ -59,7 +59,7 @@ runs the virtual box. Suggestion: disable the virtualbox DHCP provider on your h
 
 ####2. On Ubuntu the error: 'Failed to mount folders in Linux guest...'
 
-[See issue github.com/mitchellh/vagrant/3341 https://github.com/mitchellh/vagrant/issues/3341]
+[See issue github.com/mitchellh/vagrant/3341](https://github.com/mitchellh/vagrant/issues/3341)
 
 The virtual box cannot mount with /vagrant to your host filesystem. Suggestion #1: add a symbolic link in the client and reload the VM. On your VM:
 
@@ -70,7 +70,7 @@ On your host:
     $ vagrant reload
     $ vagrant provision
 
-If that does not work, try [suggestion #2:https://www.virtualbox.org/manual/ch04.html]:
+If that does not work, try [suggestion #2](https://www.virtualbox.org/manual/ch04.html):
 
 Install the guest additions on your VM:
 
