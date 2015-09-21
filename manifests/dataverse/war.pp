@@ -38,7 +38,7 @@ class iqss::dataverse::war {
         cwd     => '/dataverse' ;
     }->exec {
       'build the war': # We assume as we run 'local' this is the root of the code base in /dataverse
-        command => "/usr/bin/mvn clean package && rsync -av /dataverse/target/${dataverse_filename} /usr/src/dataverse.war",
+        command => "/usr/bin/mvn clean package && rsync -av /dataverse/target/${iqss::dataverse::package}.war /usr/src/${iqss::dataverse::package}.war",
         cwd     => '/dataverse' ;
     }
 
@@ -46,8 +46,8 @@ class iqss::dataverse::war {
 
     exec {
       'Download the file': # Note that if this download fails, the file is corrupt. Remove it then.
-        command => "/usr/bin/wget -O /usr/src/dataverse.war $iqss::dataverse::repository",
-        unless  => "/usr/bin/test -f /usr/src/dataverse.war" ;
+        command => "/usr/bin/wget -O /usr/src/${iqss::dataverse::package}.war ${iqss::dataverse::repository}",
+        unless  => "/usr/bin/test -f /usr/src/${iqss::dataverse::package}.war" ;
     }
 
   }

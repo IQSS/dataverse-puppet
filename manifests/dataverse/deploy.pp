@@ -4,9 +4,9 @@ class iqss::dataverse::deploy {
 
   exec {
     'deploy':
-      command => "asadmin undeploy dataverse ; asadmin deploy /usr/src/dataverse.war",
+      command => "asadmin undeploy dataverse ; asadmin deploy /usr/src/${iqss::dataverse::package}.war",
       path    => $path,
-      creates => "${iqss::dataverse::glassfish_parent_dir}/glassfish-${iqss::dataverse::glassfish_version}/glassfish/domains/${iqss::dataverse::glassfish_domain_name}/applications/dataverse",
+      creates => "${iqss::dataverse::glassfish_parent_dir}/glassfish-${iqss::dataverse::glassfish_version}/glassfish/domains/${iqss::dataverse::glassfish_domain_name}/applications/${iqss::dataverse::package}",
       notify  => Exec['ingest_sql', 'ingest_api'] ;
   }
 
