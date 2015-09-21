@@ -10,8 +10,8 @@ Download and install
 
 * [Virtual box](https://www.virtualbox.org/)
 * [Vagrant v2](https://docs.vagrantup.com/)
-
-And clone [This puppet module](https://github.com/IQSS/dataverse-puppet) from github.
+* And clone [This puppet module](https://github.com/IQSS/dataverse-puppet) from github.
+* Check out the known issues in the [main readme file](../README.md).
 
 ###Select your operating system
 
@@ -35,16 +35,38 @@ To begin the setup procedure.
 
 ###Post installation
  
-The installation is finished when you see lots of blue lines. Typically, it may take another two minutes for dataverse to
+The installation is finished when you see lots of blue lines and the console prompt. Typically, it may take another two minutes for dataverse to
 startup before you can use it.
 
 In the vagrant setup, the ports are forwarded thus:
 
-https://localhost:9999 will direct your browser or API client to the clients apache on port 443.
-
+    https://localhost:9999
+    
 You can ssh to the vagrant machine from the dataverse-puppet folder with:
 
     $ vagrant ssh
+
+###Explanation: where do the settings come from ?
+
+When you use Vagrant to create a client host the Vagrantfile will forward ports from the host machine 9999 to the client
+host 443. Hence you connect to a running instance from your host machine with https://localhost:9999
+
+That means Dataverse must create URLs with the 9999 port. For example when binding dummy DOI or Handles.
+
+You can override those settings when declaring a class in the example: /etc/puppet/modules/iqss/manifests/example.pp.
+Another way to try out settings is the hieradata. When you run from vagrant, the Vagrantfile will specified the
+environment parameter as 'development', the configuration in
+
+    /etc/puppet/modules/iqss/conf/hieradata/development.json
+    
+    ````javascript
+    {
+        "iqss::dataverse::site_url": "https://localhost:9999",
+        "iqss::tworavens::dataverse_port": 9999,
+        "iqss::tworavens::port": 9999
+    }
+    
+will replacing the default `443` and deliver `9999` in URL port constructs.
 
 ### Trouble shooting
 

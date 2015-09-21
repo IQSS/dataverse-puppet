@@ -10,6 +10,7 @@ live on the target host which lives somewhere on the internet or your intranet s
 * The module is tested on Centos 6.5 and Ubuntu 12 and 14 with Puppet agent 3.x. Installations on other platforms may fail.
 * It is preferable the machine you are targeting is 'clean': no other software is installed on it. If there is, it probably does not matter,
 but there may be conflicts if you already have R, Java, Glassfish, PostgreSQL or Solr installed.
+* Check out the known issues in the [main readme file](../README.md).
 
 ###Install the setup file
 
@@ -34,11 +35,16 @@ Another way to try out settings is the hieradata. As you specified the environme
 
     /etc/puppet/modules/iqss/conf/hieradata/masterless.json
     
-will overrule default settings.
+    ````javascript
+    {
+        "iqss::globals::dataverse_fqdn": "%{::fqdn}"
+    }
+    
+will replacing the default `localhost` with that of your machine.
 
 ###Post installation
  
-The installation is finished when you see lots of blue lines. Typically, it may take another two minutes for dataverse to
+The installation is finished when you see lots of blue lines and the console prompt. Typically, it may take another two minutes for dataverse to
 startup before you can use it.
 
 ### Trouble shooting
