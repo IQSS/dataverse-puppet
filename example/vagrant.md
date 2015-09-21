@@ -11,7 +11,7 @@ Download and install
 * [Virtual box](https://www.virtualbox.org/)
 * [Vagrant v2](https://docs.vagrantup.com/)
 * And clone [This puppet module](https://github.com/IQSS/dataverse-puppet) from github.
-* Check out the known issues in the [main readme file](../README.md).
+* Check out the known issues in the [main readme file](../README.md#known-issues).
 
 ###Select your operating system
 

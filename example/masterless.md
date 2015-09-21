@@ -10,7 +10,7 @@ live on the target host which lives somewhere on the internet or your intranet s
 * The module is tested on Centos 6.5 and Ubuntu 12 and 14 with Puppet agent 3.x. Installations on other platforms may fail.
 * It is preferable the machine you are targeting is 'clean': no other software is installed on it. If there is, it probably does not matter,
 but there may be conflicts if you already have R, Java, Glassfish, PostgreSQL or Solr installed.
-* Check out the known issues in the [main readme file](../README.md).
+* Check out the known issues in the [main readme file](../README.md#known-issues).
 
 ###Install the setup file
 
