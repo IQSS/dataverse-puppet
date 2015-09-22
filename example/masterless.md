@@ -34,8 +34,6 @@ You can override those settings when declaring a class in the example: /etc/pupp
 Another way to try out settings is the hieradata. As you specified the environment parameter as 'masterless', the configuration in
 
     /etc/puppet/modules/iqss/conf/hieradata/masterless.json
-    
-    ````javascript
     {
         "iqss::globals::dataverse_fqdn": "%{::fqdn}"
     }

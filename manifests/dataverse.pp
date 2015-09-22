@@ -4,19 +4,11 @@
 
 class iqss::dataverse (
   $auth_password_reset_timeout_in_minutes = $iqss::params::dataverse_auth_password_reset_timeout_in_minutes,
-  $ensure                                 = $iqss::params::ensure,
-  $files_directory                        = $iqss::params::dataverse_files_directory,
-  $package                                = $iqss::params::dataverse_package,
-  $port                                   = $iqss::params::dataverse_port,
-  $repository                             = $iqss::params::dataverse_repository,
-  $rserve_host                            = $iqss::params::dataverse_rserve_host,
-  $rserve_password                        = $iqss::params::dataverse_rserve_password,
-  $rserve_port                            = $iqss::params::dataverse_rserve_port,
-  $rserve_user                            = $iqss::params::dataverse_rserve_user,
-  $site_url                               = $iqss::params::dataverse_site_url,
   $doi_baseurlstring                      = $iqss::params::doi_baseurlstring,
   $doi_username                           = $iqss::params::doi_username,
   $doi_password                           = $iqss::params::doi_password,
+  $ensure                                 = $iqss::params::ensure,
+  $files_directory                        = $iqss::params::dataverse_files_directory,
   $glassfish_create_domain                = $iqss::params::glassfish_create_domain,
   $glassfish_domain_name                  = $iqss::params::glassfish_domain_name,
   $glassfish_fromaddress                  = $iqss::params::glassfish_fromaddress,
@@ -30,12 +22,23 @@ class iqss::dataverse (
   $glassfish_tmp_dir                      = $iqss::params::glassfish_tmp_dir,
   $glassfish_user                         = $iqss::params::glassfish_user,
   $glassfish_version                      = $iqss::params::glassfish_version,
+  $package                                = $iqss::params::dataverse_package,
+  $port                                   = $iqss::params::dataverse_port,
+  $repository                             = $iqss::params::dataverse_repository,
+  $rserve_host                            = $iqss::params::dataverse_rserve_host,
+  $rserve_password                        = $iqss::params::dataverse_rserve_password,
+  $rserve_port                            = $iqss::params::dataverse_rserve_port,
+  $rserve_user                            = $iqss::params::dataverse_rserve_user,
+  $site_url                               = $iqss::params::dataverse_site_url,
 
 ) inherits iqss::params {
 
+  $home   = "${iqss::dataverse::glassfish_parent_dir}/glassfish-${iqss::dataverse::glassfish_version}/glassfish"
+  $domain = "${home}/domains/${iqss::dataverse::glassfish_domain_name}"
+
   anchor { 'iqss::dataverse::start': }->
   class { 'iqss::dataverse::install': }->
-  class { 'iqss::dataverse::config': }->
+  #  class { 'iqss::dataverse::config': }->
   class { 'iqss::dataverse::reload': }->
   class { 'iqss::dataverse::war': }->
   class { 'iqss::dataverse::deploy': }->

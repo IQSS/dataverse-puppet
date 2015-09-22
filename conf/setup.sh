@@ -31,8 +31,8 @@ if [ -z "$ENVIRONMENT" ] ; then
 fi
 
 
-# Are we running with vagrant ?
-VAGRANT="0$(facter vagrant)"
+# Are we running with vagrant ? 0=no
+VAGRANT=$3
 
 
 # Tell:
@@ -125,8 +125,8 @@ function main {
 
         puppet_config
 
-        # Install the non forged modules we need. We should use puppet library for this.
-        install_module glassfish "fatmcgav-glassfish-0.6.0.tar.gz" "https://github.com/IISH/fatmcgav-glassfish/archive/dataverse.tar.gz"
+        # Install the non forged modules we need. These are declared in metadata.json.
+        puppet module install fatmcgav-glassfish --version 0.6.0
         puppet module install puppetlabs-postgresql --version 4.3.0
         puppet module install puppetlabs-apache --version 1.5.0
         puppet module install rfletcher-jq --version 0.0.2
@@ -135,7 +135,7 @@ function main {
 
         # When we provision with vagrant, it will set a mount point to the iqss puppet module from the host.
         # If not then we install the module from the repository.
-        if [ $VAGRANT -eq 0 ] ; then
+        if [ -z "$VAGRANT" ] ; then
             install_module iqss "iqss-iqss-4.0.1.tar.gz" "https://github.com/IQSS/dataverse-puppet/archive/4.0.1.tar.gz"
         fi
 
@@ -146,7 +146,7 @@ function main {
 
     # When we provision with vagrant, it will use puppet to apply the module.
     # If not then we will apply it manually here.
-    if [ $VAGRANT -eq 0 ] ; then
+    if [ -z "$VAGRANT" ] ; then
         echo "Running puppet agent"
         if [ ! -e /etc/puppet/hiera.yaml ] ; then
             ln -s /etc/puppet/modules/iqss/conf/hiera.yaml /etc/puppet/hiera.yaml

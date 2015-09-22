@@ -126,16 +126,13 @@ end
     config.vm.synced_folder ".", "/etc/puppet/modules/iqss"
 
 
-    config.vm.provision 'shell', path: 'conf/setup.sh', args: [operating_system, environment]
+    config.vm.provision 'shell', path: 'conf/setup.sh', args: [operating_system, environment, '1']
     # Vagrant/Puppet docs:
     # http://docs.vagrantup.com/v2/provisioning/puppet_apply.html
     config.vm.provision :puppet do |puppet|
       puppet.hiera_config_path = 'conf/hiera.yaml'
       puppet.manifest_file = 'example.pp'
       puppet.options = "--verbose --debug --environment #{environment} --reports none"
-      puppet.facter = {
-          "vagrant" => "1"
-      }
     end
 
 

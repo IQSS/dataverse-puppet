@@ -1,17 +1,18 @@
 class iqss::dataverse::deploy {
 
-  $path = "${iqss::dataverse::glassfish_parent_dir}/glassfish-${iqss::dataverse::glassfish_version}/bin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin"
+  $path = "${iqss::dataverse::home}/bin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin"
 
   exec {
     'deploy':
-      command => "asadmin undeploy dataverse ; asadmin deploy /usr/src/${iqss::dataverse::package}.war",
+      command => "asadmin undeploy ${iqss::dataverse::package} ; asadmin deploy /usr/src/${iqss::dataverse::package}.war",
       path    => $path,
-      creates => "${iqss::dataverse::glassfish_parent_dir}/glassfish-${iqss::dataverse::glassfish_version}/glassfish/domains/${iqss::dataverse::glassfish_domain_name}/applications/${iqss::dataverse::package}",
+      creates => "${iqss::dataverse::domain}/applications/${iqss::dataverse::package}",
       notify  => Exec['ingest_sql', 'ingest_api'] ;
   }
 
 
   # Placing a firstrun file is kind of a workaround the problem: how do we know our dataverse is populated with data ?
+  # We should move this to Iqss::Database
   exec {
     'ingest_sql':
       command => 'sudo -u dvnApp psql dvndb -f reference_data.sql && touch /opt/ingest_sql.firstrun',

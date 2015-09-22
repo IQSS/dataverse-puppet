@@ -58,8 +58,6 @@ Another way to try out settings is the hieradata. When you run from vagrant, the
 environment parameter as 'development', the configuration in
 
     /etc/puppet/modules/iqss/conf/hieradata/development.json
-    
-    ````javascript
     {
         "iqss::dataverse::site_url": "https://localhost:9999",
         "iqss::tworavens::dataverse_port": 9999,

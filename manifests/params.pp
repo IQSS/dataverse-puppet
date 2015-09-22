@@ -60,10 +60,13 @@ class iqss::params inherits iqss::globals {
   $glassfish_domain_name                            = 'domain1'
   $glassfish_jvmoption                              = [ '-XX:MaxPermSize=512m', '-XX:PermSize=256m', '-Xmx1024m', '-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl' ]
   $glassfish_mailhost                               = 'localhost'
-  $glassfish_mailproperties                         = 'username=a_username:password=a_password'
+  $glassfish_mailproperties                         = {
+    'username' => 'a username',
+    'password' => 'a password'
+  }
   $glassfish_mailuser                               = 'dataversenotify'
   $glassfish_remove_default_domain                  = false
-  $glassfish_service_name                           = 'dataverse'
+  $glassfish_service_name                           = 'glassfish'
   $glassfish_tmp_dir                                = '/opt/glassfish'
   $glassfish_user                                   = 'glassfish'
   $glassfish_version                                = '4.1'

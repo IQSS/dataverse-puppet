@@ -43,17 +43,19 @@
     "iqss::dataverse::glassfish_jvmoption": [
         "-XX\:MaxPermSize=512m",
         "-XX\:PermSize=256m",
-        "-Xmx1024m",
-        "-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl"
+        "-Xmx1024m"
     ],
     "iqss::dataverse::glassfish_parent_dir": "/home/glassfish",
-    "iqss::dataverse::glassfish_service_name": "dataverse",
+    "iqss::dataverse::glassfish_service_name": "glassfish",
     "iqss::dataverse::glassfish_tmp_dir": "/opt/glassfish",
     "iqss::dataverse::glassfish_user": "glassfish",
     "iqss::dataverse::glassfish_version": "4.1",
     "iqss::dataverse::glassfish_mailhost": "localhost",
     "iqss::dataverse::glassfish_mailuser": "dataversenotify",
-    "iqss::dataverse::glassfish_mailproperties": "username=a_username:password=a_password",
+    "iqss::dataverse::glassfish_mailproperties": {
+        "username":"a username",
+        "password":"a password"
+    },
     "iqss::dataverse::repository": "https://github.com/IQSS/dataverse/releases/download/v4.0.1/dataverse-4.0.1.war",
     "iqss::globals::apache2_purge_configs": true,
     "iqss::globals::database_host": "localhost",

@@ -30,28 +30,36 @@ class iqss::dataverse::install {
     tmp_dir                          => $iqss::dataverse::glassfish_tmp_dir,
     service_name                     => $iqss::dataverse::glassfish_service_name,
   }->file {
+    'deployed':
+      path=> "${iqss::dataverse::domain}/config/domain.deployed.xml",
+      content => template('iqss/glassfish/domain.deployed.xml.erb'),
+      owner   => $iqss::dataverse::glassfish_user;
+    'undeployed':
+      path=> "${iqss::dataverse::domain}/config/domain.undeployed.xml",
+      content => template('iqss/glassfish/domain.undeployed.xml.erb'),
+      owner   => $iqss::dataverse::glassfish_user;
     "${iqss::dataverse::glassfish_parent_dir}/.gfclient/":
       ensure => directory,
       owner  => $iqss::dataverse::glassfish_user;
-    "${iqss::dataverse::glassfish_parent_dir}/glassfish-${iqss::dataverse::glassfish_version}/glassfish/modules/weld-osgi-bundle.jar":
+    "${iqss::dataverse::home}/modules/weld-osgi-bundle.jar":
       ensure => present,
       owner  => $iqss::dataverse::glassfish_user,
       source => 'puppet:///modules/iqss/weld-osgi-bundle-patch.jar';
-    "${iqss::dataverse::glassfish_parent_dir}/glassfish-${iqss::dataverse::glassfish_version}/glassfish/modules/glassfish-grizzly-extra-all.jar":
+    "${iqss::dataverse::home}/modules/glassfish-grizzly-extra-all.jar":
       ensure => present,
       owner  => $iqss::dataverse::glassfish_user,
       source => 'puppet:///modules/iqss/glassfish-grizzly-extra-all.jar';
-    "${iqss::dataverse::glassfish_parent_dir}/glassfish-${iqss::dataverse::glassfish_version}/glassfish/domains/${iqss::dataverse::glassfish_domain_name}/config/jhove.conf":
+    "${iqss::dataverse::domain}/config/jhove.conf":
       ensure => present,
       owner  => $iqss::dataverse::glassfish_user,
       source => 'puppet:///modules/iqss/dataverse/conf/jhove/jhove.conf';
-    "${iqss::dataverse::glassfish_parent_dir}/glassfish-${iqss::dataverse::glassfish_version}/glassfish/lib/${pgdriver}":
+    "${iqss::dataverse::home}/lib/${pgdriver}":
       ensure           => present,
       owner            => $iqss::dataverse::glassfish_user,
       source           => "puppet:///modules/iqss/pgdriver/$pgdriver";
     '/var/log/glassfish':
       ensure => link,
-      target => "${iqss::dataverse::glassfish_parent_dir}/glassfish-${iqss::dataverse::glassfish_version}/glassfish/domains/${iqss::dataverse::glassfish_domain_name}/logs";
+      target => "${iqss::dataverse::domain}/logs";
   }
 
   exec {
