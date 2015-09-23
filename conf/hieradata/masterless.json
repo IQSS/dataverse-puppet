@@ -1,3 +1,6 @@
 {
-    "iqss::globals::dataverse_fqdn": "%{::fqdn}"
+    "iqss::globals::dataverse_fqdn": "%{::fqdn}",
+    "iqss::dataverse::site_url": "https://%{::fqdn}",
+    "iqss::tworavens::dataverse_fqdn": "%{::fqdn}",
+    "iqss::tworavens::domain":"%{::fqdn}"
 }

@@ -34,10 +34,13 @@ Another way to try out settings is the hieradata. As you specified the environme
 
     /etc/puppet/modules/iqss/conf/hieradata/masterless.json
     {
-        "iqss::globals::dataverse_fqdn": "%{::fqdn}"
+        "iqss::globals::dataverse_fqdn": "%{::fqdn}",
+        "iqss::dataverse::site_url": "https://%{::fqdn}",
+        "iqss::tworavens::dataverse_fqdn": "%{::fqdn}",
+        "iqss::tworavens::domain":"%{::fqdn}"
     }
-    
-will replacing the default `localhost` with that of your machine.
+
+    will replacing the default `localhost` with that of your machine.
 
 ###Post installation
  
