@@ -126,12 +126,12 @@ function main {
         puppet_config
 
         # Install the non forged modules we need. These are declared in metadata.json.
-        puppet module install fatmcgav-glassfish --version 0.6.0
-        puppet module install puppetlabs-postgresql --version 4.3.0
-        puppet module install puppetlabs-apache --version 1.5.0
-        puppet module install rfletcher-jq --version 0.0.2
         puppet module install camptocamp-archive --version 0.7.4
+        puppet module install fatmcgav-glassfish --version 0.6.0
         puppet module install jefferyb-shibboleth --version 0.3.1
+        puppet module install puppetlabs-apache --version 1.5.0
+        puppet module install puppetlabs-postgresql --version 4.3.0
+        puppet module install rfletcher-jq --version 0.0.2
 
         # When we provision with vagrant, it will set a mount point to the iqss puppet module from the host.
         # If not then we install the module from the repository.

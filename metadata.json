@@ -9,24 +9,28 @@
     "issues_url": "https://github.com/IQSS/dataverse-puppet/issues",
     "dependencies": [
         {
-            "name": "puppetlabs-postgresql",
-            "version_requirement": ">=4.3.0"
+            "name": "camptocamp-archive",
+            "version_requirement": ">=0.7.4"
         },
         {
-            "name": "puppetlabs-apache",
-            "version_requirement": ">=1.5.0"
-        },
-        {
-            "name": "rfletcher-jq",
-            "version_requirement": ">=0.0.2"
+            "name": "fatmcgav-glassfish",
+            "version_requirement": ">=0.6.0"
         },
         {
             "name": "jefferyb-shibboleth",
             "version_requirement": ">=0.3.1"
         },
         {
-            "name": "camptocamp-archive",
-            "version_requirement": ">=0.7.4"
+            "name": "puppetlabs-apache",
+            "version_requirement": ">=1.5.0"
+        },
+        {
+            "name": "puppetlabs-postgresql",
+            "version_requirement": ">=4.3.0"
+        },
+        {
+            "name": "rfletcher-jq",
+            "version_requirement": ">=0.0.2"
         }
     ],
     "operatingsystem_support": [

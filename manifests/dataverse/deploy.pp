@@ -4,7 +4,7 @@ class iqss::dataverse::deploy {
 
   exec {
     'deploy':
-      command => "asadmin undeploy ${iqss::dataverse::package} ; asadmin deploy /usr/src/${iqss::dataverse::package}.war",
+      command => "asadmin undeploy ${iqss::dataverse::package} ; asadmin deploy --name ${iqss::dataverse::package} /usr/src/${iqss::dataverse::package}.war",
       path    => $path,
       creates => "${iqss::dataverse::domain}/applications/${iqss::dataverse::package}",
       notify  => Exec['ingest_sql', 'ingest_api'] ;

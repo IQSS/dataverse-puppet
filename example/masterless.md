@@ -4,6 +4,9 @@ In this setup we will install
 dataverse with a masterless puppet agent. That is: all the configuration, settings ( passwords too ) and the module
 live on the target host which resides somewhere on the internet or your intranet so a group of people can take a look at it.
 
+###Assumption
+This machine can be reached by its fully qualified domain name over port 443.
+
 ###Prerequisites
 
 * The module is tested on Centos 6.5 and Ubuntu 12 and 14 with Puppet agent 3.x. Installations on other platforms may fail.
