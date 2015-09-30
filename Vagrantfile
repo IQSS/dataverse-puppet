@@ -89,10 +89,10 @@ if operating_system == 'centos-6'
 #  box_url = 'https://atlas.hashicorp.com/puppetlabs'
 elsif operating_system == 'ubuntu-12'
   box = "puppetlabs/ubuntu-12.04-64-puppet"
-  box_url = 'https://atlas.hashicorp.com/puppetlabs'
+  #box_url = 'https://atlas.hashicorp.com/puppetlabs'
 elsif operating_system == 'ubuntu-14'
   box = "puppetlabs/ubuntu-14.04-64-puppet"
-  box_url = 'https://atlas.hashicorp.com/puppetlabs'
+  #box_url = 'https://atlas.hashicorp.com/puppetlabs'
 else
   puts "Not sure what do to with operating system: #{operating_system}"
   puts 'Use: export OPERATING_SYSTEM=centos-6|ubuntu-12|ubuntu-14'

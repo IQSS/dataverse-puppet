@@ -98,21 +98,25 @@ function main {
             centos-6)
                 rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
                 yum -y update
+                yum -y install puppet
             ;;
             ubuntu-12|precise)
                 wget https://apt.puppetlabs.com/puppetlabs-release-precise.deb
                 dpkg -i puppetlabs-release-precise.deb
                 apt-get -y update
+                apt-get -y install puppet
             ;;
             ubuntu-14|trusty)
                 wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
                 dpkg -i puppetlabs-release-trusty.deb
                 apt-get -y update
+                apt-get -y install puppet
             ;;
             ubuntu-15|vivid)
                 wget https://apt.puppetlabs.com/puppetlabs-release-vivid.deb
                 dpkg -i puppetlabs-release-vivid.deb
                 apt-get -y update
+                apt-get -y install puppet
             ;;
             *)
                 echo "Operating system ${OPERATING_SYSTEM} not supported."
