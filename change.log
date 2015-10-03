@@ -15,3 +15,7 @@
  - When provisioning all on one machine, ensure the database is setup before dataverse attempts to populate the database.
  - Append to the readme.
  - Show some examples to provision with Vagrant and for a standalone server
+
+ 0.9.0 October 2015
+  - Document updates: two examples and contribution sections.
+  - This module versioning adopts Semantic Versioning.

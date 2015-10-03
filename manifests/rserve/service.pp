@@ -1,18 +1,16 @@
 # Set the user and configuration for rserve
 class iqss::rserve::service {
 
-  $group_and_user_id = 97
-
   user {
     $iqss::params::rserve_user:
       ensure => present,
-      uid    => $group_and_user_id,
+      uid    => $iqss::rserve::uid,
       groups => $iqss::params::rserve_user,
   }
   group {
     $iqss::params::rserve_user:
       ensure => present,
-      gid    => $group_and_user_id,
+      gid    => $iqss::rserve::gid,
   }
 
   file {
