@@ -4,7 +4,7 @@ Thank you for your interest in contributing to the module ! We welcome bug repor
 
 ## Bug Reports/Issues
 
-An issue can be a bug: a feature is no longer behaving the way it should as described in the [API documentation](README.rm).
+An issue can be a bug: a feature is no longer behaving the way it should as described in the [API documentation](README.md).
 Or a feature request: to add something the module does not do at the moment, yet is an installation option in Dataverse.
 You can browse issues [issue tracker] on GitHub.
 
@@ -27,7 +27,7 @@ The branching strategy of this module follows that of the Dataverse community. P
 [Developer's Guide]: http://guides.dataverse.org/en/latest/developers
 
 In addition, this module's branch versions and tags reflect the API's status as meant by [Semantic Versioning](http://semver.org/).
-The API contract is specified in the [Classes and Defined Types](README.md#classes_and_defined_types) readme section.
+The API contract is specified in the [Classes and Defined Types](README.md#classes-and-defined-types) readme section.
 
 If your pull request is not assigned to anyone in a timely manner, please reach out. The assignee is responsible for
 evaluating the pull request and deciding whether or not to merge it in. Please try to make it easy to merge in pull
