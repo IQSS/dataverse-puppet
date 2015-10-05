@@ -37,7 +37,7 @@
 # [eval=undef]
 #   Preload packages with expressions that you would otherwise have to load from scripts.
 #
-# [fileio='enable'|'disable'] (default='enable')
+# [fileio='enable'|'disable']
 #   Allow clients to perform filesystem operations via the RServe deamon.
 #
 # [gid=97)
@@ -48,16 +48,16 @@
 # [maxinbuf=262144]
 #   The maximum allowed buffer size in Kb send from the client per connection.
 #
-# [maxsendbuf] (default=0)
+# [maxsendbuf=0]
 #   The maximum allowed buffer size in Kb send from the server per connection.
 #
 # [plaintext='disable'|'enable']
 #   Allows for sending credentials as plaintext.
 #
-# [port] (default=6311)
+# [port=6311]
 #   The TCP port the daemon listens too.
 #
-# [pwdfile] (default='/etc/Rserve.pwd')
+# [pwdfile='/etc/Rserve.pwd']
 #   The password file containing the authentication credentials.
 #
 # [remote='enable'|'disable']

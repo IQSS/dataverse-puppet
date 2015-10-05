@@ -4,7 +4,7 @@ Thank you for your interest in contributing to the module ! We welcome bug repor
 
 ## Bug Reports/Issues
 
-An issue can be a bug: a feature is no longer behaving the way it should as described in the [API documentation](README.md).
+An issue can be a bug: a feature is no longer behaving the way it should as described in the [API documentation](README.md#classes-and-defined-types).
 Or a feature request: to add something the module does not do at the moment, yet is an installation option in Dataverse.
 You can browse issues [issue tracker] on GitHub.
 
