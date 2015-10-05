@@ -6,6 +6,7 @@ class iqss::params inherits iqss::globals {
   $apache2_default_ssl_vhost                        = false
   $apache2_default_vhost                            = false
   $apache2_purge_configs                            = $iqss::globals::apache2_purge_configs
+
   $database_createdb                                = false
   $database_encoding                                = 'UTF-8'
   $database_host                                    = $iqss::globals::database_host
@@ -39,6 +40,7 @@ class iqss::params inherits iqss::globals {
   $database_replication                             = false
   $database_createrole                              = false
   $database_version                                 = '9.3'
+
   $dataverse_auth_password_reset_timeout_in_minutes = '60'
   $dataverse_files_directory                        = '/home/glassfish/dataverse/files'
   $dataverse_fqdn                                   = $iqss::globals::dataverse_fqdn
@@ -115,15 +117,16 @@ class iqss::params inherits iqss::globals {
   $rserve_workdir                                   = '/tmp/Rserv'
 
   $solr_core                                        = 'collection1'
-  $solr_url                                         = 'http://archive.apache.org/dist/lucene/solr'
-  $solr_version                                     = '4.6.0'
-  $solr_solr_parent_dir                             = "/home/solr-${solr_version}"
   $solr_jetty_home                                  = "${solr_solr_parent_dir}/example"
-  $solr_jetty_java_options                          = '-Xmx512m'
   $solr_jetty_host                                  = $iqss::globals::dataverse_fqdn
+  $solr_jetty_java_options                          = '-Xmx512m'
   $solr_jetty_port                                  = '8983'
   $solr_jetty_user                                  = 'solr'
   $solr_solr_home                                   = "${solr_solr_parent_dir}/example/solr"
+  $solr_solr_parent_dir                             = "/home/solr-${solr_version}"
+  $solr_url                                         = 'http://archive.apache.org/dist/lucene/solr'
+  $solr_version                                     = '4.6.0'
+
   $tworavens_domain                                 = $iqss::globals::dataverse_fqdn
   $tworavens_package                                = 'https://github.com/IQSS/TwoRavens/archive/master.zip'
   $tworavens_parent_dir                             = '/var/www/html'

@@ -18,4 +18,4 @@
 
  0.9.0 October 2015
   - Document updates: two examples and contribution sections.
-  - This module versioning adopts Semantic Versioning.
+  - This module versioning adopts Semantic Versioning, hence we reset at 0.9.0
