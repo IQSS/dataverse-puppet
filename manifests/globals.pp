@@ -1,23 +1,16 @@
-# Puppet module for dataverse
-# Copyright (C) 2015
+# = Puppet module for dataverse.
+# == Class: Iqss::Globals
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# === Copyright
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
 #
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# === Description
 #
-#
-# == Class: iqss::globals
-#
-# Install the shared settings for the iqss classes.
+# Sets the shared settings for the iqss classes. Child classes can override these settings.
+# Ensure the base packages that fascilitate the installation are available:
+#  - unzip.
 #
 # === Parameters
 #
@@ -36,7 +29,7 @@
 # [database_host='localhost']
 #   The domain of the database.
 #
-# [database_name='dvndb']
+# [database_dbname='dvndb']
 #   The name of the database.
 #
 # [database_password='dvnAppPass']
@@ -53,8 +46,8 @@ class iqss::globals (
   $apache2_purge_configs       = true,
   $dataverse_fqdn              = 'localhost',
   $dataverse_port              = 443,
+  $database_dbname             = 'dvndb',
   $database_host               = 'localhost',
-  $database_name               = 'dvndb',
   $database_password           = 'dvnAppPass',
   $database_port               = 5432,
   $database_user               = 'dvnApp',

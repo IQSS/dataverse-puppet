@@ -1,6 +1,16 @@
+# = Puppet module for dataverse.
 # == Class: Iqss::Dataverse::Install
 #
+# === Copyright
+#
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+#
+# === Description
+#
 # Private class. Do not use directly.
+#
+# Install Glassfish plus the application's dependencies like the database driver, jhove config and patches.
 #
 class iqss::dataverse::install {
 

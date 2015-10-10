@@ -1,21 +1,12 @@
-# Puppet module for dataverse
-# Copyright (C) 2015
+# = Puppet module for dataverse.
+# == Class: Iqss::Database
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# === Copyright
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
 #
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-#
-# == Class: iqss::database
+# === Description
 #
 # Install a PostgreSQL database and configure roles, access database.
 #
@@ -24,13 +15,16 @@
 # [createdb=false|true]
 #   The user can create database.
 #
+# [createrole=false|true]
+#   The user can create roles.
+#
 # [dataverse_fqdn='localhost']
 #   If the Dataverse server has multiple DNS names, this option specifies the one to be used as the "official" hostname.
 #   For example, you may want to have dataverse.foobar.edu, and not the less appealing server-123.socsci.foobar.edu to
 #   appear exclusively in all the registered global identifiers, Data Deposit API records, etc.
 #
-# [createrole=false|true]
-#   The user can create roles.
+# [dbname='dvndb']
+#   Name of the database.
 #
 # [encoding='utf-8']
 #   This will set the default encoding encoding for all databases created with this module. On certain operating systems
@@ -56,9 +50,6 @@
 #
 # [manage_package_repo=true|false]
 #   Setup the official PostgreSQL repositories on your host.
-#
-# [name='dvndb']
-#   Name of the database.
 #
 # [password='dvnAppPass']
 #   The user password.
@@ -88,7 +79,7 @@ class iqss::database (
   $locale                  = $iqss::params::database_locale,
   $login                   = $iqss::params::database_login,
   $manage_package_repo     = $iqss::params::database_manage_package_repo,
-  $name                    = $iqss::params::database_name,
+  $dbname                  = $iqss::params::database_dbname,
   $password                = $iqss::params::database_password,
   $port                    = $iqss::params::database_port,
   $replication             = $iqss::params::database_replication,

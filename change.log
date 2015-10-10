@@ -1,7 +1,7 @@
 [BRANCH RELEASE] [date]
  - [New or deprecated item.]
 
-0.1.0 July 2015
+4.0.1 July 2015
  - Inception.
 
 4.0.1 September 2015
@@ -18,4 +18,5 @@
 
  0.9.0 October 2015
   - Document updates: two examples and contribution sections.
-  - This module versioning adopts Semantic Versioning, hence we reset at 0.9.0
+  - This module versioning adopts Semantic Versioning, hence we set it at 0.9.0
+

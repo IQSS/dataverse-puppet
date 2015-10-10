@@ -1,9 +1,9 @@
 ---
 :backends:
-  - json
-:json:
-  :datadir: '/etc/puppet/modules/iqss/conf/hieradata'
+  - yaml
 :hierarchy:
   - "%{::fqdn}"
   - "%{::environment}"
   - defaults
+:yaml:
+  :datadir: /etc/puppet/modules/iqss/conf/hieradata

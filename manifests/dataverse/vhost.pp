@@ -1,4 +1,16 @@
+# = Puppet module for dataverse.
+# == Class: Iqss::Dataverse::Vhost
+#
+# === Copyright
+#
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+#
+# === Description
+#
 # Private class. Do not use directly.
+#
+# Add the Apache virtual host to direct HTTP traffic to the ajp listener.
 #
 class iqss::dataverse::vhost {
 

@@ -1,5 +1,0 @@
-{
-    "iqss::dataverse::site_url": "https://localhost:9999",
-    "iqss::tworavens::dataverse_port": 9999,
-    "iqss::tworavens::port": 9999
-}

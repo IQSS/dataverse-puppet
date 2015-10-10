@@ -1,8 +1,25 @@
 #!/bin/bash
 #
+# Puppet module for dataverse
+# Copyright (C) 2015
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+#
 # setup.sh
 #
-# Usage: ./setup [operating system] [environment]
+# Usage: ./setup [operating system] [environment=development|[what you would like]] [vagrant=0|1]
 #
 #
 # Ensure that the packager manager's latest repository settings are up to date.
@@ -27,12 +44,25 @@ fi
 ENVIRONMENT=$2
 if [ -z "$ENVIRONMENT" ] ; then
     ENVIRONMENT="development"
-    echo "Environment not specified. Assumping ${ENVIRONMENT}"
+    echo "Environment not specified. Assuming ${ENVIRONMENT}"
 fi
 
 
 # Are we running with vagrant ? 0=no
 VAGRANT=$3
+if [ -z "$VAGRANT" ] ; then
+    VAGRANT=0
+fi
+case $VAGRANT in
+    0)
+    ;;
+    1)
+    ;;
+    *)
+    echo "Invalid VAGRANT parameter. Must be 0 or 1."
+        exit 1
+    ;;
+esac
 
 
 # Tell:
@@ -138,7 +168,7 @@ function main {
         puppet module install rfletcher-jq --version 0.0.2
 
         # When we provision with vagrant, it will set a mount point to the iqss puppet module from the host.
-        if [ -z "$VAGRANT" ] ; then
+        if [[ $VAGRANT -eq 0 ]] ; then
             # Then again, if not we install the module from the repository.
             install_module iqss "iqss-iqss-4.0.1.tar.gz" "https://github.com/IQSS/dataverse-puppet/archive/4.0.1.tar.gz"
         fi
@@ -149,7 +179,7 @@ function main {
     fi
 
     # When we provision with vagrant, it will use it's puppet provisioner to apply the module.
-    if [ -z "$VAGRANT" ] ; then
+    if [[ $VAGRANT -eq 0 ]] ; then
         # Then again if not then we will apply it manually here on the host.
         echo "Running puppet agent"
         if [ ! -e /etc/puppet/hiera.yaml ] ; then

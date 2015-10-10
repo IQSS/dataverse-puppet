@@ -1,3 +1,17 @@
+# = Puppet module for dataverse.
+# == Class: Iqss::Tworavens::Config
+#
+# === Copyright
+#
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+#
+# === Description
+#
+# Private class. Do not use directly.
+#
+# Set the configuration. TwoRavens does not have a configuration file as such, hence the source code is altered here.
+#
 class iqss::tworavens::config {
 
 # Depending on the OS:

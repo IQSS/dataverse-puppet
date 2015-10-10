@@ -1,5 +1,19 @@
-# PRIVATE CLASS: do not use directly. To change settings use the inherited classes or Iqss::Globals
-# Variable name convention whereever possible: classname_keyname=default|Iqss::Globals::classname_keyname
+# = Puppet module for dataverse.
+# == Class: Iqss::Params
+#
+# === Copyright
+#
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+#
+# === Description
+#
+# Private class. Do not use directly.
+#
+# These are default settings. To change them use the inherited classes (though declaration and hieradata) or Iqss::Globals
+#
+# Variable name convention whereever possible: classname_keyname=default value
+#
 class iqss::params inherits iqss::globals {
   $apache2_default_confd_files                      = false
   $apache2_default_mods                             = false
@@ -14,7 +28,7 @@ class iqss::params inherits iqss::globals {
   $database_listen_addresses                        = 'localhost'
   $database_locale                                  = 'en_US.UTF-8'
   $database_login                                   = true
-  $database_name                                    = $iqss::globals::database_name
+  $database_dbname                                  = $iqss::globals::database_dbname
   $database_manage_package_repo                     = true
   $database_password                                = $iqss::globals::database_password
   $database_port                                    = $iqss::globals::database_port
@@ -26,7 +40,7 @@ class iqss::params inherits iqss::globals {
     'IPv4 local connections' => {
       'description' => 'Open up a IP4 connection from localhost',
       'type'=> 'host',
-      'database'=> $database_name,
+      'database'=> $database_dbname,
       'user'=> $database_user,
       'address'=> '127.0.0.1/32',
       'auth_method'=> 'md5'
@@ -34,7 +48,7 @@ class iqss::params inherits iqss::globals {
     'IPv6 local connections' => {
       'description'=> 'Open up a IP6 connection from localhost',
       'type'=> 'host',
-      'database'=> $database_name,
+      'database'=> $database_dbname,
       'user'=> $database_user,
       'address'=> '::1/128',
       'auth_method'=> 'md5'
@@ -121,15 +135,15 @@ class iqss::params inherits iqss::globals {
   $rserve_workdir                                   = '/tmp/Rserv'
 
   $solr_core                                        = 'collection1'
-  $solr_version                                     = '4.6.0'
-  $solr_solr_parent_dir                             = '/home/solr'
-  $solr_jetty_home                                  = "${solr_solr_parent_dir}/solr-${solr_version}/example"
   $solr_jetty_host                                  = $iqss::globals::dataverse_fqdn
   $solr_jetty_java_options                          = '-Xmx512m'
   $solr_jetty_port                                  = '8983'
   $solr_jetty_user                                  = 'solr'
-  $solr_solr_home                                   = "${solr_jetty_home}/solr"
   $solr_url                                         = 'http://archive.apache.org/dist/lucene/solr'
+  $solr_version                                     = '4.6.0'
+  $solr_parent_dir                                  = "/home/${solr_jetty_user}"
+  $solr_jetty_home                                  = "${solr_parent_dir}/solr-${solr_version}/example"
+  $solr_solr_home                                   = "${solr_jetty_home}/solr"
 
   $tworavens_domain                                 = $iqss::globals::dataverse_fqdn
   $tworavens_package                                = 'https://github.com/IQSS/TwoRavens/archive/master.zip'

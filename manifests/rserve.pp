@@ -1,21 +1,12 @@
-# Puppet module for dataverse
-# Copyright (C) 2015
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-#
+# = Puppet module for dataverse.
 # == Class: iqss::rserve
+#
+# === Copyright
+#
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+#
+# === Description
 #
 # Installs the RServe package with a Binary R server (a daemon) together with a range of R packages.
 # Also see: https://rforge.net/Rserve/doc.html

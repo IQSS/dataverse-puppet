@@ -45,7 +45,7 @@
         <property name="PortNumber" value="<%= scope.lookupvar('iqss::params::database_port') %>"></property>
         <property name="create" value="true"></property>
         <property name="ServerName" value="<%= scope.lookupvar('iqss::params::database_host') %>"></property>
-        <property name="databaseName" value="<%= scope.lookupvar('iqss::params::database_name') %>"></property>
+        <property name="databaseName" value="<%= scope.lookupvar('iqss::params::database_dbname') %>"></property>
         <property name="User" value="<%= scope.lookupvar('iqss::params::database_user') %>"></property>
     </jdbc-connection-pool>
     <% if @glassfish_mailhost %>

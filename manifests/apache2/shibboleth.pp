@@ -1,4 +1,12 @@
+# = Puppet module for dataverse.
 # == Class: Iqss::Apache2::Shibboleth
+#
+# === Copyright
+#
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+#
+# === Description
 #
 # Private class. Do not use directly.
 #

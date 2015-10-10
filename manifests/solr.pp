@@ -1,21 +1,12 @@
-# Puppet module for dataverse
-# Copyright (C) 2015
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-#
+# = Puppet module for dataverse.
 # == Class: iqss::solr
+#
+# === Copyright
+#
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+#
+# === Description
 #
 # Installs Solr together with the dataverse schema.
 # Also see: http://lucene.apache.org/solr
@@ -40,9 +31,6 @@
 # [jetty_user='solr']
 #   The user running the Jetty Solr instance.
 #
-# [parent_dir='/home/solr/solr-4.6.0']
-#   The installation directory of Solr.
-#
 # [solr_home='/home/solr/solr-4.6.0/example/solr']
 #   The Solr home used for the jvm setting -Dsolr.solr.home.
 #
@@ -62,7 +50,7 @@ class iqss::solr (
   $jetty_java_options = $iqss::params::solr_jetty_java_options,
   $jetty_port         = $iqss::params::solr_jetty_port,
   $jetty_user         = $iqss::params::solr_jetty_user,
-  $parent_dir         = $iqss::params::solr_solr_parent_dir,
+  $parent_dir         = $iqss::params::solr_parent_dir,
   $solr_home          = $iqss::params::solr_solr_home,
   $url                = $iqss::params::solr_url,
   $version            = $iqss::params::solr_version,

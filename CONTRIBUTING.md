@@ -4,8 +4,11 @@ Thank you for your interest in contributing to the module ! We welcome bug repor
 
 ## Bug Reports/Issues
 
-An issue can be a bug: a feature is not behaving the way it should as described in the [API contract](README.md#classes-and-defined-types).
-Or a feature request: to add something not included in the API contract, yet is an installation option in Dataverse.
+This module's branch versions and tags reflect the API's status as meant by [Semantic Versioning](http://semver.org/).
+
+An issue is a bug when a feature is not behaving the way it should as described in the [API contract](README.md#classes-and-defined-types).
+A feature request is to add something not covered by the API, yet is an installation option in Dataverse.
+
 You can browse the [issue tracker] on GitHub.
 
 [issue tracker]: https://github.com/IQSS/dataverse-puppet/issues
@@ -25,9 +28,6 @@ If you find a typo or inaccuracy or something to clarify, please send us a pull 
 The branching strategy of this module follows that of the Dataverse community. Please read the [Developer's Guide].
 
 [Developer's Guide]: http://guides.dataverse.org/en/latest/developers
-
-In addition, this module's branch versions and tags reflect the API's status as meant by [Semantic Versioning](http://semver.org/).
-The API contract is specified in the [Classes and Defined Types](README.md#classes-and-defined-types) readme section.
 
 If your pull request is not assigned to anyone in a timely manner, please reach out. The assignee is responsible for
 evaluating the pull request and deciding whether or not to merge it in. Please try to make it easy to merge in pull

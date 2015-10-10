@@ -1,6 +1,16 @@
+# = Puppet module for dataverse.
 # == Class: Iqss::Apache2::Install
 #
+# === Copyright
+#
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+#
+# === Description
+#
 # Private class. Do not use directly.
+#
+# Installs apache and the required mods.
 #
 class iqss::apache2::install {
 

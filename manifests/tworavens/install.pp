@@ -1,3 +1,18 @@
+# = Puppet module for dataverse.
+# == Class: Iqss::Tworavens::Install
+#
+# === Copyright
+#
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+#
+# === Description
+#
+# Private class. Do not use directly.
+#
+# Download and build the RApache module.
+# Download and install TwoRavens..
+#
 class iqss::tworavens::install {
 
   include 'apache::dev'

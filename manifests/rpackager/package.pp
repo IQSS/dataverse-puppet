@@ -1,4 +1,12 @@
-# Private class. Do not use directly.
+# = Puppet module for dataverse.
+# == Type: Iqss::Dataverse::Package
+#
+# === Copyright
+#
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+#
+# === Description
 #
 # Download the R package from the latest or archived repo.
 # Then check to see if we find the package.
@@ -13,6 +21,7 @@
 #
 # Note that if the specific version fails to install, we let the procedure to go on anyway and hope the latest version
 # does not break things.
+#
 define iqss::rpackager::package (
   $dependencies = true,
   $install_opts = '--no-test-load',

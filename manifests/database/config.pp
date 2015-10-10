@@ -1,6 +1,16 @@
+# = Puppet module for dataverse.
 # == Class: Iqss::Database::Config
 #
+# === Copyright
+#
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+#
+# === Description
+#
 # Private class. Do not use directly.
+#
+# Create the database, role ( user \ owner ) and access rules.
 #
 class iqss::database::config {
 
@@ -18,7 +28,7 @@ class iqss::database::config {
       createdb      => $iqss::database::createdb,
       createrole    => $iqss::database::createrole;
   }->postgresql::server::database {
-    $iqss::database::name:
+    $iqss::database::dbname:
       owner => $iqss::database::user,
   }
 

@@ -1,16 +1,19 @@
-# == Class: iqss::solr::service
-#
-# === Parameters
-#
-#
-# === Variables
-#
-# === Examples
-#
+# = Puppet module for dataverse.
+# == Class: Iqss::Solr::Service
 #
 # === Copyright
 #
-# GPL-3.0+
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+#
+# === Description
+#
+# === Copyright
+#
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+#
+# Private class. Do not use directly.
 #
 class iqss::solr::service {
   anchor { 'iqss::solr::service::begin': }->

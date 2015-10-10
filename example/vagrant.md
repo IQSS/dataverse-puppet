@@ -57,7 +57,7 @@ You can override those settings when declaring a class in the example: /etc/pupp
 Another way to try out settings is the hieradata. When you run from vagrant, the Vagrantfile will specified the
 environment parameter as 'development', the configuration in
 
-    /etc/puppet/modules/iqss/conf/hieradata/development.json
+    /etc/puppet/modules/iqss/conf/hieradata/development.yaml
     {
         "iqss::dataverse::site_url": "https://localhost:9999",
         "iqss::tworavens::dataverse_port": 9999,

@@ -1,8 +1,19 @@
+# = Puppet module for dataverse.
+# == Class: Iqss::Rpackager::Repo
+#
+# === Copyright
+#
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+#
+# === Description
+#
 # Private class. Do not use directly.
 #
 # For redhat we use the R repo that comes with the OS.
-# For Ubuntu we use the first from the list:
+# For Ubuntu we use the first one on this list:
 # https://cran.r-project.org/mirrors.html
+#
 class iqss::rpackager::repo {
 
   case $::osfamily {
