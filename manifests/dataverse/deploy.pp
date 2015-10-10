@@ -1,3 +1,7 @@
+# == Class: Iqss::Dataverse::Deploy
+#
+# Private class. Do not use directly.
+#
 class iqss::dataverse::deploy {
 
   $path = "${iqss::dataverse::home}/bin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin"

@@ -1,5 +1,5 @@
 # Puppet module for dataverse
-# Copyright (C) 2015 {name of author}
+# Copyright (C) 2015
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,8 +21,6 @@
 # Also see: https://rforge.net/Rserve/doc.html
 #
 # === Parameters
-# [parameter='default'[|alternatives]]
-#   Description
 #
 # [auth='disable'|'require']
 #   If you need remote access use set auth 'required' and plaintext to 'disable'.

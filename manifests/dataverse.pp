@@ -1,13 +1,35 @@
-# This installs a Dataverse server. See README.md for more details.
-# We install glassfish in home like described in:
+# Puppet module for dataverse
+# Copyright (C) 2015
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+#
+# == Class: iqss::database
+#
+# This installs a Dataverse server.
+# By default we will  install glassfish in /home/glassfish like described in:
 # https://glassfish.java.net/docs/4.0/installation-guide.pdf
+#
+# === Parameters
+#
+
 
 class iqss::dataverse (
   $auth_password_reset_timeout_in_minutes = $iqss::params::dataverse_auth_password_reset_timeout_in_minutes,
   $doi_baseurlstring                      = $iqss::params::doi_baseurlstring,
   $doi_username                           = $iqss::params::doi_username,
   $doi_password                           = $iqss::params::doi_password,
-  $ensure                                 = $iqss::params::ensure,
   $files_directory                        = $iqss::params::dataverse_files_directory,
   $glassfish_create_domain                = $iqss::params::glassfish_create_domain,
   $glassfish_domain_name                  = $iqss::params::glassfish_domain_name,
@@ -38,7 +60,6 @@ class iqss::dataverse (
 
   anchor { 'iqss::dataverse::start': }->
   class { 'iqss::dataverse::install': }->
-  #  class { 'iqss::dataverse::config': }->
   class { 'iqss::dataverse::reload': }->
   class { 'iqss::dataverse::war': }->
   class { 'iqss::dataverse::deploy': }->

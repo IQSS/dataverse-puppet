@@ -1,3 +1,5 @@
+# Private class. Do not use directly.
+#
 class iqss::dataverse::war {
 
 # We only need maven for the development environment

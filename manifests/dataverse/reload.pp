@@ -1,4 +1,10 @@
-# Restart the domain so we can load the added libraries and -Xms, -Xmx settings we added in ::config and ::install
+# == Class: Iqss::Dataverse::Reload
+#
+# Private class. Do not use directly.
+#
+# Install the domain.xml with the settings. There are two here. One for when the war is not deployed.
+# And the other for when it is.
+#
 class iqss::dataverse::reload {
 
   $path    = "${iqss::dataverse::home}/bin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin"

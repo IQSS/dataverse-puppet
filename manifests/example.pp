@@ -1,3 +1,7 @@
+# example.pp
+#
+# A manifest to apply the configuration with.
+
 class {
   'iqss::globals':   # The global settings
 }->class {

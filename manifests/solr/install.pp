@@ -45,7 +45,7 @@ class iqss::solr::install {
     timeout          => 300,
     require          => User[$iqss::solr::jetty_user],
   }->exec { 'copy solr':
-    command => "/usr/bin/rsync -av /opt/solr/$package_solr $target_solr",
+    command => "/usr/bin/mkdir -p $target_solr ; /usr/bin/rsync -av /opt/solr/$package_solr $target_solr",
     creates => $iqss::solr::solr_home;
   }
 

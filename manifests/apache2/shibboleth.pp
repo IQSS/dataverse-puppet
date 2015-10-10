@@ -1,5 +1,10 @@
+# == Class: Iqss::Apache2::Shibboleth
+#
+# Private class. Do not use directly.
+#
 # Shibboleth is not part of this puppet module until it's experimental status is changed to production ready.
 # We therefore only install the packages.
+#
 class iqss::apache2::shibboleth {
 
   notify {

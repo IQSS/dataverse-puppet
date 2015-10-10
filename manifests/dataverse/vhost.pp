@@ -1,5 +1,6 @@
+# Private class. Do not use directly.
+#
 class iqss::dataverse::vhost {
-
 
   if ! defined(Class['iqss::apache2']) {
     class {

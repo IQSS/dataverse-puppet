@@ -138,8 +138,8 @@ function main {
         puppet module install rfletcher-jq --version 0.0.2
 
         # When we provision with vagrant, it will set a mount point to the iqss puppet module from the host.
-        # If not then we install the module from the repository.
         if [ -z "$VAGRANT" ] ; then
+            # Then again, if not we install the module from the repository.
             install_module iqss "iqss-iqss-4.0.1.tar.gz" "https://github.com/IQSS/dataverse-puppet/archive/4.0.1.tar.gz"
         fi
 
@@ -148,9 +148,9 @@ function main {
         echo "Repositories are already updated and puppet modules are installed. To update and reinstall, remove the file ${FIRSTRUN}"
     fi
 
-    # When we provision with vagrant, it will use puppet to apply the module.
-    # If not then we will apply it manually here.
+    # When we provision with vagrant, it will use it's puppet provisioner to apply the module.
     if [ -z "$VAGRANT" ] ; then
+        # Then again if not then we will apply it manually here on the host.
         echo "Running puppet agent"
         if [ ! -e /etc/puppet/hiera.yaml ] ; then
             ln -s /etc/puppet/modules/iqss/conf/hiera.yaml /etc/puppet/hiera.yaml

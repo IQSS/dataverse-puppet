@@ -1,3 +1,5 @@
+# Private class. Do not use directly.
+#
 class iqss::rpackager::install {
 
   package {

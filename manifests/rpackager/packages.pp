@@ -1,3 +1,5 @@
+# Private class. Do not use directly.
+#
 class iqss::rpackager::packages {
 
   $r_path       = '/usr/bin/R'

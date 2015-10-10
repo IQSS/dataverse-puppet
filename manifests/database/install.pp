@@ -1,3 +1,7 @@
+# == Class: Iqss::Database::Config
+#
+# Private class. Do not use directly.
+#
 class iqss::database::install {
 
 # Add a pg user

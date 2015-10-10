@@ -1,5 +1,5 @@
 # Puppet module for dataverse
-# Copyright (C) 2015 {name of author}
+# Copyright (C) 2015
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,13 +21,11 @@
 # Also see: http://lucene.apache.org/solr
 #
 # === Parameters
-# [parameter='default'[|alternatives]]
-#   Description
 #
 # [core='collection1']
 #   The handle of the Solr core.
 #
-# [jetty_home='/home/solr-4.6.0/example']
+# [jetty_home='/home/solr/solr-4.6.0/example']
 #   The Jetty home directory which contains start.jar.
 #
 # [jetty_host='0.0.0.0']
@@ -42,7 +40,14 @@
 # [jetty_user='solr']
 #   The user running the Jetty Solr instance.
 #
-# [parent_dir='/home/solr-${solr_version}']
+# [parent_dir='/home/solr/solr-4.6.0']
+#   The installation directory of Solr.
+#
+# [solr_home='/home/solr/solr-4.6.0/example/solr']
+#   The Solr home used for the jvm setting -Dsolr.solr.home.
+#
+# [url='http://archive.apache.org/dist/lucene/solr']
+#   The download url for solr. Preferably a mirror.
 #
 # === Examples
 #
@@ -63,7 +68,6 @@ class iqss::solr (
   $version            = $iqss::params::solr_version,
 ) inherits iqss::params {
 
-## === Variables === ##
   anchor{ 'iqss::solr::begin': }
 
   class{ 'iqss::solr::install':

@@ -1,3 +1,7 @@
+# == Class: Iqss::Dataverse::Install
+#
+# Private class. Do not use directly.
+#
 class iqss::dataverse::install {
 
   case $iqss::dataverse::glassfish_version {

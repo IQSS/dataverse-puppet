@@ -1,3 +1,5 @@
+# Private class. Do not use directly.
+#
 # Set the user and configuration for rserve
 class iqss::rserve::service {
 

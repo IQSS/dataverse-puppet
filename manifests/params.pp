@@ -8,13 +8,20 @@ class iqss::params inherits iqss::globals {
   $apache2_purge_configs                            = $iqss::globals::apache2_purge_configs
 
   $database_createdb                                = false
+  $database_createrole                              = false
   $database_encoding                                = 'UTF-8'
   $database_host                                    = $iqss::globals::database_host
+  $database_listen_addresses                        = 'localhost'
   $database_locale                                  = 'en_US.UTF-8'
-  $database_port                                    = $iqss::globals::database_port
+  $database_login                                   = true
   $database_name                                    = $iqss::globals::database_name
-  $database_user                                    = $iqss::globals::database_user
+  $database_manage_package_repo                     = true
   $database_password                                = $iqss::globals::database_password
+  $database_port                                    = $iqss::globals::database_port
+  $database_replication                             = false
+  $database_superuser                               = false
+  $database_user                                    = $iqss::globals::database_user
+  $database_version                                 = '9.3'
   $database_hba_rule                                = {
     'IPv4 local connections' => {
       'description' => 'Open up a IP4 connection from localhost',
@@ -33,13 +40,6 @@ class iqss::params inherits iqss::globals {
       'auth_method'=> 'md5'
     }
   }
-  $database_login                                   = true
-  $database_manage_package_repo                     = true
-  $database_superuser                               = false
-  $database_listen_addresses                        = 'localhost'
-  $database_replication                             = false
-  $database_createrole                              = false
-  $database_version                                 = '9.3'
 
   $dataverse_auth_password_reset_timeout_in_minutes = '60'
   $dataverse_files_directory                        = '/home/glassfish/dataverse/files'
@@ -55,12 +55,16 @@ class iqss::params inherits iqss::globals {
   $doi_baseurlstring                                = 'https://ezid.cdlib.org'
   $doi_password                                     = 'apitest'
   $doi_username                                     = 'apitest'
-  $ensure                                           = 'present'
   $glassfish_create_domain                          = true
   $glassfish_fromaddress                            = 'do-not-reply@localhost'
   $glassfish_parent_dir                             = '/home/glassfish'
   $glassfish_domain_name                            = 'domain1'
-  $glassfish_jvmoption                              = [ '-XX:MaxPermSize=512m', '-XX:PermSize=256m', '-Xmx1024m', '-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl' ]
+  $glassfish_jvmoption                              = [
+    '-XX:MaxPermSize=512m',
+    '-XX:PermSize=256m',
+    '-Xmx1024m',
+    '-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl'
+  ]
   $glassfish_mailhost                               = 'localhost'
   $glassfish_mailproperties                         = {
     'username' => 'a username',
@@ -117,15 +121,15 @@ class iqss::params inherits iqss::globals {
   $rserve_workdir                                   = '/tmp/Rserv'
 
   $solr_core                                        = 'collection1'
-  $solr_jetty_home                                  = "${solr_solr_parent_dir}/example"
+  $solr_version                                     = '4.6.0'
+  $solr_solr_parent_dir                             = '/home/solr'
+  $solr_jetty_home                                  = "${solr_solr_parent_dir}/solr-${solr_version}/example"
   $solr_jetty_host                                  = $iqss::globals::dataverse_fqdn
   $solr_jetty_java_options                          = '-Xmx512m'
   $solr_jetty_port                                  = '8983'
   $solr_jetty_user                                  = 'solr'
-  $solr_solr_home                                   = "${solr_solr_parent_dir}/example/solr"
-  $solr_solr_parent_dir                             = "/home/solr-${solr_version}"
+  $solr_solr_home                                   = "${solr_jetty_home}/solr"
   $solr_url                                         = 'http://archive.apache.org/dist/lucene/solr'
-  $solr_version                                     = '4.6.0'
 
   $tworavens_domain                                 = $iqss::globals::dataverse_fqdn
   $tworavens_package                                = 'https://github.com/IQSS/TwoRavens/archive/master.zip'
@@ -158,7 +162,16 @@ class iqss::params inherits iqss::globals {
         'apache::mod::rewrite',
         'apache::mod::setenvif']
       $rpackager_rstudio_libraries = [
-        'R', 'R-devel', 'libapreq2', 'libcurl-devel', 'libxml2-devel', 'openssl-devel', 'libXt-devel', 'mesa-libGL-devel', 'mesa-libGLU-devel', 'libpng-devel'
+        'R',
+        'R-devel',
+        'libapreq2',
+        'libcurl-devel',
+        'libxml2-devel',
+        'openssl-devel',
+        'libXt-devel',
+        'mesa-libGL-devel',
+        'mesa-libGLU-devel',
+        'libpng-devel'
       ]
       $shibboleth_lib = '/usr/lib64/shibboleth/mod_shib_22.so'
       $mod_r_so_file  = '/etc/httpd/modules/mod_R.so'
@@ -169,10 +182,27 @@ class iqss::params inherits iqss::globals {
       $solr_java_home = '/usr/lib/jvm/java-7-openjdk-amd64/jre'
       $rpackager_rstudio_libraries = $::lsbdistcodename ? {
         'trusty' => [
-          'r-base', 'r-base-core', 'r-base-dev', 'libcurl4-openssl-dev', 'libpq-dev', 'libxml2-dev', 'libcurl4-gnutls-dev', 'libapreq2-3'
+          'r-base',
+          'r-base-core',
+          'r-base-dev',
+          'libcurl4-openssl-dev',
+          'libpq-dev',
+          'libxml2-dev',
+          'libcurl4-gnutls-dev',
+          'libapreq2-3'
         ],
         /(precise|default)/ => [
-          'r-base', 'r-base-core', 'r-base-dev', 'libcurl4-openssl-dev', 'libpq-dev', 'libxml2-dev', 'libcurl4-gnutls-dev', 'libapreq2', 'libglu1-mesa-dev', 'freeglut3-dev', 'mesa-common-dev'
+          'r-base',
+          'r-base-core',
+          'r-base-dev',
+          'libcurl4-openssl-dev',
+          'libpq-dev',
+          'libxml2-dev',
+          'libcurl4-gnutls-dev',
+          'libapreq2',
+          'libglu1-mesa-dev',
+          'freeglut3-dev',
+          'mesa-common-dev'
         ],
       }
 

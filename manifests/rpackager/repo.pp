@@ -1,3 +1,5 @@
+# Private class. Do not use directly.
+#
 # For redhat we use the R repo that comes with the OS.
 # For Ubuntu we use the first from the list:
 # https://cran.r-project.org/mirrors.html

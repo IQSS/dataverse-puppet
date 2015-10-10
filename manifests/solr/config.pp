@@ -1,19 +1,6 @@
 # == Class: iqss::solr::config
 #
-# Full description of class solr here.
-#
-# === Parameters
-#
-#
-# === Variables
-#
-#
-# === Examples
-#
-#
-# === Copyright
-#
-# GPL-3.0+
+# Private class. Do not use directly.
 #
 class iqss::solr::config {
 
@@ -33,12 +20,7 @@ class iqss::solr::config {
       recurse => true,
       owner   => $iqss::solr::jetty_user,
       group   => $iqss::solr::jetty_user,
-      source  => 'puppet:///modules/iqss/dataverse/conf/solr/4.6.0';
-    "${iqss::solr::solr_home}/${iqss::solr::core}/conf/solrconfig.xml":
-      ensure  => file,
-      owner   => $iqss::solr::jetty_user,
-      group   => $iqss::solr::jetty_user,
-      source  => 'puppet:///modules/iqss/solr/solrconfig.xml';
+      source  => "puppet:///modules/iqss/dataverse/conf/solr/${iqss::solr::version}";
     '/etc/default/solr':
       ensure  => file,
       content => template('iqss/solr/jetty.erb');

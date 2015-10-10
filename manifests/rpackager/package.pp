@@ -1,7 +1,9 @@
+# Private class. Do not use directly.
+#
 # Download the R package from the latest or archived repo.
 # Then check to see if we find the package.
 #
-# Installing a specific R version is quite a challenge. You cannot specify a version.
+# Installing a specific R package is quite a challenge. You cannot specify a version.
 # We could directly download the intended package, however the R installation does not download the required
 # dependencies when installing the main package from the local file system.
 #

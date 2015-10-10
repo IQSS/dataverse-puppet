@@ -1,3 +1,7 @@
+# == Class: Iqss::Apache2::Install
+#
+# Private class. Do not use directly.
+#
 class iqss::apache2::install {
 
   class { 'apache':
