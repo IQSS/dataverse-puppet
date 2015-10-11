@@ -170,7 +170,7 @@ function main {
         # When we provision with vagrant, it will set a mount point to the iqss puppet module from the host.
         if [[ $VAGRANT -eq 0 ]] ; then
             # Then again, if not we install the module from the repository.
-            install_module iqss "iqss-iqss-4.0.1.tar.gz" "https://github.com/IQSS/dataverse-puppet/archive/4.0.1.tar.gz"
+            install_module iqss "iqss-iqss-master.tar.gz" "https://github.com/IQSS/dataverse-puppet/archive/master.tar.gz"
         fi
 
         touch $FIRSTRUN

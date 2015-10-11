@@ -35,7 +35,7 @@ class iqss::rpackager::packages {
 
   exec { 'install Zelig-master':
     require => [Archive['Zelig-master'], Iqss::Rpackager::Package['devtools']], # devtools must be declared in $iqss::rpackager::packages_r
-    command => "/usr/bin/rsync -av /opt/rpackager/Zelig-master /tmp/ && ${r_path} -e \"setwd('/tmp'); library(devtools); install('Zelig-master')\"",
+    command => "/usr/bin/rsync -av /opt/rpackager/Zelig-master /tmp/ && ${r_path} --vanilla --slave -e \"setwd('/tmp'); library(devtools); install('Zelig-master')\"",
     cwd     => '/tmp',
     unless  => "$r_path -q -e 'installed.packages()' | grep '\"Zelig\"' | grep '\"5.0.5\"'",
   }

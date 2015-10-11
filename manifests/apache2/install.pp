@@ -23,7 +23,7 @@ class iqss::apache2::install {
   }
 
   class {
-    $iqss::params::apache_mods:
+    $iqss::apache2::mods:
   }
 
 

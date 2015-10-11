@@ -37,6 +37,11 @@
 # [url='http://archive.apache.org/dist/lucene/solr']
 #   The download url for solr. Preferably a mirror.
 #
+# === Parameters
+#
+# [required_packages]
+#   Solr dependencies ( java ) that must be installed.
+#
 # === Examples
 #
 #   class { iqss:solr
@@ -56,7 +61,16 @@ class iqss::solr (
   $version            = $iqss::params::solr_version,
 ) inherits iqss::params {
 
+  $required_packages = $iqss::params::solr_required_packages
+
   anchor{ 'iqss::solr::begin': }
+
+  #if ! defined(Packages[$required_packages]) {
+  #  package {
+  #    $required_packages:
+  #      ensure => installed,
+  #  }
+  #}
 
   class{ 'iqss::solr::install':
     require => Anchor['iqss::solr::begin'],

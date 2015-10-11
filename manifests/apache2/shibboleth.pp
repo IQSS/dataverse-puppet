@@ -43,7 +43,7 @@ In Dataverse 4.0, Shibboleth support requires fronting Glassfish with Apache as 
 
   apache::mod { 'shib2':
     id   => 'mod_shib',
-    path => $iqss::params::shibboleth_lib,
+    path => $iqss::apache2::shibboleth_lib,
   }
 
 }

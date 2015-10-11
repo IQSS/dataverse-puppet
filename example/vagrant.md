@@ -58,11 +58,9 @@ Another way to try out settings is the hieradata. When you run from vagrant, the
 environment parameter as 'development', the configuration in
 
     /etc/puppet/modules/iqss/conf/hieradata/development.yaml
-    {
-        "iqss::dataverse::site_url": "https://localhost:9999",
-        "iqss::tworavens::dataverse_port": 9999,
-        "iqss::tworavens::port": 9999
-    }
+        iqss::dataverse::site_url: "https://localhost:9999"
+        iqss::tworavens::dataverse_port: 9999
+        iqss::tworavens::port: 9999
     
 will replacing the default `443` and deliver `9999` in URL port constructs.
 

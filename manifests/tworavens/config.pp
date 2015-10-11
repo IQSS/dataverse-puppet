@@ -77,12 +77,12 @@ class iqss::tworavens::config {
     'rookutils url':
       ensure  => present,
       path    => "${iqss::tworavens::dataexplore_dir}/rook/rookutils.R",
-      line    => "url <- paste('${iqss::tworavens::protocol}://${iqss::tworavens::domain}:${iqss::tworavens::port}/custom/preprocess_dir/preprocessSubset_',sessionid,'.txt',sep='')",
+      line    => "url <- paste('${iqss::tworavens::protocol}://${iqss::tworavens::fqdn}:${iqss::tworavens::port}/custom/preprocess_dir/preprocessSubset_',sessionid,'.txt',sep='')",
       match   => 'dataverse-demo.iq.harvard.edu/custom/preprocess_dir/preprocessSubset_';
     'rookutils imagevector':
       ensure  => present,
       path    => "${iqss::tworavens::dataexplore_dir}/rook/rookutils.R",
-      line    => "imageVector[[qicount]]<<-paste('${iqss::tworavens::protocol}://${iqss::tworavens::domain}:${iqss::tworavens::port}/custom/pic_dir/', mysessionid,'_',mymodelcount,qicount,'.png', sep = '')",
+      line    => "imageVector[[qicount]]<<-paste('${iqss::tworavens::protocol}://${iqss::tworavens::fqdn}:${iqss::tworavens::port}/custom/pic_dir/', mysessionid,'_',mymodelcount,qicount,'.png', sep = '')",
       match   => 'dataverse-demo.iq.harvard.edu/custom/pic_dir/';
     'app_ddi production':
       ensure  => present,
@@ -102,7 +102,7 @@ class iqss::tworavens::config {
     'app_ddi rappURL':
       ensure  => present,
       path    => "${iqss::tworavens::dataexplore_dir}/app_ddi.js",
-      line    => "var rappURL = '${iqss::tworavens::protocol}://${iqss::tworavens::domain}:${iqss::tworavens::port}/custom/';",
+      line    => "var rappURL = '${iqss::tworavens::protocol}://${iqss::tworavens::fqdn}:${iqss::tworavens::port}/custom/';",
       match   => 'var rappURL = "https://dataverse-demo.iq.harvard.edu/custom/"';
   }
 

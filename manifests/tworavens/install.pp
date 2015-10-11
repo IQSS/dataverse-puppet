@@ -40,7 +40,7 @@ class iqss::tworavens::install {
     'Build the rapache R mod':
       require => [Class['apache::dev', 'iqss::apache2', 'iqss::rpackager'], File['/opt/rapache.sh']],
       command => '/opt/rapache.sh',
-      creates => $iqss::params::mod_r_so_file;
+      creates => $iqss::tworavens::mod_r_so_file;
   }
 
   apache::mod {

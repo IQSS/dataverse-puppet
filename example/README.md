@@ -1,7 +1,14 @@
 Examples
 ========
 
-These are demonstrations how to apply the dataverse module in different kinds of setups.
+Note
+----
+All examples pull the puppet module from the git repository, rather than the [Puppet Forge](https://forge.puppetlabs.com/).
+
+Demo installations
+------------------
+
+These are demonstrations how to apply the dataverse module from the git repo in different kinds of setups.
 
 For detailed information on puppet and how it can be useful for configuration management see [PuppetLabs](https://puppetlabs.com/).
 

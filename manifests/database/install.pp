@@ -16,7 +16,7 @@ class iqss::database::install {
 
 # Add a pg user
   user {
-    $iqss::globals::database_user:
+    $iqss::database::database_user:
       ensure     => present,
   }
 

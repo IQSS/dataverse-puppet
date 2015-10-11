@@ -16,10 +16,10 @@ class iqss::dataverse::install {
 
   case $iqss::dataverse::glassfish_version {
     '8.4': {
-      $pgdriver = "postgresql-${iqss::params::database_version}.jdbc4-latest.jar"
+      $pgdriver = "postgresql-${iqss::database::database_version}.jdbc4-latest.jar"
     }
     '9.0': {
-      $pgdriver = "postgresql-${iqss::params::database_version}.jdbc4-latest.jar"
+      $pgdriver = "postgresql-${iqss::database::database_version}.jdbc4-latest.jar"
     }
     default: {
       $pgdriver = 'postgresql-9.1.jdbc4-latest.jar'
@@ -46,11 +46,11 @@ class iqss::dataverse::install {
   }->file {
     'deployed':
       path=> "${iqss::dataverse::domain}/config/domain.deployed.xml",
-      content => template('iqss/glassfish/domain.deployed.xml.erb'),
+      content => template('iqss/dataverse/domain.deployed.xml.erb'),
       owner   => $iqss::dataverse::glassfish_user;
     'undeployed':
       path=> "${iqss::dataverse::domain}/config/domain.undeployed.xml",
-      content => template('iqss/glassfish/domain.undeployed.xml.erb'),
+      content => template('iqss/dataverse/domain.undeployed.xml.erb'),
       owner   => $iqss::dataverse::glassfish_user;
     "${iqss::dataverse::glassfish_parent_dir}/.gfclient/":
       ensure => directory,

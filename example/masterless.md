@@ -33,17 +33,16 @@ Default settings like passwords and file locations are hard wired in the puppet 
 
 You can override those settings when declaring a class in the example: /etc/puppet/modules/iqss/manifests/example.pp
 
-Another way to try out settings is the hieradata. As you specified the environment parameter as 'masterless', the configuration in
+Another way to try out settings is the hieradata. As you specified the environment parameter as 'masterless', the
+configuration is in a file called masterless.yaml:
 
     /etc/puppet/modules/iqss/conf/hieradata/masterless.yaml
-    {
-        "iqss::globals::dataverse_fqdn": "%{::fqdn}",
-        "iqss::dataverse::site_url": "https://%{::fqdn}",
-        "iqss::tworavens::dataverse_fqdn": "%{::fqdn}",
-        "iqss::tworavens::domain":"%{::fqdn}"
-    }
+        iqss::globals::dataverse_fqdn: "%{::fqdn}"
+        iqss::dataverse::site_url: "https://%{::fqdn}"
+        iqss::tworavens::dataverse_fqdn: "%{::fqdn}"
+        iqss::tworavens::domain:"%{::fqdn}"
 
-    will replacing the default `localhost` with that of your machine.
+which will replacing the default `localhost` with the fqdn of your machine.
 
 ###Post installation
  

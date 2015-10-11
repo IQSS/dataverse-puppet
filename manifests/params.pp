@@ -10,32 +10,21 @@
 #
 # Private class. Do not use directly.
 #
-# These are default settings. To change them use the inherited classes (though declaration and hieradata) or Iqss::Globals
+# These are default settings. To overwrite them use the inherited classes.
 #
-# Variable name convention whereever possible: classname_keyname=default value
+# Variable name convention possible: classname_keyname=default value
 #
-class iqss::params inherits iqss::globals {
+class iqss::params {
   $apache2_default_confd_files                      = false
   $apache2_default_mods                             = false
   $apache2_default_ssl_vhost                        = false
   $apache2_default_vhost                            = false
-  $apache2_purge_configs                            = $iqss::globals::apache2_purge_configs
+  $apache2_purge_configs                            = true
 
   $database_createdb                                = false
   $database_createrole                              = false
+  $database_dbname                                  = 'dvndb'
   $database_encoding                                = 'UTF-8'
-  $database_host                                    = $iqss::globals::database_host
-  $database_listen_addresses                        = 'localhost'
-  $database_locale                                  = 'en_US.UTF-8'
-  $database_login                                   = true
-  $database_dbname                                  = $iqss::globals::database_dbname
-  $database_manage_package_repo                     = true
-  $database_password                                = $iqss::globals::database_password
-  $database_port                                    = $iqss::globals::database_port
-  $database_replication                             = false
-  $database_superuser                               = false
-  $database_user                                    = $iqss::globals::database_user
-  $database_version                                 = '9.3'
   $database_hba_rule                                = {
     'IPv4 local connections' => {
       'description' => 'Open up a IP4 connection from localhost',
@@ -54,42 +43,51 @@ class iqss::params inherits iqss::globals {
       'auth_method'=> 'md5'
     }
   }
+  $database_listen_addresses                        = '*'
+  $database_locale                                  = 'en_US.UTF-8'
+  $database_login                                   = true
+  $database_manage_package_repo                     = true
+  $database_password                                = 'dvnAppPass'
+  $database_replication                             = false
+  $database_superuser                               = false
+  $database_user                                    = 'dvnApp'
+  $database_version                                 = '9.3'
 
-  $dataverse_auth_password_reset_timeout_in_minutes = '60'
+  $dataverse_auth_password_reset_timeout_in_minutes = 60
+  $dataverse_doi_baseurlstring                      = 'https://ezid.cdlib.org'
+  $dataverse_doi_password                           = 'apitest'
+  $dataverse_doi_username                           = 'apitest'
   $dataverse_files_directory                        = '/home/glassfish/dataverse/files'
-  $dataverse_fqdn                                   = $iqss::globals::dataverse_fqdn
+  $dataverse_fqdn                                   = 'localhost'
+  $dataverse_glassfish_create_domain                = true
+  $dataverse_glassfish_fromaddress                  = 'do-not-reply@localhost'
+  $dataverse_glassfish_parent_dir                   = '/home/glassfish'
+  $dataverse_glassfish_domain_name                  = 'domain1'
+  $dataverse_glassfish_jvmoption                    = [
+'-XX:MaxPermSize=512m',
+'-XX:PermSize=256m',
+'-Xmx1024m',
+'-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl'
+]
+  $dataverse_glassfish_mailhost                     = 'localhost'
+  $dataverse_glassfish_mailproperties               = {
+'username' => 'a username',
+'password' => 'a password'
+}
+  $dataverse_glassfish_mailuser                     = 'dataversenotify'
+  $dataverse_glassfish_remove_default_domain        = false
+  $dataverse_glassfish_service_name                 = 'glassfish'
+  $dataverse_glassfish_tmp_dir                      = '/opt/glassfish'
+  $dataverse_glassfish_user                         = 'glassfish'
+  $dataverse_glassfish_version                      = '4.1'
   $dataverse_package                                = 'dataverse-4.0.1'
-  $dataverse_port                                   = $iqss::globals::dataverse_port
-  $dataverse_repository                             = "https://github.com/IQSS/dataverse/releases/download/v4.0.1/${dataverse_package}.war"
-  $dataverse_rserve_host                            = $iqss::globals::dataverse_fqdn
-  $dataverse_rserve_password                        = $iqss::globals::rserve_pwd
-  $dataverse_rserve_port                            = '6311'
+  $dataverse_port                                   = 443
+  $dataverse_repository                             = "https://github.com/IQSS/dataverse/releases/download/v4.0.1/dataverse-4.0.1.war"
+  $dataverse_rserve_host                            = 'localhost'
+  $dataverse_rserve_password                        = 'rserve'
+  $dataverse_rserve_port                            = 6311
   $dataverse_rserve_user                            = 'rserve'
   $dataverse_site_url                               = "https://${dataverse_fqdn}:${dataverse_port}"
-  $doi_baseurlstring                                = 'https://ezid.cdlib.org'
-  $doi_password                                     = 'apitest'
-  $doi_username                                     = 'apitest'
-  $glassfish_create_domain                          = true
-  $glassfish_fromaddress                            = 'do-not-reply@localhost'
-  $glassfish_parent_dir                             = '/home/glassfish'
-  $glassfish_domain_name                            = 'domain1'
-  $glassfish_jvmoption                              = [
-    '-XX:MaxPermSize=512m',
-    '-XX:PermSize=256m',
-    '-Xmx1024m',
-    '-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl'
-  ]
-  $glassfish_mailhost                               = 'localhost'
-  $glassfish_mailproperties                         = {
-    'username' => 'a username',
-    'password' => 'a password'
-  }
-  $glassfish_mailuser                               = 'dataversenotify'
-  $glassfish_remove_default_domain                  = false
-  $glassfish_service_name                           = 'glassfish'
-  $glassfish_tmp_dir                                = '/opt/glassfish'
-  $glassfish_user                                   = 'glassfish'
-  $glassfish_version                                = '4.1'
 
   $rpackager_packages                               = {
     'AER'       => { version => '1.2-4' },
@@ -123,7 +121,7 @@ class iqss::params inherits iqss::globals {
   $rserve_user                                      = 'rserve'
   $rserve_plaintext                                 = 'disable'
   $rserve_port                                      = 6311
-  $rserve_pwd                                       = $iqss::globals::rserve_pwd
+  $rserve_pwd                                       = 'rserve'
   $rserve_pwdfile                                   = '/etc/Rserv.pwd'
   $rserve_remote                                    = 'enable'
   $rserve_socket                                    = undef
@@ -135,7 +133,7 @@ class iqss::params inherits iqss::globals {
   $rserve_workdir                                   = '/tmp/Rserv'
 
   $solr_core                                        = 'collection1'
-  $solr_jetty_host                                  = $iqss::globals::dataverse_fqdn
+  $solr_jetty_host                                  = 'localhost'
   $solr_jetty_java_options                          = '-Xmx512m'
   $solr_jetty_port                                  = '8983'
   $solr_jetty_user                                  = 'solr'
@@ -145,8 +143,10 @@ class iqss::params inherits iqss::globals {
   $solr_jetty_home                                  = "${solr_parent_dir}/solr-${solr_version}/example"
   $solr_solr_home                                   = "${solr_jetty_home}/solr"
 
-  $tworavens_domain                                 = $iqss::globals::dataverse_fqdn
-  $tworavens_package                                = 'https://github.com/IQSS/TwoRavens/archive/master.zip'
+  $tworavens_dataverse_fqdn                         = 'localhost'
+  $tworavens_dataverse_port                         = 443
+  $tworavens_fqdn                                   = 'localhost'
+  $tworavens_package                                = 'https://github.com/IQSS/TwoRavens/archive/v0.1.zip'
   $tworavens_parent_dir                             = '/var/www/html'
   $tworavens_port                                   = 443
   $tworavens_protocol                               = 'https'
@@ -158,8 +158,7 @@ class iqss::params inherits iqss::globals {
   case $::osfamily {
     'redhat': {
       $solr_required_packages  = ['java-1.7.0-openjdk']
-      $solr_java_home = '/usr/lib/jvm/jre-1.7.0-openjdk.x86_64'
-      $apache_mods = [  'apache::mod::alias',
+      $apache2_mods = [  'apache::mod::alias',
         'apache::mod::auth_basic',
         'apache::mod::authn_file',
         'apache::mod::authz_default',
@@ -185,15 +184,15 @@ class iqss::params inherits iqss::globals {
         'libXt-devel',
         'mesa-libGL-devel',
         'mesa-libGLU-devel',
-        'libpng-devel'
+        'libpng-devel',
+        'r-cran-mcmcpack'
       ]
-      $shibboleth_lib = '/usr/lib64/shibboleth/mod_shib_22.so'
-      $mod_r_so_file  = '/etc/httpd/modules/mod_R.so'
-      $r_site_library = '/usr/lib64/R/library'
+      $apache2_shibboleth_lib = '/usr/lib64/shibboleth/mod_shib_22.so'
+      $tworavens_mod_r_so_file  = '/etc/httpd/modules/mod_R.so'
+      $rpackager_r_site_library = '/usr/lib64/R/library'
     }
     'debian': {
       $solr_required_packages = ['openjdk-7-jre']
-      $solr_java_home = '/usr/lib/jvm/java-7-openjdk-amd64/jre'
       $rpackager_rstudio_libraries = $::lsbdistcodename ? {
         'trusty' => [
           'r-base',
@@ -203,7 +202,8 @@ class iqss::params inherits iqss::globals {
           'libpq-dev',
           'libxml2-dev',
           'libcurl4-gnutls-dev',
-          'libapreq2-3'
+          'libapreq2-3',
+          'r-cran-mcmcpack'
         ],
         /(precise|default)/ => [
           'r-base',
@@ -216,18 +216,19 @@ class iqss::params inherits iqss::globals {
           'libapreq2',
           'libglu1-mesa-dev',
           'freeglut3-dev',
-          'mesa-common-dev'
+          'mesa-common-dev',
+          'r-cran-mcmcpack'
         ],
       }
 
-      $shibboleth_lib = $::lsbdistcodename ? {
+      $apache2_shibboleth_lib = $::lsbdistcodename ? {
         'trusty' => '/usr/lib/apache2/modules/mod_shib2.so' ,
         /(precise|default)/ => '/usr/lib/apache2/modules/mod_shib_22.so'
       }
-      $mod_r_so_file = '/usr/lib/apache2/modules/mod_R.so'
-      $r_site_library = '/usr/local/lib/R/site-library'
+      $tworavens_mod_r_so_file = '/usr/lib/apache2/modules/mod_R.so'
+      $rpackager_r_site_library = '/usr/local/lib/R/site-library'
 
-      $apache_mods = $::lsbdistcodename ? {
+      $apache2_mods = $::lsbdistcodename ? {
         'trusty' => [
           'apache::mod::alias',
           'apache::mod::authn_core',

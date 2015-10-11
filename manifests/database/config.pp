@@ -20,7 +20,7 @@ class iqss::database::config {
 
 # Install a user role, database and make the role owner of a database.
   postgresql::server::role {
-    $iqss::params::database_user:
+    $iqss::database::user:
       password_hash => postgresql_password($iqss::database::user, $iqss::database::password),
       login         => $iqss::database::login,
       superuser     => $iqss::database::superuser,

@@ -1,10 +1,10 @@
 [BRANCH RELEASE] [date]
  - [New or deprecated item.]
 
-4.0.1 July 2015
+July 2015
  - Inception.
 
-4.0.1 September 2015
+September 2015
  - Create this change.log.
  - Change in metadata.json to reflect new repo.
  - Provision a RServe class and configuration file.
@@ -18,5 +18,5 @@
 
  0.9.0 October 2015
   - Document updates: two examples and contribution sections.
-  - This module versioning adopts Semantic Versioning, hence we set it at 0.9.0
+  - We set the version to 0.9.0 to follow SemVer.
 

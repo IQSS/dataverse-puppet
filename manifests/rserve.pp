@@ -13,7 +13,7 @@
 #
 # === Parameters
 #
-# [auth='disable'|'require']
+# [auth='required'|'disable']
 #   If you need remote access use set auth 'required' and plaintext to 'disable'.
 #
 # [chroot=undef]
@@ -40,6 +40,9 @@
 # [maxsendbuf=0]
 #   The maximum allowed buffer size in Kb send from the server per connection.
 #
+# [password='rserve']
+#   The password for connecting to the Binary R server daemon.
+#
 # [plaintext='disable'|'enable']
 #   Allows for sending credentials as plaintext.
 #
@@ -54,6 +57,8 @@
 #
 # [socket=undef]
 #
+# [sockmod=undef]
+#
 # [source=undef]
 #   Location to a file to preload packages that you would otherwise have to load from your scripts.
 #
@@ -62,6 +67,9 @@
 #
 # [uid=97]
 #   The user id of the 'rserve' user running the daemon.
+#
+# [user='rserve']
+#   The username for connecting to the Binary R server daemon.
 #
 # [umask=0]
 #   Controls how file permissions are set for files.
@@ -87,6 +95,7 @@ class iqss::rserve (
   $maxsendbuf        = $iqss::params::rserve_maxsendbuf,
   $plaintext         = $iqss::params::rserve_plaintext,
   $port              = $iqss::params::rserve_port,
+  $password          = $iqss::params::rserve_password,
   $pwdfile           = $iqss::params::rserve_pwdfile,
   $remote            = $iqss::params::rserve_remote,
   $socket            = $iqss::params::rserve_socket,
@@ -94,6 +103,7 @@ class iqss::rserve (
   $source            = $iqss::params::rserve_source,
   $su                = $iqss::params::rserve_su,
   $uid               = $iqss::params::rserve_uid,
+  $user              = $iqss::params::rserve_user,
   $umask             = $iqss::params::rserve_umask,
   $workdir           = $iqss::params::rserve_workdir,
 ) inherits iqss::params {
