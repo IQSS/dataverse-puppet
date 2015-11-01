@@ -19,4 +19,5 @@ September 2015
  0.9.0 October 2015
   - Document updates: two examples and contribution sections.
   - We set the version to 0.9.0 to follow SemVer.
+  - Support configuration for dataverse releases 4.0, 4.0.1, 4.1 and 4.2
 

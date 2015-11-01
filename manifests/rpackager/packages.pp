@@ -10,17 +10,15 @@
 #
 # Private class. Do not use directly.
 #
-# Install the R packages.
-#
-class iqss::rpackager::packages {
+# Install the R packages. We make a special case for Zelig, because it is not in an R repo.
 
-  $r_path       = '/usr/bin/R'
+class iqss::rpackager::packages {
 
 
 # r packages from the repo
   create_resources(iqss::rpackager::package, $iqss::rpackager::packages, {
-    repo => $iqss::rpackager::repo,
-    r_path  => $r_path,
+    r_path  => $iqss::rpackager::r_path,
+    repo    => $iqss::rpackager::repo,
     version => 'latest' }
   )
 
@@ -35,9 +33,9 @@ class iqss::rpackager::packages {
 
   exec { 'install Zelig-master':
     require => [Archive['Zelig-master'], Iqss::Rpackager::Package['devtools']], # devtools must be declared in $iqss::rpackager::packages_r
-    command => "/usr/bin/rsync -av /opt/rpackager/Zelig-master /tmp/ && ${r_path} --vanilla --slave -e \"setwd('/tmp'); library(devtools); install('Zelig-master')\"",
+    command => "/usr/bin/rsync -av /opt/rpackager/Zelig-master /tmp/ && ${iqss::rpackager::r_path} --vanilla --slave -e \"setwd('/tmp'); library(devtools); install('Zelig-master')\"",
     cwd     => '/tmp',
-    unless  => "$r_path -q -e 'installed.packages()' | grep '\"Zelig\"' | grep '\"5.0.5\"'",
+    unless  => "${iqss::rpackager::r_path} -q -e 'installed.packages()' | grep '\"Zelig\"' | grep '\"5.0.5\"'",
   }
 
 }

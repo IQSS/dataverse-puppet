@@ -83,6 +83,7 @@
 #     pwdfile => '/tip/top/secret',
 #   }
 #
+
 class iqss::rserve (
   $auth              = $iqss::params::rserve_auth,
   $chroot            = $iqss::params::rserve_chroot,

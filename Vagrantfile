@@ -47,9 +47,17 @@
 #
 # If that does not work, try suggestion #2:
 # https://www.virtualbox.org/manual/ch04.html
-# Install the guest additions on your VM:
+# Install the guest additions on your VM for Ubuntu:
 # $ sudo apt-get update
 # $ sudo apt-get install virtualbox-guest-dkms
+# And on your host
+# $ vagrant reload
+#
+# Or Centos:
+# $ wget "http://download.virtualbox.org/virtualbox/4.3.32/VBoxGuestAdditions_4.3.32.iso"
+# $ mount VBoxGuestAdditions_4.3.32.iso -o loop /mnt
+# $ cd /mnt
+# $ ./VBoxLinuxAdditions.run  --nox11
 # And on your host
 # $ vagrant reload
 #
@@ -109,7 +117,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.vm.provider "virtualbox" do |v|
       v.customize ["modifyvm", :id, "--cpus", 2]
-      v.customize ["modifyvm", :id, "--memory", "2048"]
+      v.customize ["modifyvm", :id, "--memory", "4096"]
     end
 
     standalone.vm.box = box

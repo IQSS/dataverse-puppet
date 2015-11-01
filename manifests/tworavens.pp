@@ -50,7 +50,7 @@
 #   class { iqss:tworavens
 #     fqdn => 'analysis.domain.org',
 #   }
-#
+
 class iqss::tworavens (
   $dataverse_fqdn           = $iqss::params::dataverse_fqdn,
   $dataverse_port           = $iqss::params::dataverse_port,

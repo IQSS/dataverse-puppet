@@ -37,7 +37,10 @@
 # [url='http://archive.apache.org/dist/lucene/solr']
 #   The download url for solr. Preferably a mirror.
 #
-# === Parameters
+# === Variables
+#
+# [dataverse_package]
+#   The package name and version of dataverse.
 #
 # [required_packages]
 #   Solr dependencies ( java ) that must be installed.
@@ -48,6 +51,7 @@
 #     parent_dir => '/usr/share',
 #   }
 #
+
 class iqss::solr (
   $core               = $iqss::params::solr_core,
   $jetty_home         = $iqss::params::solr_jetty_home,
@@ -61,6 +65,7 @@ class iqss::solr (
   $version            = $iqss::params::solr_version,
 ) inherits iqss::params {
 
+  $dataverse_package = $iqss::params::dataverse_package
   $required_packages = $iqss::params::solr_required_packages
 
   anchor{ 'iqss::solr::begin': }

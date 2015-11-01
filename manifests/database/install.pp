@@ -11,7 +11,7 @@
 # Private class. Do not use directly.
 #
 # Install PostgreSQL.
-#
+
 class iqss::database::install {
 
 # Add a pg user

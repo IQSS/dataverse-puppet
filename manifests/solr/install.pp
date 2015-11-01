@@ -30,7 +30,6 @@ class iqss::solr::install {
       ensure     => present,
       home       => $iqss::solr::parent_dir,
       managehome => true,
-      shell      => '/bin/false',
       groups     => $iqss::solr::jetty_user,
       require    => Anchor['iqss::solr::install::begin'],
   }

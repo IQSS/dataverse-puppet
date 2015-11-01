@@ -13,7 +13,7 @@
 # These are default settings. To overwrite them use the inherited classes.
 #
 # Variable name convention possible: classname_keyname=default value
-#
+
 class iqss::params {
   $apache2_default_confd_files                      = false
   $apache2_default_mods                             = false
@@ -80,9 +80,9 @@ class iqss::params {
   $dataverse_glassfish_tmp_dir                      = '/opt/glassfish'
   $dataverse_glassfish_user                         = 'glassfish'
   $dataverse_glassfish_version                      = '4.1'
-  $dataverse_package                                = 'dataverse-4.0.1'
+  $dataverse_package                                = 'dataverse-4.2'
   $dataverse_port                                   = 443
-  $dataverse_repository                             = "https://github.com/IQSS/dataverse/releases/download/v4.0.1/dataverse-4.0.1.war"
+  $dataverse_repository                             = "https://github.com/IQSS/dataverse/releases/download/v4.2/dataverse-4.2.war"
   $dataverse_rserve_host                            = 'localhost'
   $dataverse_rserve_password                        = 'rserve'
   $dataverse_rserve_port                            = 6311
@@ -104,10 +104,14 @@ class iqss::params {
     'Rserve'    => { version => '1.7-3' },
     'R2HTML'    => { version => '2.3.1' },
     'rjson'     => { version => '0.2.15' },
-    'VGAM'      => { version => '0.9-8' }
+    'VGAM'      => { version => '0.9-8' },
+    'MCMCpack'  => { version => '1.3-3' }
   }
+
+  $r_path                                           = '/usr/bin/R'
   $rpackager_packages_zelig                         = 'https://github.com/IQSS/Zelig/archive/master.zip'
   $rpackager_repo                                   = 'http://cran.r-project.org'
+
 
   $rserve_auth                                      = 'required'
   $rserve_chroot                                    = undef
@@ -184,8 +188,7 @@ class iqss::params {
         'libXt-devel',
         'mesa-libGL-devel',
         'mesa-libGLU-devel',
-        'libpng-devel',
-        'r-cran-mcmcpack'
+        'libpng-devel'
       ]
       $apache2_shibboleth_lib = '/usr/lib64/shibboleth/mod_shib_22.so'
       $tworavens_mod_r_so_file  = '/etc/httpd/modules/mod_R.so'

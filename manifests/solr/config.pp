@@ -30,25 +30,22 @@ class iqss::solr::config {
       recurse => true,
       owner   => $iqss::solr::jetty_user,
       group   => $iqss::solr::jetty_user,
-      source  => "puppet:///modules/iqss/dataverse/conf/solr/${iqss::solr::version}";
-    '/etc/default/solr':
+      source  => "puppet:///modules/iqss/${iqss::solr::dataverse_package}/conf/solr/${iqss::solr::version}";
+    "/etc/default/${iqss::solr::jetty_user}":
       ensure  => file,
       content => template('iqss/solr/jetty.erb');
-    '/etc/init.d/solr':
+    "/etc/init.d/${iqss::solr::jetty_user}":
       ensure  => file,
       mode    => '0755',
-      content => template('iqss/solr/jetty.sh.erb');
-    '/var/log/jetty':
+      source  => 'puppet:///modules/iqss/solr/jetty.sh';
+    "/var/log/${iqss::solr::jetty_user}":
       ensure  => directory,
       owner   => $iqss::solr::jetty_user,
       group   => $iqss::solr::jetty_user;
-    '/var/cache/jetty':
+    "/var/cache/${iqss::solr::jetty_user}":
       ensure  => directory,
       owner   => $iqss::solr::jetty_user,
       group   => $iqss::solr::jetty_user;
-    '/var/log/solr':
-      ensure  => link,
-      target  => "${iqss::solr::jetty_home}/logs";
   }->anchor { 'solr::config::end': }
 
 }

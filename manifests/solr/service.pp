@@ -17,7 +17,7 @@
 #
 class iqss::solr::service {
   anchor { 'iqss::solr::service::begin': }->
-  service { 'solr':
+  service { $iqss::solr::jetty_user:
     ensure     => running,
     enable     => true,
     path       => '/etc/init.d/',
@@ -26,7 +26,7 @@ class iqss::solr::service {
   }
 
   anchor { 'solr::service::end':
-    require => Service ['solr'],
+    require => Service[$iqss::solr::jetty_user],
   }
 
 }

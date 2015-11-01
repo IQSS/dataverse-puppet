@@ -11,7 +11,7 @@
 # Private class. Do not use directly.
 #
 # Installs apache and the required mods.
-#
+
 class iqss::apache2::install {
 
   class { 'apache':

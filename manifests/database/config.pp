@@ -11,7 +11,7 @@
 # Private class. Do not use directly.
 #
 # Create the database, role ( user \ owner ) and access rules.
-#
+
 class iqss::database::config {
 
 # Set the configuration rules.

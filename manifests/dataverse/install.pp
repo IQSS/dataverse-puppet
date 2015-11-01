@@ -11,7 +11,7 @@
 # Private class. Do not use directly.
 #
 # Install Glassfish plus the application's dependencies like the database driver, jhove config and patches.
-#
+
 class iqss::dataverse::install {
 
   case $iqss::dataverse::glassfish_version {
@@ -66,7 +66,7 @@ class iqss::dataverse::install {
     "${iqss::dataverse::domain}/config/jhove.conf":
       ensure => present,
       owner  => $iqss::dataverse::glassfish_user,
-      source => 'puppet:///modules/iqss/dataverse/conf/jhove/jhove.conf';
+      source => "puppet:///modules/iqss/${iqss::dataverse::_package}/conf/jhove/jhove.conf";
     "${iqss::dataverse::home}/lib/${pgdriver}":
       ensure           => present,
       owner            => $iqss::dataverse::glassfish_user,

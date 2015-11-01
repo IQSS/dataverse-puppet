@@ -12,7 +12,7 @@
 #
 # Install the domain.xml with the settings. There are two here. One for when the war is not deployed.
 # And the other for when it is.
-#
+
 class iqss::dataverse::reload {
 
   $path    = "${iqss::dataverse::home}/bin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin"
@@ -24,14 +24,14 @@ class iqss::dataverse::reload {
       path        => $path,
       refreshonly => true,
       subscribe   => File['deployed'],
-      onlyif      => "test -d ${iqss::dataverse::domain}/applications/${iqss::dataverse::package}" ;
+      onlyif      => "test -d ${iqss::dataverse::domain}/applications/${iqss::dataverse::_package}" ;
   }
 
   exec {
     'start undeployed':
       command     => "cp \"${iqss::dataverse::domain}/config/domain.undeployed.xml\" \"${iqss::dataverse::domain}/config/domain.xml\" ; ${restart}",
       path        => $path,
-      unless      => "test -d ${iqss::dataverse::domain}/applications/${iqss::dataverse::package}" ;
+      unless      => "test -d ${iqss::dataverse::domain}/applications/${iqss::dataverse::_package}" ;
   }
 
 

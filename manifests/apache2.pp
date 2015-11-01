@@ -10,7 +10,7 @@
 #
 # Private class. Do not use directly.
 #
-# Install the shared settings for the iqss classes.
+# Installs apache.
 #
 # === Parameters
 #
@@ -36,7 +36,7 @@
 #
 # [mods]
 #   A list of apache modules to install.
-#
+
 class iqss::apache2 (
   $purge_configs          = $iqss::params::apache2_purge_configs,
 ) inherits iqss::params {

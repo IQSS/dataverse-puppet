@@ -11,7 +11,7 @@
 # Private class. Do not use directly.
 #
 # Download the war
-#
+
 class iqss::dataverse::war {
 
 # We only need maven for the development environment
@@ -44,24 +44,24 @@ class iqss::dataverse::war {
     }
 
     file {
-      '/dataverse':
+      '/usr/src':
         ensure => directory ;
     }->exec {
       'clone the repository':
         command => '/usr/bin/git clone git@github.com:IQSS/dataverse.git',
-        cwd     => '/dataverse' ;
+        cwd     => '/usr/src' ;
     }->exec {
       'build the war': # We assume as we run 'local' this is the root of the code base in /dataverse
-        command => "/usr/bin/mvn clean package && rsync -av /dataverse/target/${iqss::dataverse::package}.war /usr/src/${iqss::dataverse::package}.war",
-        cwd     => '/dataverse' ;
+        command => "/usr/bin/mvn clean package && rsync -av /usr/src/dataverse/target/${iqss::dataverse::_package}.war /usr/src/${iqss::dataverse::_package}.war",
+        cwd     => '/usr/src/dataverse' ;
     }
 
   } else {
 
     exec {
       'Download the file': # Note that if this download fails, the file is corrupt. Remove it then.
-        command => "/usr/bin/wget -O /usr/src/${iqss::dataverse::package}.war ${iqss::dataverse::repository}",
-        unless  => "/usr/bin/test -f /usr/src/${iqss::dataverse::package}.war" ;
+        command => "/usr/bin/wget -O /usr/src/${iqss::dataverse::_package}.war ${iqss::dataverse::repository}",
+        unless  => "/usr/bin/test -f /usr/src/${iqss::dataverse::_package}.war" ;
     }
 
   }
@@ -80,7 +80,7 @@ class iqss::dataverse::war {
     '/opt/dataverse':
       ensure  => file,
       recurse => true,
-      source  => 'puppet:///modules/iqss/dataverse';
+      source  => "puppet:///modules/iqss/${iqss::dataverse::_package}";
   }
 
 }

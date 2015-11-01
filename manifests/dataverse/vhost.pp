@@ -11,7 +11,7 @@
 # Private class. Do not use directly.
 #
 # Add the Apache virtual host to direct HTTP traffic to the ajp listener.
-#
+
 class iqss::dataverse::vhost {
 
   if ! defined(Class['iqss::apache2']) {
@@ -23,7 +23,7 @@ class iqss::dataverse::vhost {
   file {
     '/opt/dataverse/dataverse.conf':
       ensure   => file,
-      source   => 'puppet:///modules/iqss/dataverse/conf/httpd/conf.d/dataverse.conf',
+      source   => "puppet:///modules/iqss/${iqss::dataverse::_package}/conf/httpd/conf.d/dataverse.conf",
       notify   => Service[$::apache::service_name];
   }
 

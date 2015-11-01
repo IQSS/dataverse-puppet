@@ -9,7 +9,6 @@
 # === Description
 #
 # Overal must have packages.
-#  - unzip.
 #
 # === Parameters
 #

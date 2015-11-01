@@ -21,24 +21,28 @@
 # [packages]
 #   A list of R packages to install.
 #
+# === Variables
+#
 # [packages_zelig='https://github.com/IQSS/Zelig/archive/master.zip']
 #   The url to the Zelig package.
 #
-# === Variables
+# [r_path='/usr/bin/R']
+#   The location of the R binary.
 #
 # [r_site_library]
 #   The library folder for installed R packages.
 #
 # [rpackager_rstudio_libraries]
 #   A list of R library dependencies to install.
-#
+
 class iqss::rpackager (
   $repo              = $iqss::params::rpackager_repo,
   $packages          = $iqss::params::rpackager_packages,
-  $packages_zelig    = $iqss::params::rpackager_packages_zelig,
 ) inherits iqss::params {
 
-  $r_site_library = $iqss::params::rpackager_r_site_library
+  $packages_zelig    = $iqss::params::rpackager_packages_zelig
+  $r_path            = $iqss::params::r_path
+  $r_site_library    = $iqss::params::rpackager_r_site_library
   $rstudio_libraries = $iqss::params::rpackager_rstudio_libraries
 
   anchor { 'iqss::rpackager::start': }->
