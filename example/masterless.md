@@ -18,7 +18,7 @@ but there may be conflicts if you already have R, Java, Glassfish, PostgreSQL or
 
 Download the setup file from the dataverse-puppet repository with curl or wget and give it executable persmissions:
 
-    $ wget https://raw.githubusercontent.com/IQSS/dataverse-puppet/4.0.1/conf/setup.sh
+    $ wget https://raw.githubusercontent.com/IQSS/dataverse-puppet/master/conf/setup.sh
     $ sudo chmod 744 setup.sh
     
 Then start it up:
