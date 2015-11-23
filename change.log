@@ -1,8 +1,14 @@
 [BRANCH RELEASE] [date]
  - [New or deprecated item.]
 
-July 2015
- - Inception.
+1.0.0 November 2015
+  - Add 4.2.1 configuration and set it as the default.
+  - Set the TwoRavens repository to https://github.com/IQSS/TwoRavens/archive/master.zip
+
+0.9.0 October 2015
+  - Document updates: two examples and contribution sections.
+  - We set the version to 0.9.0 to follow SemVer.
+  - Support configuration for dataverse releases 4.0, 4.0.1, 4.1 and 4.2
 
 September 2015
  - Create this change.log.
@@ -16,8 +22,9 @@ September 2015
  - Append to the readme.
  - Show some examples to provision with Vagrant and for a standalone server
 
- 0.9.0 October 2015
-  - Document updates: two examples and contribution sections.
-  - We set the version to 0.9.0 to follow SemVer.
-  - Support configuration for dataverse releases 4.0, 4.0.1, 4.1 and 4.2
+July 2015
+ - Inception.
+
+
+
 

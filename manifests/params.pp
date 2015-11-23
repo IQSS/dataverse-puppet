@@ -80,9 +80,9 @@ class iqss::params {
   $dataverse_glassfish_tmp_dir                      = '/opt/glassfish'
   $dataverse_glassfish_user                         = 'glassfish'
   $dataverse_glassfish_version                      = '4.1'
-  $dataverse_package                                = 'dataverse-4.2'
+  $dataverse_package                                = 'dataverse-4.2.1'
   $dataverse_port                                   = 443
-  $dataverse_repository                             = "https://github.com/IQSS/dataverse/releases/download/v4.2/dataverse-4.2.war"
+  $dataverse_repository                             = "https://github.com/IQSS/dataverse/releases/download/v4.2.1/dataverse-4.2.1.war"
   $dataverse_rserve_host                            = 'localhost'
   $dataverse_rserve_password                        = 'rserve'
   $dataverse_rserve_port                            = 6311
@@ -150,7 +150,7 @@ class iqss::params {
   $tworavens_dataverse_fqdn                         = 'localhost'
   $tworavens_dataverse_port                         = 443
   $tworavens_fqdn                                   = 'localhost'
-  $tworavens_package                                = 'https://github.com/IQSS/TwoRavens/archive/v0.1.zip'
+  $tworavens_package                                = 'https://github.com/IQSS/TwoRavens/archive/master.zip'
   $tworavens_parent_dir                             = '/var/www/html'
   $tworavens_port                                   = 443
   $tworavens_protocol                               = 'https'

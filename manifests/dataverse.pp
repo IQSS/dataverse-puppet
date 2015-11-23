@@ -86,7 +86,7 @@
 # [glassfish_user='glassfish']
 #   The user running the glassfish domain.
 #
-# [package='dataverse-4.2'|dataverse-4.0|dataverse-4.0.1|dataverse-4.1]
+# [package='dataverse-4.2.1'||dataverse-4.2|dataverse-4.1|dataverse-4.0.1|dataverse-4.0]
 #   The release tag: name and version of dataverse.
 #
 # [port=443]
@@ -147,7 +147,11 @@ class iqss::dataverse (
   $glassfish_user                  = $iqss::params::dataverse_glassfish_user
 
   case $package {
-    'dataverse-4.2', default: {
+    'dataverse-4.2.1', default: {
+      $_package = 'dataverse-4.2.1'
+      $msg='Dataverse v4.2.1 is focused on improving performance of the dataset page and system stability by greatly reducing the number database calls made and limiting to 25 the number of files displayed on initialization. In addition, the SWORD API performance was improved to allow retrieval of file listings with large numbers of files.'
+    }
+    'dataverse-4.2': {
       $_package = 'dataverse-4.2'
       $msg='Dataverse v4.2 is focused on improving performance of the files and permissions pages as well as adding batch editing of files.'
     }

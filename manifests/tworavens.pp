@@ -22,7 +22,7 @@
 # [fqdn='localhost']
 #   The public domain name of the TwoRavens web application. Defaults to 'localhost'.
 #
-# [package='https://github.com/IQSS/TwoRavens/archive/v0.1.zip']
+# [package='https://github.com/IQSS/TwoRavens/archive/master.zip']
 #   The download url of the TwoRavens web application.
 #
 # [parent_dir='/var/www/html'].
