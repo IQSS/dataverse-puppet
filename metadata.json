@@ -1,6 +1,6 @@
 {
     "name": "iqss-iqss",
-    "version": "0.9.0",
+    "version": "1.0.0",
     "author": "Lucien van Wouw",
     "summary": "This module will install and configure the IQSS Dataverse application.",
     "license": "GPL-3.0",
