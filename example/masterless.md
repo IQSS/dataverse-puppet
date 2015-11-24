@@ -37,7 +37,7 @@ Another way to try out settings is the hieradata. As you specified the environme
 configuration is in a file called masterless.yaml:
 
     /etc/puppet/modules/iqss/conf/hieradata/masterless.yaml
-        iqss::globals::dataverse_fqdn: "%{::fqdn}"
+        iqss::dataverse::fqdn: "%{::fqdn}"
         iqss::dataverse::site_url: "https://%{::fqdn}"
         iqss::tworavens::dataverse_fqdn: "%{::fqdn}"
         iqss::tworavens::domain:"%{::fqdn}"
