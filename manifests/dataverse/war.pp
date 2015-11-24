@@ -60,7 +60,7 @@ class iqss::dataverse::war {
 
     exec {
       'Download the file': # Note that if this download fails, the file is corrupt. Remove it then.
-        command => "/usr/bin/wget -O /usr/src/${iqss::dataverse::_package}.war ${iqss::dataverse::repository}",
+        command => "/usr/bin/wget --no-check-certificate -O /usr/src/${iqss::dataverse::_package}.war ${iqss::dataverse::repository}",
         unless  => "/usr/bin/test -f /usr/src/${iqss::dataverse::_package}.war" ;
     }
 

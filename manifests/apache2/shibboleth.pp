@@ -17,8 +17,7 @@ class iqss::apache2::shibboleth {
 
   notify {
     'Shibboleth status experimental':
-      message => 'Shibboleth support in Dataverse should be considered experimental until the following issue is closed: https://github.com/IQSS/dataverse/issues/2117
-In Dataverse 4.0, Shibboleth support requires fronting Glassfish with Apache as described below, but this configuration has not been heavily tested in a production environment and is not recommended until this issue is closed: https://github.com/IQSS/dataverse/issues/2180',
+      message => 'Shibboleth support in Dataverse should be considered experimental until the following issue is closed: https://github.com/IQSS/dataverse/issues/2117',
   }
 
   include shibboleth::params
