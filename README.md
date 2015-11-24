@@ -69,6 +69,7 @@ Setup
 Before you begin
 ----------------
 
+* unzip must be installed on the OS.
 * Apply a first-time update of each of the host's package repository using 'apt-get update' or 'yum update'.
 * Maybe take a look at the [examples](example) if you are unfamiliar with puppet or need some suggestions.
 
@@ -78,8 +79,6 @@ Configuring your infrastructure
 To install Dataverse and TwoRavens with all the out-of-the-box settings use:
 
     class {
-      'iqss::globals':   # The global settings
-    }->class {
       'iqss::rserve':    # RServe
     }->class {
       'iqss::database':  # Our PostgreSQL database
@@ -87,22 +86,19 @@ To install Dataverse and TwoRavens with all the out-of-the-box settings use:
       'iqss::solr':      # Apache Solr 4
     }->class {
       'iqss::dataverse': # Dataverse ( Glassfish and war )
-    }
-    
-    class {
+    }->class {
       'iqss::tworavens': # TwoRavens add-on
-        require => Class['iqss::globals'];
     }
     
 To install on different machines you can deploy per server per component. E.g.:
 
-    database-0.domain.org   class { 'iqss::globals':}->class { 'iqss::database': }
-    dataverse-1.domain.org  class { 'iqss::globals':}->class { 'iqss::dataverse': }
-    dataverse-2.domain.org  class { 'iqss::globals':}->class { 'iqss::dataverse': }
-    dataverse-3.domain.org  class { 'iqss::globals':}->class { 'iqss::dataverse': }
-    rserve-0.domain.org     class { 'iqss::globals':}->class { 'iqss::rserve': }
-    solr-0.domain.org       class { 'iqss::globals':}->class { 'iqss::solr': }
-    tworavens-0.domain.org  class { 'iqss::globals':}->class { 'iqss::tworavens': }
+    database-0.domain.org     class { 'iqss::database': }
+    dataverse-1.domain.org    class { 'iqss::dataverse': }
+    dataverse-2.domain.org    class { 'iqss::dataverse': }
+    dataverse-3.domain.org    class { 'iqss::dataverse': }
+    rserve-0.domain.org       class { 'iqss::rserve': }
+    solr-0.domain.org         class { 'iqss::solr': }
+    tworavens-0.domain.org    class { 'iqss::tworavens': }
     
 ###Public Classes and Defined Types
 
@@ -112,7 +108,6 @@ This module modifies configuration files and directories with the following publ
 
 * [Class: Iqss::Database](#class-iqssdatabase)
 * [Class: Iqss::Dataverse](#class-iqssdataverse)
-* [Class: Iqss::Globals](#class-iqssglobals)
 * [Class: Iqss::Rserve](#class-iqssrserve)
 * [Class: Iqss::Solr](#class-iqsssolr)
 * [Class: Iqss::TwoRavens](#class-iqsstworavens)
@@ -128,9 +123,6 @@ Installs Postgresql, the database user and database. For example:
         password => 'secret',
     }
     
-Use the Iqss::Globals class to override settings. This will create a running Postgresql server with the
-database, users and access policies.
-
 It also contains settings for
    
 #####`createdb`
@@ -301,7 +293,7 @@ The release tag: name and version of dataverse 4. Defaults to 'dataverse-4.2.1'.
 
 #####`port`
 
-The SSL port on which dataverse can be reached. Defaults to `Globals:dataverse_port`.
+The SSL port on which dataverse can be reached.
 
 #####`repository`
 
