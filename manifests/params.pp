@@ -54,6 +54,7 @@ class iqss::params {
   $database_version                                 = '9.3'
 
   $dataverse_auth_password_reset_timeout_in_minutes = 60
+  $allow_http                                       = false
   $dataverse_doi_baseurlstring                      = 'https://ezid.cdlib.org'
   $dataverse_doi_password                           = 'apitest'
   $dataverse_doi_username                           = 'apitest'

@@ -17,6 +17,10 @@
 # [auth_password_reset_timeout_in_minutes=60]
 #   The time in minutes for a password reset.
 #
+# [allow_http=false]
+#   Allow a http connection. If false, redirect traffic to https. Set to true for a development server or when you use
+#   a proxy for SSL termination.
+#
 # [files_directory='/home/glassfish/dataverse/files']
 #   The location of the uploaded files and their tabular derivatives.
 #
@@ -113,6 +117,7 @@
 
 class iqss::dataverse (
   $auth_password_reset_timeout_in_minutes = $iqss::params::dataverse_auth_password_reset_timeout_in_minutes,
+  $allow_http                             = $iqss::params::allow_http,
   $files_directory                        = $iqss::params::dataverse_files_directory,
   $doi_baseurlstring                      = $iqss::params::dataverse_doi_baseurlstring,
   $doi_username                           = $iqss::params::dataverse_doi_username,

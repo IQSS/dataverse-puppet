@@ -213,6 +213,11 @@ It also contains settings for
 
 The time in minutes for a password reset. Defaults to '60'.
 
+#####`allow_http`
+
+Allow a http connection. If false, redirect traffic to https. Set to true for a development server or when you use
+a proxy for SSL termination. Defaults to false.
+
 #####`doi_baseurlstring`
 
 The DOI endpoint for the EZID Service. Defaults to 'https://ezid.cdlib.org'.
