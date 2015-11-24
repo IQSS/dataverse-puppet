@@ -125,7 +125,7 @@ class iqss::params {
   $rserve_user                                      = 'rserve'
   $rserve_plaintext                                 = 'disable'
   $rserve_port                                      = 6311
-  $rserve_pwd                                       = 'rserve'
+  $rserve_password                                  = 'rserve'
   $rserve_pwdfile                                   = '/etc/Rserv.pwd'
   $rserve_remote                                    = 'enable'
   $rserve_socket                                    = undef

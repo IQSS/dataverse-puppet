@@ -28,25 +28,26 @@ class iqss::rserve::service {
 
   file {
     '/etc/Rserv.conf':
-      ensure  => present,
-      owner   => $iqss::rserve::rserve_user,
-      group   => $iqss::rserve::rserve_user,
       content => template( 'iqss/rserve/Rserve.conf.erb' ),
-      notify  => Service['rserve'] ;
-    '/etc/Rserv.pwd':
       ensure  => present,
-      owner   => $iqss::rserve::rserve_user,
       group   => $iqss::rserve::rserve_user,
+      notify  => Service['rserve'] ,
+      owner   => $iqss::rserve::rserve_user ;
+    '/etc/Rserv.pwd':
       content => "${iqss::rserve::rserve_user} ${iqss::rserve::password}",
-      notify  => Service['rserve'] ;
+      ensure  => present,
+      group   => $iqss::rserve::rserve_user,
+      mode    => 400,
+      notify  => Service['rserve'] ,
+      owner   => $iqss::rserve::rserve_user ;
     '/var/log/rserve/':
       ensure => directory,
-      owner  => $iqss::rserve::rserve_user,
-      group  => $iqss::rserve::rserve_user;
+      group  => $iqss::rserve::rserve_user,
+      owner  => $iqss::rserve::rserve_user ;
     '/etc/init.d/rserve':
       ensure  => present,
-      mode    => 755,
-      content => template( 'iqss/rserve/rserve-startup.sh.erb' );
+      content => template( 'iqss/rserve/rserve-startup.sh.erb' ) ,
+      mode    => 755;
   }
 
   service {
