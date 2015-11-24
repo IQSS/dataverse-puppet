@@ -33,6 +33,16 @@
             "version_requirement": ">=0.0.2"
         }
     ],
+    "requirements": [
+        {
+            "name": "pe",
+            "version_requirement": "3.x"
+        },
+        {
+            "name": "puppet",
+            "version_requirement": "3.x"
+        }
+    ],
     "operatingsystem_support": [
         {
             "operatingsystem": "CentOS",
