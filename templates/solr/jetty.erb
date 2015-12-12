@@ -8,25 +8,25 @@ VERBOSE=yes
 
 # Run Jetty as this user ID (default: jetty)
 # Set this to an empty string to prevent Jetty from starting automatically
-JETTY_USER=<%= scope.lookupvar('iqss::solr::jetty_user') %>
+JETTY_USER=<%= scope.lookupvar('dataverse::solr::jetty_user') %>
 
 # Listen to connections from this network host
 # Use 0.0.0.0 as host to accept all connections.
 # Uncomment to restrict access to localhost
-JETTY_HOST=<%= scope.lookupvar('iqss::solr::jetty_host') %>
+JETTY_HOST=<%= scope.lookupvar('dataverse::solr::jetty_host') %>
 
 # The network port used by Jetty
-JETTY_PORT=<%= scope.lookupvar('iqss::solr::jetty_port') %>
+JETTY_PORT=<%= scope.lookupvar('dataverse::solr::jetty_port') %>
 
 # Additional arguments to pass to Jetty    
 #JETTY_ARGS=
 
 # log file
-JETTY_LOGS="<%= scope.lookupvar('iqss::solr::jetty_home') %>/logs"
+JETTY_LOGS="<%= scope.lookupvar('dataverse::solr::jetty_home') %>/logs"
 
-JETTY_HOME="<%= scope.lookupvar('iqss::solr::jetty_home') %>"
+JETTY_HOME="<%= scope.lookupvar('dataverse::solr::jetty_home') %>"
 
-JETTY_BASE="<%= scope.lookupvar('iqss::solr::jetty_home') %>"
+JETTY_BASE="<%= scope.lookupvar('dataverse::solr::jetty_home') %>"
 
 # Extra options to pass to the JVM         
-JAVA_OPTIONS="-Dsolr.solr.home=<%= scope.lookupvar('iqss::solr::solr_home') %> <%= scope.lookupvar('iqss::solr::jetty_java_options') %>"
+JAVA_OPTIONS="-Dsolr.solr.home=<%= scope.lookupvar('dataverse::solr::solr_home') %> <%= scope.lookupvar('dataverse::solr::jetty_java_options') %>"

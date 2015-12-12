@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Apache2
+# == Class: Dataverse::Apache2
 #
 # === Copyright
 #
@@ -37,20 +37,20 @@
 # [mods]
 #   A list of apache modules to install.
 
-class iqss::apache2 (
-  $purge_configs          = $iqss::params::apache2_purge_configs,
-) inherits iqss::params {
+class dataverse::apache2 (
+  $purge_configs          = $dataverse::params::apache2_purge_configs,
+) inherits dataverse::params {
 
-  $shibboleth_lib         = $iqss::params::apache2_shibboleth_lib
-  $default_confd_files    = $iqss::params::apache2_default_confd_files
-  $default_mods           = $iqss::params::apache2_default_mods
-  $default_ssl_vhost      = $iqss::params::apache2_default_ssl_vhost
-  $default_vhost          = $iqss::params::apache2_default_vhost
-  $mods                   = $iqss::params::apache2_mods
+  $shibboleth_lib         = $dataverse::params::apache2_shibboleth_lib
+  $default_confd_files    = $dataverse::params::apache2_default_confd_files
+  $default_mods           = $dataverse::params::apache2_default_mods
+  $default_ssl_vhost      = $dataverse::params::apache2_default_ssl_vhost
+  $default_vhost          = $dataverse::params::apache2_default_vhost
+  $mods                   = $dataverse::params::apache2_mods
 
-  anchor { 'iqss::apache2::start': }->
-  class { 'iqss::apache2::install': }->
-  class { 'iqss::apache2::shibboleth': }->
-  anchor { 'iqss::apache2::end': }
+  anchor { 'dataverse::apache2::start': }->
+  class { 'dataverse::apache2::install': }->
+  class { 'dataverse::apache2::shibboleth': }->
+  anchor { 'dataverse::apache2::end': }
 
 }

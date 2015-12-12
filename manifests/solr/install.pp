@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Solr::Install
+# == Class: Dataverse::Solr::Install
 #
 # === Copyright
 #
@@ -12,31 +12,31 @@
 #
 # Download the desired Solr package to the home directory.
 #
-class iqss::solr::install {
+class dataverse::solr::install {
 
-  $package_solr="solr-${iqss::solr::version}"
-  $solr_url = "${iqss::solr::url}/${iqss::solr::version}/$package_solr.zip"
+  $package_solr="solr-${dataverse::solr::version}"
+  $solr_url = "${dataverse::solr::url}/${dataverse::solr::version}/$package_solr.zip"
 
-  anchor{ 'iqss::solr::install::begin': }
+  anchor{ 'dataverse::solr::install::begin': }
 
 ## create a solr user
   group {
-    $iqss::solr::jetty_user:
+    $dataverse::solr::jetty_user:
       ensure => present,
 
   }
   user {
-    $iqss::solr::jetty_user:
+    $dataverse::solr::jetty_user:
       ensure     => present,
-      home       => $iqss::solr::parent_dir,
+      home       => $dataverse::solr::parent_dir,
       managehome => true,
-      groups     => $iqss::solr::jetty_user,
-      require    => Anchor['iqss::solr::install::begin'],
+      groups     => $dataverse::solr::jetty_user,
+      require    => Anchor['dataverse::solr::install::begin'],
   }
 
   notify {
     'parent dir':
-      message => "Parent directory=${iqss::solr::parent_dir}" ;
+      message => "Parent directory=${dataverse::solr::parent_dir}" ;
   }->archive { 'apache-solr':
     ensure           => present,
     url              => $solr_url,
@@ -45,13 +45,13 @@ class iqss::solr::install {
     extension        => 'zip',
     checksum         => false,
     timeout          => 300,
-    require          => User[$iqss::solr::jetty_user],
+    require          => User[$dataverse::solr::jetty_user],
   }->exec { 'copy solr':
-    command => "/usr/bin/rsync -av /opt/solr/$package_solr $iqss::solr::parent_dir",
-    creates => $iqss::solr::solr_home;
+    command => "/usr/bin/rsync -av /opt/solr/$package_solr $dataverse::solr::parent_dir",
+    creates => $dataverse::solr::solr_home;
   }
 
-  anchor{ 'iqss::solr::install::end':
+  anchor{ 'dataverse::solr::install::end':
     require => Exec['copy solr'],
   }
 }

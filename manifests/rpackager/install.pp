@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Rpackager::Install
+# == Class: Dataverse::Rpackager::Install
 #
 # === Copyright
 #
@@ -12,10 +12,10 @@
 #
 # Install all the desired libraries needed to build R packages.
 #
-class iqss::rpackager::install {
+class dataverse::rpackager::install {
 
   package {
-    $iqss::rpackager::rpackager_rstudio_libraries:
+    $dataverse::rpackager::rpackager_rstudio_libraries:
       ensure => installed,
   }
 

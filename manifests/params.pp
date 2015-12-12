@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Params
+# == Class: Dataverse::Params
 #
 # === Copyright
 #
@@ -14,7 +14,7 @@
 #
 # Variable name convention possible: classname_keyname=default value
 
-class iqss::params {
+class dataverse::params {
   $apache2_default_confd_files                      = false
   $apache2_default_mods                             = false
   $apache2_default_ssl_vhost                        = false
@@ -54,7 +54,9 @@ class iqss::params {
   $database_version                                 = '9.3'
 
   $dataverse_auth_password_reset_timeout_in_minutes = 60
-  $allow_http                                       = false
+  $dataverse_database_host                          = 'localhost'
+  $dataverse_database_port                          = 5432
+  $dataverse_allow_http                             = false
   $dataverse_doi_baseurlstring                      = 'https://ezid.cdlib.org'
   $dataverse_doi_password                           = 'apitest'
   $dataverse_doi_username                           = 'apitest'
@@ -65,16 +67,16 @@ class iqss::params {
   $dataverse_glassfish_parent_dir                   = '/home/glassfish'
   $dataverse_glassfish_domain_name                  = 'domain1'
   $dataverse_glassfish_jvmoption                    = [
-'-XX:MaxPermSize=512m',
-'-XX:PermSize=256m',
-'-Xmx1024m',
-'-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl'
-]
+    '-XX:MaxPermSize=512m',
+    '-XX:PermSize=256m',
+    '-Xmx1024m',
+    '-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl'
+  ]
   $dataverse_glassfish_mailhost                     = 'localhost'
   $dataverse_glassfish_mailproperties               = {
-'username' => 'a username',
-'password' => 'a password'
-}
+    'username' => 'a username',
+    'password' => 'a password'
+  }
   $dataverse_glassfish_mailuser                     = 'dataversenotify'
   $dataverse_glassfish_remove_default_domain        = false
   $dataverse_glassfish_service_name                 = 'glassfish'

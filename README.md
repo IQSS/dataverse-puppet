@@ -70,6 +70,8 @@ Before you begin
 ----------------
 
 * unzip must be installed on the OS.
+* The solr installation does not provision java. Install the latter when you apply this class without Dataverse::Dataverse 
+* Import the SQL statements in reference_data.sql if you install the database on a different machine than Dataverse::Dataverse.
 * Apply a first-time update of each of the host's package repository using 'apt-get update' or 'yum update'.
 * Maybe take a look at the [examples](example) if you are unfamiliar with puppet or need some suggestions.
 
@@ -79,26 +81,26 @@ Configuring your infrastructure
 To install Dataverse and TwoRavens with all the out-of-the-box settings use:
 
     class {
-      'iqss::rserve':    # RServe
+      'dataverse::rserve':    # RServe
     }->class {
-      'iqss::database':  # Our PostgreSQL database
+      'dataverse::database':  # Our PostgreSQL database
     }->class {
-      'iqss::solr':      # Apache Solr 4
+      'dataverse::solr':      # Apache Solr 4
     }->class {
-      'iqss::dataverse': # Dataverse ( Glassfish and war )
+      'dataverse::dataverse': # Dataverse ( Glassfish and war )
     }->class {
-      'iqss::tworavens': # TwoRavens add-on
+      'dataverse::tworavens': # TwoRavens add-on
     }
     
 To install on different machines you can deploy per server per component. E.g.:
 
-    database-0.domain.org     class { 'iqss::database': }
-    dataverse-1.domain.org    class { 'iqss::dataverse': }
-    dataverse-2.domain.org    class { 'iqss::dataverse': }
-    dataverse-3.domain.org    class { 'iqss::dataverse': }
-    rserve-0.domain.org       class { 'iqss::rserve': }
-    solr-0.domain.org         class { 'iqss::solr': }
-    tworavens-0.domain.org    class { 'iqss::tworavens': }
+    database-0.domain.org     class { 'dataverse::database': }
+    dataverse-1.domain.org    class { 'dataverse::dataverse': }
+    dataverse-2.domain.org    class { 'dataverse::dataverse': }
+    dataverse-3.domain.org    class { 'dataverse::dataverse': }
+    rserve-0.domain.org       class { 'dataverse::rserve': }
+    solr-0.domain.org         class { 'dataverse::solr': }
+    tworavens-0.domain.org    class { 'dataverse::tworavens': }
     
 ###Public Classes and Defined Types
 
@@ -106,18 +108,18 @@ Public classes can be set when declaring them in a manifest and with (#hieradata
 
 This module modifies configuration files and directories with the following public classes:
 
-* [Class: Iqss::Database](#class-iqssdatabase)
-* [Class: Iqss::Dataverse](#class-iqssdataverse)
-* [Class: Iqss::Rserve](#class-iqssrserve)
-* [Class: Iqss::Solr](#class-iqsssolr)
-* [Class: Iqss::TwoRavens](#class-iqsstworavens)
+* [Class: Dataverse::Database](#class-dataverse::database)
+* [Class: Dataverse::Dataverse](#class-dataverse::dataverse)
+* [Class: Dataverse::Rserve](#class-dataverse::rserve)
+* [Class: Dataverse::Solr](#class-dataverse::solr)
+* [Class: Dataverse::TwoRavens](#class-dataverse::tworavens)
 
-####Class: Iqss::Database
+####Class: Dataverse::Database
 
 Installs Postgresql, the database user and database. For example:
 
     class {
-      'iqss::database':
+      'dataverse::database':
         name     => 'dataverse',
         user     => 'dataverse',
         password => 'secret',
@@ -125,15 +127,15 @@ Installs Postgresql, the database user and database. For example:
     
 It also contains settings for
    
-#####`createdb`
+#####`createdb=false`
    
-The user can create database. Defaults to 'false'.
+The user can create database.
 
-#####`createrole`
+#####`createrole=false`
 
-The user can create roles. Defaults to 'false'.
+The user can create roles.
  
-#####`encoding`
+#####`encoding='UTF-8'`
 
 This will set the default encoding encoding for all databases created with this module. On certain operating systems
 this will be used during the `template1` initialization as well so it becomes a default outside of the module too.
@@ -160,239 +162,260 @@ The access rules that determine who can connect to what database from where. Def
         auth_method => 'md5'
         }
 
-#####`listen_addresses`
+#####`listen_addresses='*'`
 
-This value defaults to `*`, meaning the postgres server will accept connections accept connections from any remote
+The defaults `*` means the postgres server will accept connections accept connections from any remote
 machine. Alternately, you can specify a comma-separated list of hostnames or IP addresses. (For more info, have a look
 at the `postgresql.conf` file from your system's postgres package).
 
-#####`locale`
+#####`locale='en_US.UTF-8'`
 
-This will set the default database locale for all databases created with this module. Defaults to 'en_US.UTF-8'.
+This will set the default database locale for all databases created with this module.
 
-#####`login`
+#####`login-true`
 
-The fact the user can login or not. Defaults to 'true'.
+The fact the user can login or not.
 
-#####`manage_package_repo`
+#####`manage_package_repo=true`
 
-Setup the official PostgreSQL repositories on your host. Defaults to `true`.
+Setup the official PostgreSQL repositories on your host.
 
-#####`replication`
+#####`replication=false`
 
-This role can replicate. Defaults to 'false'.
+This role can replicate.
 
-#####`superuser`
+#####`superuser=false`
 
-This role is a superuser. Defaults to 'false'.
+This role is a superuser.
 
-#####`version`
+#####`version='9.3'`
 
-The version of PostgreSQL. Defaults to '9.3'. 
+The version of the PostgreSQL package.
 
-####Class: Iqss::Dataverse
+####Class: Dataverse::Dataverse
 
 This class installs Glassfish, the domain settings and depending on the configuration builds a war or pulls a war
 distribution from a repository. Example:
 
     class {
-        'iqss::dataverse':
-            package => 'dataverse-4.2',
-            repository => 'https://github.com/IQSS/dataverse/releases/download/v4.2/dataverse-4.2.war', 
+        'dataverse::dataverse':
+            package => 'dataverse-4.2.1',
+            repository => 'https://github.com/IQSS/dataverse/releases/download/v4.2.1/dataverse-4.2.1.war', 
     }
     
 This will create three services:
 
-* The Dataverse 4.2 distribution plus glassfish service: $ service glassfish start|stop|status
+* The Dataverse 4.2.1 distribution plus glassfish service: $ service glassfish start|stop|status
 * An R-daemon: $ service rserve start|stop|status
 * The Apache web server
 
 It also contains settings for
 
-#####`auth_password_reset_timeout_in_minutes`
+#####`auth_password_reset_timeout_in_minutes=60`
 
-The time in minutes for a password reset. Defaults to '60'.
+The time in minutes for a password reset.
 
-#####`allow_http`
+#####`allow_http=false`
 
 Allow a http connection. If false, redirect traffic to https. Set to true for a development server or when you use
-a proxy for SSL termination. Defaults to false.
+a proxy for SSL termination.
 
-#####`doi_baseurlstring`
+#####`database_dbname='dvndb'`
 
-The DOI endpoint for the EZID Service. Defaults to 'https://ezid.cdlib.org'.
+The name of the database.
+
+#####`database_host='localhost'`
+
+The resolvable hostname of the database.
+
+#####`database_password='dvnAppPass'`  
+
+The database user's password
+
+#####`database_port=5432`
+
+The database port.
+
+#####`database_user='dvnApp'`
+
+The username granted control over the database.
+
+#####`doi_baseurlstring='https://ezid.cdlib.org'`
+
+The DOI endpoint for the EZID Service.
  
-#####`doi_username`
+#####`doi_username='apitest'`
 
-The username to connect to the EZID Service. Defaults to 'apitest'. 
+The username to connect to the EZID Service.
 
-#####`doi_password`
+#####`doi_password='apitest'`
 
-The password to connect to the EZID Service. Defaults to 'apitest'. 
+The password to connect to the EZID Service.
 
-#####`files_directory`
+#####`files_directory='/home/glassfish/dataverse/files'`
 
-The location of the uploaded files and their tabular derivatives. Defaults to '/home/glassfish/dataverse/files'.
+The location of the uploaded files and their tabular derivatives.
 
-#####`fqdn`
+#####`fqdn='localhost'`
 
 If the Dataverse server has multiple DNS names, this option specifies the one to be used as the "official" host name.
 For example, you may want to have dataverse.foobar.edu, and not the less appealing server-123.socsci.foobar.edu to
-appear exclusively in all the registered global identifiers, Data Deposit API records, etc. Defaults to 'localhost'.
+appear exclusively in all the registered global identifiers, Data Deposit API records, etc.
 
 Do note that whenever the system needs to form a service URL, by default, it will be formed with https:// and port 443.
 I.e.,
 https://{dataverse.fqdn}/
 
-If that does not suit your setup, use the `Iqss::Dataverse::site_url` option.
+If that does not suit your setup, use the `site_url` option.
 
-#####`glassfish_parent_dir`
+#####`glassfish_parent_dir='/home/glassfish'`
 
-The Glassfish parent directory. Defaults to '/home/glassfish'.
+The Glassfish parent directory.
 
-#####`glassfish_domain_name`
+#####`glassfish_domain_name='domain1'`
 
-The domain name. Defaults to 'domain1'.
+The domain name.
 
-#####`glassfish_fromaddress`
+#####`glassfish_fromaddress='do-not-reply@localhost'`
 
-The e-mail -from field in the mail header. Defaults to 'do-not-reply@localhost'.
+The e-mail -from field in the mail header.
 
 #####`glassfish_jvmoption`
 
 An array of jvm options. 
-Defaults to ["-Xmx1024m", "-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl"].
 
-#####`glassfish_mailhost`
+Defaults are ["-Xmx1024m", "-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl"].
 
-The mail relay hostname. Defaults to 'localhost'.
+#####`glassfish_mailhost='localhost'.`
 
-#####`glassfish_mailuser`
+The mail relay hostname.
 
-The user name that is allowed by the mail relay to sent mails. Defaults to 'dataversenotify'.
+#####`glassfish_mailuser='dataversenotify'`
+
+The user name that is allowed by the mail relay to sent mails.
 
 #####`glassfish_mailproperties`
 
 Key-value pairs sent with to the mail relay, such as credentials.
-Defaults to dummy values 'username=a_username:password=a_password'.
 
-#####`glassfish_service_name`
+Defaults to dummy values ['username=a_username,password=a_password'].
 
-The service handle to submit start, stop, status commands. E.g. service dataverse start. Defaults to 'glassfish'
+#####`glassfish_service_name='glassfish'`
 
-#####`glassfish_tmp_dir`
+The service handle to submit start, stop, status commands. E.g. service dataverse start.
 
-The download path of the glassfish package. Defaults to '/opt/glassfish'.
+#####`glassfish_tmp_dir='/opt/glassfish'`
 
-#####`glassfish_user`
+The download path of the glassfish package.
 
-The user running the glassfish domain. Defaults to 'glassfish'.
+#####`glassfish_user='glassfish'`
 
-#####`glassfish_version`
+The user running the glassfish domain.
 
-The Glassfish J2EE Application server version. Defaults to '4.1'.
+#####`glassfish_version='4.1'`
 
-#####`package`
+The Glassfish J2EE Application server version.
 
-The release tag: name and version of dataverse 4. Defaults to 'dataverse-4.2.1'.
+#####`package='dataverse-4.2.1'`
 
-#####`port`
+The release tag: name and version of dataverse 4.
+
+#####`port=443`
 
 The SSL port on which dataverse can be reached.
 
-#####`repository`
+#####`repository='https://github.com/IQSS/dataverse/releases/download/v4.2.1/dataverse-4.2.1.war'`
 
 This indicates there the package comes from. It can be 'git' to build a war from the IQSS repository; or the repository
 url of a Dataverse war file.
-Defaults to 'https://github.com/IQSS/dataverse/releases/download/v4.2.1/dataverse-4.2.1.war'.
 
-#####`rserve_host`
+#####`rserve_host='localhost'`
 
-The Rserve service endpoint. Defaults to 'localhost'.
+The Rserve service endpoint.
 
-#####`rserve_password`
+#####`rserve_password='rserve'`
 
-The password needed to access the Rserve service. Defaults to 'rserve'.
+The password needed to access the Rserve service.
 
-#####`rserve_port`
+#####`rserve_port=6311`
 
-The Rserve service port. Defaults to 6311.
+The Rserve service port.
 
-#####`rserve_user`
+#####`rserve_user='rserve'`
 
-The username that can access the Rserce service. Defaults to 'serve'. 
+The username that can access the Rserce service.
  
-#####`site_url`
+#####`site_url='https://localhost:443'`
 
-The url to a dataverse web application. Defaults to 'https://localhost:443'.
+The url to a dataverse web application.
 
-####Class: Iqss::Rserve
+####Class: Dataverse::Rserve
 
 Installs the Rserve or Binary R server daemon. Example:
                             
-    class { 'iqss::rserve':
+    class { 'dataverse::rserve':
         pwd  => 'potato',
     }
     
 This will install R and a number of R packages including the RServe package. A password file /etc/Rserve.pwd is set with
 content: rserve potato. Rserve is run by the 'rserve' user.
 
-#####`auth`
+#####`auth='disable'`
 
-If you need remote access use set auth 'required' and plaintext to 'disable'. Defaults to 'disable'.
+If you need remote access use set auth 'required' and plaintext to 'disable'.
 
 #####`chroot`
 
-The jail directory. Defaults tot undef.
+The jail directory. Defaults to undef.
 
-#####`encoding`
+#####`encoding='utf8'`
 
 This means that strings are converted to the given encoding before being sent to the client and also all strings from
-the client are assumed to come from the given encoding. Defaults to 'utf8'.
+the client are assumed to come from the given encoding.
 
 #####`eval`
 
 Preload packages with expressions that you would otherwise have to load from scripts. Defaults to undef. 
 
-#####`fileio`
+#####`fileio='enable'`
 
-Allow clients to perform filesystem operations via the RServe deamon. Defaults to 'enable'.
+Allow clients to perform filesystem operations via the RServe deamon.
 
-#####`gid`
+#####`gid=97`
 
-The group id of the 'rserve' user runnning the daemon. Defaults to 97.
+The group id of the 'rserve' user runnning the daemon.
 
-#####`interactive`
+#####`interactive='yes'`
 
-Undocumented. Defaults to 'yes'.
+Undocumented.
 
-#####`maxinbuf`
+#####`maxinbuf=262144`
 
-The maximum allowed buffer size send from the client per connection. Defaults to 262144 Kb.
+The maximum allowed buffer size in kb send from the client per connection.
 
-#####`maxsendbuf`
+#####`maxsendbuf=0`
 
-The maximum allowed buffer size send from the server per connection. Defaults to 0 Kb.
+The maximum allowed buffer size in kb send from the server per connection.
 
-#####`plaintext`
+#####`plaintext='disable'`
 
-Allows for sending credentials as plaintext. Defaults to 'disable'.
+Allows for sending credentials as plaintext.
 
-#####`password`
+#####`password='rserve'`
 
-The password for connecting to the Binary R server daemon. Defaults to 'rserve'.
+The password for connecting to the Binary R server daemon.
 
-#####`port`
+#####`port=6311`
 
-The TCP port the daemon listens too. Defaults to '6311'
+The TCP port the daemon listens too.
 
-#####`pwdfile`
+#####`pwdfile='/etc/Rserve.pwd'`
 
-The password file containing the authentication credentials. Defaults to '/etc/Rserve.pwd'.
+The password file containing the authentication credentials.
 
-#####`remote`
+#####`remote='enable'`
 
-Allows remote connections when enabled. Defaults to 'enable'.
+Allows remote connections when enabled.
 
 #####`socket`
 
@@ -410,23 +433,23 @@ Location to a file to preload packages that you would otherwise have to load fro
 
 Undocumented. Defaults to undef.
 
-#####`uid`
+#####`uid=97`
 
-The user id of the 'rserve' user running the daemon. Defaults to 97.
+The user id of the 'rserve' user running the daemon.
 
-#####`umask`
+#####`umask=0`
 
-Controls how file permissions are set for files. Defaults to 0.
+Controls how file permissions are set for files.
 
 #####`workdir`
  
 R working directory.Defaults to '/tmp/Rserv'
 
-####Class: Iqss::Solr
+####Class: Dataverse::Solr
 
 Installs Solr. Example:
 
-    class { 'iqss::solr':
+    class { 'dataverse::solr':
         parent_dir => '/usr/share',
     }
     
@@ -434,106 +457,106 @@ This will create a Jetty server with a running Solr instance : $ service solr st
 
 It also contains settings for
 
-#####`core`
+#####`core='collection1'`
 
-The handle of the Solr core. Defaults to 'collection1'.
+The handle of the Solr core.
 
-#####`jetty_home`
+#####`jetty_home='/home/solr/solr-4.6.0/example'`
 
-The Jetty home directory which contains start.jar. Defaults to '/home/solr/solr-4.6.0/example'
+The Jetty home directory which contains start.jar.
 
-#####`jetty_host`
+#####`jetty_host='localhost'`
 
-The IP to listen to. Use 0.0.0.0 as host to listen on all IP connections. Defaults to 'localhost'.
+The IP to listen to. Use 0.0.0.0 as host to listen on all IP connections.
 
 #####`jetty_java_options`
 
 JVM options for Jetty. 
 
-#####`jetty_port`
+#####`jetty_port=8983`
 
-The port Jetty will listen to. Defaults to '8983'.
+The port Jetty will listen to.
 
-#####`jetty_user`
+#####`jetty_user='solr'`
 
-The user running the Jetty Solr instance. Defaults to 'solr'.
+The user running the Jetty Solr instance.
 
-#####`solr_home`
+#####`solr_home='/home/${jetty_user}/solr-4.6.0/example/solr'`
 
-The Solr home used for the jvm setting -Dsolr.solr.home. Defaults to '/home/${jetty_user}/solr-4.6.0/example/solr'.
+The Solr home used for the jvm setting -Dsolr.solr.home.
 
-#####`url`
+#####`url='http://archive.apache.org/dist/lucene/solr'`
 
-The download url for solr. Preferably a mirror. Defaults to 'http://archive.apache.org/dist/lucene/solr'.
+The download url for solr. Preferably a mirror.
 
-#####`version`
+#####`version='4.6.0'`
 
-The Apache Solr version. Defaults to '4.6.0'.
+The Apache Solr version.
 
-####Class: Iqss::Tworavens
+####Class: Dataverse::Tworavens
 
 This class installs the Apache RApache handler and the Tworavens web application. For example:
 
     class {
-      'iqss::tworavens':
+      'dataverse::tworavens':
         tworavens_package => 'https://github.com/IQSS/TwoRavens/archive/master.zip',
     }
     
 It also contains settings for
     
-#####`dataverse_fqdn`
-The public domain name of the Dataverse web application. Defaults to 'localhost'.
+#####`dataverse_fqdn='localhost'`
+The public domain name of the Dataverse web application.
     
-#####`dataverse_port`
+#####`dataverse_port=443`
 
-The public port of the Dataverse web application. Defaults to '443'.  
+The public port of the Dataverse web application.
 
-#####`fqdn`
+#####`fqdn='localhost'`
 
-The public domain name of the TwoRavens web application. Defaults to 'localhost'.
+The public domain name of the TwoRavens web application.
 
-#####`package`
+#####`package='https://github.com/IQSS/TwoRavens/archive/master.zip'`
 
-The download url of TwoRavens. Defaults to 'https://github.com/IQSS/TwoRavens/archive/master.zip'.
+The download url of TwoRavens.
 
-#####`parent_dir`
+#####`parent_dir='/var/www/html'`
 
-The installation directory of the TwoRavens web application. Defaults to '/var/www/html'. 
+The installation directory of the TwoRavens web application.
 
-#####`port`
+#####`port=443`
 
-The public port of the TwoRavens web application. Defaults to '443'.
+The public port of the TwoRavens web application.
 
-#####`protocol`
+#####`protocol='https'`
 
-The protocol of the TwoRavens web application. Defaults to 'https'.
+The protocol of the TwoRavens web application.
 
-#####`rapache_version`
+#####`rapache_version='1.2.6'`
 
-The rapache version to be installed. Defaults to '1.2.6'.
+The rapache version to be installed.
 
 ###Private Classes and Defined Types
 
 Private classes should not be called directly from the module or manifests.
 But their parameters can be altered with (#hieradata).
 
-#### Class: Iqss::Apache2
+#### Class: Dataverse::Apache2
 
 Installs apache.
 
-#####`purge_configs`
+#####`purge_configs=true`
 
 Removes all other Apache configs and vhosts. Setting this to 'false' is a stopgap measure to allow the apache module
-to coexist with existing or otherwise-managed configuration. Defaults to true.
+to coexist with existing or otherwise-managed configuration.
 
-#### Class: Iqss::Rpackager 
+#### Class: Dataverse::Rpackager 
 
 Installs R, required libraries and then a range of packages used by dataverse (RServe) and TwoRavens (Rook, Zelig, and
 others).
 
-#####`repo`
+#####`repo='http://cran.r-project.org'`
 
-The repository to download the packages from. Defaults to 'http://cran.r-project.org'.
+The repository to download the packages from.
 
 #####`packages`
 

@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Rpackager::Repo
+# == Class: Dataverse::Rpackager::Repo
 #
 # === Copyright
 #
@@ -14,7 +14,7 @@
 # For Ubuntu we use the first one on this list:
 # https://cran.r-project.org/mirrors.html
 #
-class iqss::rpackager::repo {
+class dataverse::rpackager::repo {
 
   case $::osfamily {
     'redhat': {
@@ -26,7 +26,7 @@ class iqss::rpackager::repo {
     'debian': {
       apt::source { 'cran':
         comment    => 'This is the Ubuntu Debian repository for R and its packages',
-        location   => "${iqss::rpackager::repo}/bin/linux/ubuntu",
+        location   => "${dataverse::rpackager::repo}/bin/linux/ubuntu",
         repos      => "${::lsbdistcodename}/",
         release    => ' ', # The space prevents the default lsbdistcodename
         key        => 'E298A3A825C0D65DFD57CBB651716619E084DAB9',

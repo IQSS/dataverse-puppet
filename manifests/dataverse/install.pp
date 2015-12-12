@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Dataverse::Install
+# == Class: Dataverse::Dataverse::Install
 #
 # === Copyright
 #
@@ -12,14 +12,14 @@
 #
 # Install Glassfish plus the application's dependencies like the database driver, jhove config and patches.
 
-class iqss::dataverse::install {
+class dataverse::dataverse::install {
 
-  case $iqss::dataverse::glassfish_version {
+  case $dataverse::dataverse::glassfish_version {
     '8.4': {
-      $pgdriver = "postgresql-${iqss::database::database_version}.jdbc4-latest.jar"
+      $pgdriver = "postgresql-${dataverse::database::database_version}.jdbc4-latest.jar"
     }
     '9.0': {
-      $pgdriver = "postgresql-${iqss::database::database_version}.jdbc4-latest.jar"
+      $pgdriver = "postgresql-${dataverse::database::database_version}.jdbc4-latest.jar"
     }
     default: {
       $pgdriver = 'postgresql-9.1.jdbc4-latest.jar'
@@ -30,57 +30,57 @@ class iqss::dataverse::install {
     '/usr/bin/asadmin':
       ensure  => file,
       mode    => 755,
-      content => template('iqss/dataverse/asadmin.erb') ;
+      content => template('dataverse/dataverse/asadmin.erb') ;
   }
 
   class { 'glassfish':
     require                          => File['/usr/bin/asadmin'],
-    user                             => $iqss::dataverse::glassfish_user,
-    version                          => $iqss::dataverse::glassfish_version,
-    create_domain                    => $iqss::dataverse::glassfish_create_domain,
-    parent_dir                       => $iqss::dataverse::glassfish_parent_dir,
-    remove_default_domain            => $iqss::dataverse::glassfish_remove_default_domain,
-    domain_name                      => $iqss::dataverse::glassfish_domain_name,
-    tmp_dir                          => $iqss::dataverse::glassfish_tmp_dir,
-    service_name                     => $iqss::dataverse::glassfish_service_name,
+    user                             => $dataverse::dataverse::glassfish_user,
+    version                          => $dataverse::dataverse::glassfish_version,
+    create_domain                    => $dataverse::dataverse::glassfish_create_domain,
+    parent_dir                       => $dataverse::dataverse::glassfish_parent_dir,
+    remove_default_domain            => $dataverse::dataverse::glassfish_remove_default_domain,
+    domain_name                      => $dataverse::dataverse::glassfish_domain_name,
+    tmp_dir                          => $dataverse::dataverse::glassfish_tmp_dir,
+    service_name                     => $dataverse::dataverse::glassfish_service_name,
   }->file {
     'deployed':
-      path=> "${iqss::dataverse::domain}/config/domain.deployed.xml",
-      content => template('iqss/dataverse/domain.deployed.xml.erb'),
-      owner   => $iqss::dataverse::glassfish_user;
+      path=> "${dataverse::dataverse::domain}/config/domain.deployed.xml",
+      content => template('dataverse/dataverse/domain.deployed.xml.erb'),
+      owner   => $dataverse::dataverse::glassfish_user;
     'undeployed':
-      path=> "${iqss::dataverse::domain}/config/domain.undeployed.xml",
-      content => template('iqss/dataverse/domain.undeployed.xml.erb'),
-      owner   => $iqss::dataverse::glassfish_user;
-    "${iqss::dataverse::glassfish_parent_dir}/.gfclient/":
+      path=> "${dataverse::dataverse::domain}/config/domain.undeployed.xml",
+      content => template('dataverse/dataverse/domain.undeployed.xml.erb'),
+      owner   => $dataverse::dataverse::glassfish_user;
+    "${dataverse::dataverse::glassfish_parent_dir}/.gfclient/":
       ensure => directory,
-      owner  => $iqss::dataverse::glassfish_user;
-    "${iqss::dataverse::home}/modules/weld-osgi-bundle.jar":
+      owner  => $dataverse::dataverse::glassfish_user;
+    "${dataverse::dataverse::home}/modules/weld-osgi-bundle.jar":
       ensure => present,
-      owner  => $iqss::dataverse::glassfish_user,
-      source => 'puppet:///modules/iqss/weld-osgi-bundle-patch.jar';
-    "${iqss::dataverse::home}/modules/glassfish-grizzly-extra-all.jar":
+      owner  => $dataverse::dataverse::glassfish_user,
+      source => 'puppet:///modules/dataverse/weld-osgi-bundle-patch.jar';
+    "${dataverse::dataverse::home}/modules/glassfish-grizzly-extra-all.jar":
       ensure => present,
-      owner  => $iqss::dataverse::glassfish_user,
-      source => 'puppet:///modules/iqss/glassfish-grizzly-extra-all.jar';
-    "${iqss::dataverse::domain}/config/jhove.conf":
+      owner  => $dataverse::dataverse::glassfish_user,
+      source => 'puppet:///modules/dataverse/glassfish-grizzly-extra-all.jar';
+    "${dataverse::dataverse::domain}/config/jhove.conf":
       ensure => present,
-      owner  => $iqss::dataverse::glassfish_user,
-      source => "puppet:///modules/iqss/${iqss::dataverse::_package}/conf/jhove/jhove.conf";
-    "${iqss::dataverse::home}/lib/${pgdriver}":
+      owner  => $dataverse::dataverse::glassfish_user,
+      source => "puppet:///modules/dataverse/${dataverse::dataverse::_package}/conf/jhove/jhove.conf";
+    "${dataverse::dataverse::home}/lib/${pgdriver}":
       ensure           => present,
-      owner            => $iqss::dataverse::glassfish_user,
-      source           => "puppet:///modules/iqss/pgdriver/$pgdriver";
+      owner            => $dataverse::dataverse::glassfish_user,
+      source           => "puppet:///modules/dataverse/pgdriver/$pgdriver";
     '/var/log/glassfish':
       ensure => link,
-      target => "${iqss::dataverse::domain}/logs";
+      target => "${dataverse::dataverse::domain}/logs";
   }
 
   exec {
     'Create the files directory': # We use an exec rather than a file type, because the path may have subdirectories.
       require          => Class['glassfish'],
-      command          => "/bin/mkdir -p ${iqss::dataverse::files_directory} && chown -R ${iqss::dataverse::glassfish_user}:${iqss::dataverse::glassfish_user} ${iqss::dataverse::files_directory}",
-      creates          => $iqss::dataverse::files_directory;
+      command          => "/bin/mkdir -p ${dataverse::dataverse::files_directory} && chown -R ${dataverse::dataverse::glassfish_user}:${dataverse::dataverse::glassfish_user} ${dataverse::dataverse::files_directory}",
+      creates          => $dataverse::dataverse::files_directory;
   }
 
 }

@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Database::Config
+# == Class: Dataverse::Database::Config
 #
 # === Copyright
 #
@@ -12,22 +12,22 @@
 #
 # Install PostgreSQL.
 
-class iqss::database::install {
+class dataverse::database::install {
 
 # Add a pg user
   user {
-    $iqss::database::database_user:
+    $dataverse::database::database_user:
       ensure     => present,
   }
 
 # Install postgresql
   class { 'postgresql::globals':
-    version                        => $iqss::database::version,
-    manage_package_repo            => $iqss::database::manage_package_repo,
-    encoding                       => $iqss::database::encoding,
-    locale                         => $iqss::database::locale,
+    version                        => $dataverse::database::version,
+    manage_package_repo            => $dataverse::database::manage_package_repo,
+    encoding                       => $dataverse::database::encoding,
+    locale                         => $dataverse::database::locale,
   }->class { 'postgresql::server':
-    listen_addresses               => $iqss::database::listen_addresses,
+    listen_addresses               => $dataverse::database::listen_addresses,
   }
 
 }

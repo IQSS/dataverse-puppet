@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Rserve::Service
+# == Class: Dataverse::Rserve::Service
 #
 # === Copyright
 #
@@ -12,41 +12,41 @@
 #
 # Set the user and configuration for the rserve daemon
 #
-class iqss::rserve::service {
+class dataverse::rserve::service {
 
   user {
-    $iqss::rserve::rserve_user:
+    $dataverse::rserve::rserve_user:
       ensure => present,
-      uid    => $iqss::rserve::uid,
-      groups => $iqss::rserve::rserve_user,
+      uid    => $dataverse::rserve::uid,
+      groups => $dataverse::rserve::rserve_user,
   }
   group {
-    $iqss::rserve::rserve_user:
+    $dataverse::rserve::rserve_user:
       ensure => present,
-      gid    => $iqss::rserve::gid,
+      gid    => $dataverse::rserve::gid,
   }
 
   file {
     '/etc/Rserv.conf':
-      content => template( 'iqss/rserve/Rserve.conf.erb' ),
+      content => template( 'dataverse/rserve/Rserve.conf.erb' ),
       ensure  => present,
-      group   => $iqss::rserve::rserve_user,
+      group   => $dataverse::rserve::rserve_user,
       notify  => Service['rserve'] ,
-      owner   => $iqss::rserve::rserve_user ;
+      owner   => $dataverse::rserve::rserve_user ;
     '/etc/Rserv.pwd':
-      content => "${iqss::rserve::rserve_user} ${iqss::rserve::password}",
+      content => "${dataverse::rserve::rserve_user} ${dataverse::rserve::password}",
       ensure  => present,
-      group   => $iqss::rserve::rserve_user,
+      group   => $dataverse::rserve::rserve_user,
       mode    => 400,
       notify  => Service['rserve'] ,
-      owner   => $iqss::rserve::rserve_user ;
+      owner   => $dataverse::rserve::rserve_user ;
     '/var/log/rserve/':
       ensure => directory,
-      group  => $iqss::rserve::rserve_user,
-      owner  => $iqss::rserve::rserve_user ;
+      group  => $dataverse::rserve::rserve_user,
+      owner  => $dataverse::rserve::rserve_user ;
     '/etc/init.d/rserve':
       ensure  => present,
-      content => template( 'iqss/rserve/rserve-startup.sh.erb' ) ,
+      content => template( 'dataverse/rserve/rserve-startup.sh.erb' ) ,
       mode    => 755;
   }
 

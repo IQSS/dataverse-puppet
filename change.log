@@ -1,6 +1,11 @@
 [BRANCH RELEASE] [date]
  - [New or deprecated item.]
 
+1.0.0 December 2015
+  - the namespace has changed from iqss into dataverse.
+  - documentation added
+  - bug: database parameters were not set after the global class was removed. These are now part of the Dataverse class.
+
 1.0.0 November 2015
   - Add 4.2.1 configuration and set it as the default.
   - Set the TwoRavens repository to https://github.com/IQSS/TwoRavens/archive/master.zip

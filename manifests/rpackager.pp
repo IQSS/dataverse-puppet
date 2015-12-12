@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Rpackager
+# == Class: Dataverse::Rpackager
 #
 # === Copyright
 #
@@ -35,20 +35,20 @@
 # [rpackager_rstudio_libraries]
 #   A list of R library dependencies to install.
 
-class iqss::rpackager (
-  $repo              = $iqss::params::rpackager_repo,
-  $packages          = $iqss::params::rpackager_packages,
-) inherits iqss::params {
+class dataverse::rpackager (
+  $repo              = $dataverse::params::rpackager_repo,
+  $packages          = $dataverse::params::rpackager_packages,
+) inherits dataverse::params {
 
-  $packages_zelig    = $iqss::params::rpackager_packages_zelig
-  $r_path            = $iqss::params::r_path
-  $r_site_library    = $iqss::params::rpackager_r_site_library
-  $rstudio_libraries = $iqss::params::rpackager_rstudio_libraries
+  $packages_zelig    = $dataverse::params::rpackager_packages_zelig
+  $r_path            = $dataverse::params::r_path
+  $r_site_library    = $dataverse::params::rpackager_r_site_library
+  $rstudio_libraries = $dataverse::params::rpackager_rstudio_libraries
 
-  anchor { 'iqss::rpackager::start': }->
-  class { 'iqss::rpackager::repo': }->
-  class { 'iqss::rpackager::install': }->
-  class { 'iqss::rpackager::packages': }->
-  anchor { 'iqss::rpackager::end': }
+  anchor { 'dataverse::rpackager::start': }->
+  class { 'dataverse::rpackager::repo': }->
+  class { 'dataverse::rpackager::install': }->
+  class { 'dataverse::rpackager::packages': }->
+  anchor { 'dataverse::rpackager::end': }
 
 }

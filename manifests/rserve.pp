@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: iqss::rserve
+# == Class: dataverse::rserve
 #
 # === Copyright
 #
@@ -79,45 +79,45 @@
 #
 # === Examples
 #
-#   class { iqss:rserve
+#   class { dataverse:rserve
 #     pwdfile => '/tip/top/secret',
 #   }
 #
 
-class iqss::rserve (
-  $auth              = $iqss::params::rserve_auth,
-  $chroot            = $iqss::params::rserve_chroot,
-  $encoding          = $iqss::params::rserve_encoding,
-  $eval              = $iqss::params::rserve_eval,
-  $fileio            = $iqss::params::rserve_fileio,
-  $gid               = $iqss::params::rserve_gid,
-  $interactive       = $iqss::params::rserve_interactive,
-  $maxinbuf          = $iqss::params::rserve_maxinbuf,
-  $maxsendbuf        = $iqss::params::rserve_maxsendbuf,
-  $plaintext         = $iqss::params::rserve_plaintext,
-  $port              = $iqss::params::rserve_port,
-  $password          = $iqss::params::rserve_password,
-  $pwdfile           = $iqss::params::rserve_pwdfile,
-  $remote            = $iqss::params::rserve_remote,
-  $socket            = $iqss::params::rserve_socket,
-  $sockmod           = $iqss::params::rserve_sockmod,
-  $source            = $iqss::params::rserve_source,
-  $su                = $iqss::params::rserve_su,
-  $uid               = $iqss::params::rserve_uid,
-  $user              = $iqss::params::rserve_user,
-  $umask             = $iqss::params::rserve_umask,
-  $workdir           = $iqss::params::rserve_workdir,
-) inherits iqss::params {
+class dataverse::rserve (
+  $auth              = $dataverse::params::rserve_auth,
+  $chroot            = $dataverse::params::rserve_chroot,
+  $encoding          = $dataverse::params::rserve_encoding,
+  $eval              = $dataverse::params::rserve_eval,
+  $fileio            = $dataverse::params::rserve_fileio,
+  $gid               = $dataverse::params::rserve_gid,
+  $interactive       = $dataverse::params::rserve_interactive,
+  $maxinbuf          = $dataverse::params::rserve_maxinbuf,
+  $maxsendbuf        = $dataverse::params::rserve_maxsendbuf,
+  $plaintext         = $dataverse::params::rserve_plaintext,
+  $port              = $dataverse::params::rserve_port,
+  $password          = $dataverse::params::rserve_password,
+  $pwdfile           = $dataverse::params::rserve_pwdfile,
+  $remote            = $dataverse::params::rserve_remote,
+  $socket            = $dataverse::params::rserve_socket,
+  $sockmod           = $dataverse::params::rserve_sockmod,
+  $source            = $dataverse::params::rserve_source,
+  $su                = $dataverse::params::rserve_su,
+  $uid               = $dataverse::params::rserve_uid,
+  $user              = $dataverse::params::rserve_user,
+  $umask             = $dataverse::params::rserve_umask,
+  $workdir           = $dataverse::params::rserve_workdir,
+) inherits dataverse::params {
 
 
-  if ! defined(Class['iqss::rpackager']) {
+  if ! defined(Class['dataverse::rpackager']) {
     class {
-      'iqss::rpackager':
+      'dataverse::rpackager':
     }
   }
 
-  class { 'iqss::rserve::service':
-    require => Class['iqss::rpackager'];
+  class { 'dataverse::rserve::service':
+    require => Class['dataverse::rpackager'];
   }
 
 }

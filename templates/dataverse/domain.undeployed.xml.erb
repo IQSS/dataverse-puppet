@@ -41,15 +41,15 @@
     <connector-resource pool-name="jms/__defaultConnectionFactory-Connection-Pool" jndi-name="jms/__defaultConnectionFactory" object-type="system-all-req"></connector-resource>
     <connector-connection-pool max-pool-size="250" steady-pool-size="1" name="jms/IngestQueueConnectionFactoryPool" resource-adapter-name="jmsra" connection-definition-name="javax.jms.QueueConnectionFactory"></connector-connection-pool>
     <jdbc-connection-pool datasource-classname="org.postgresql.ds.PGPoolingDataSource" res-type="javax.sql.DataSource" name="dvnDbPool">
-        <property name="password" value="<%= scope.lookupvar('iqss::dataverse::database_password') %>"></property>
-        <property name="PortNumber" value="<%= scope.lookupvar('iqss::dataverse::database_port') %>"></property>
+        <property name="password" value="<%= scope.lookupvar('dataverse::dataverse::database_password') %>"></property>
+        <property name="PortNumber" value="<%= scope.lookupvar('dataverse::dataverse::database_port') %>"></property>
         <property name="create" value="true"></property>
-        <property name="ServerName" value="<%= scope.lookupvar('iqss::dataverse::database_host') %>"></property>
-        <property name="databaseName" value="<%= scope.lookupvar('iqss::dataverse::database_dbname') %>"></property>
-        <property name="User" value="<%= scope.lookupvar('iqss::dataverse::database_user') %>"></property>
+        <property name="ServerName" value="<%= scope.lookupvar('dataverse::dataverse::database_host') %>"></property>
+        <property name="databaseName" value="<%= scope.lookupvar('dataverse::dataverse::database_dbname') %>"></property>
+        <property name="User" value="<%= scope.lookupvar('dataverse::dataverse::database_user') %>"></property>
     </jdbc-connection-pool>
     <% if @glassfish_mailhost %>
-        <mail-resource host="<%= scope.lookupvar('iqss::dataverse::glassfish_mailhost') %>" jndi-name="mail/notifyMailSession" from="<%= scope.lookupvar('iqss::dataverse::glassfish_fromaddress') %>" user="<%= scope.lookupvar('iqss::dataverse::glassfish_mailuser') %>">
+        <mail-resource host="<%= scope.lookupvar('dataverse::dataverse::glassfish_mailhost') %>" jndi-name="mail/notifyMailSession" from="<%= scope.lookupvar('dataverse::dataverse::glassfish_fromaddress') %>" user="<%= scope.lookupvar('dataverse::dataverse::glassfish_mailuser') %>">
             <% @glassfish_mailproperties.keys.sort.each do |key| -%>
                 <property name="<%= key %>" value="<%= @glassfish_mailproperties[key] %>"></property>
             <% end -%>
@@ -81,7 +81,7 @@
     </server>
 </servers>
 <nodes>
-    <node node-host="localhost" name="localhost-<%= scope.lookupvar('iqss::dataverse::glassfish_domain_name') %>" type="CONFIG" install-dir="${com.sun.aas.productRoot}"></node>
+    <node node-host="localhost" name="localhost-<%= scope.lookupvar('dataverse::dataverse::glassfish_domain_name') %>" type="CONFIG" install-dir="${com.sun.aas.productRoot}"></node>
 </nodes>
 <configs>
 <config name="server-config">
@@ -199,17 +199,17 @@
         <% end -%>
 
         <!-- dataverse options -->
-        <jvm-options>-Ddataverse.auth.password-reset-timeout-in-minutes=<%= scope.lookupvar('iqss::dataverse::auth_password_reset_timeout_in_minutes') %></jvm-options>
-        <jvm-options>-Ddataverse.files.directory=<%= scope.lookupvar('iqss::dataverse::files_directory') %></jvm-options>
-        <jvm-options>-Ddataverse.fqdn=<%= scope.lookupvar('iqss::dataverse::fqdn') %></jvm-options>
-        <jvm-options>-Ddataverse.rserve.host=<%= scope.lookupvar('iqss::dataverse::rserve_host') %></jvm-options>
-        <jvm-options>-Ddataverse.rserve.password=<%= scope.lookupvar('iqss::dataverse::rserve_password') %></jvm-options>
-        <jvm-options>-Ddataverse.rserve.port=<%= scope.lookupvar('iqss::dataverse::rserve_port') %></jvm-options>
-        <jvm-options>-Ddataverse.rserve.user=<%= scope.lookupvar('iqss::dataverse::rserve_user') %></jvm-options>
-        <jvm-options>-Ddataverse.siteUrl=<%= scope.lookupvar('iqss::dataverse::site_url') %></jvm-options>
-        <jvm-options>-Ddoi.baseurlstring=<%= scope.lookupvar('iqss::dataverse::doi_baseurlstring') %></jvm-options>
-        <jvm-options>-Ddoi.password=<%= scope.lookupvar('iqss::dataverse::doi_password') %></jvm-options>
-        <jvm-options>-Ddoi.username=<%= scope.lookupvar('iqss::dataverse::doi_username') %></jvm-options>
+        <jvm-options>-Ddataverse.auth.password-reset-timeout-in-minutes=<%= scope.lookupvar('dataverse::dataverse::auth_password_reset_timeout_in_minutes') %></jvm-options>
+        <jvm-options>-Ddataverse.files.directory=<%= scope.lookupvar('dataverse::dataverse::files_directory') %></jvm-options>
+        <jvm-options>-Ddataverse.fqdn=<%= scope.lookupvar('dataverse::dataverse::fqdn') %></jvm-options>
+        <jvm-options>-Ddataverse.rserve.host=<%= scope.lookupvar('dataverse::dataverse::rserve_host') %></jvm-options>
+        <jvm-options>-Ddataverse.rserve.password=<%= scope.lookupvar('dataverse::dataverse::rserve_password') %></jvm-options>
+        <jvm-options>-Ddataverse.rserve.port=<%= scope.lookupvar('dataverse::dataverse::rserve_port') %></jvm-options>
+        <jvm-options>-Ddataverse.rserve.user=<%= scope.lookupvar('dataverse::dataverse::rserve_user') %></jvm-options>
+        <jvm-options>-Ddataverse.siteUrl=<%= scope.lookupvar('dataverse::dataverse::site_url') %></jvm-options>
+        <jvm-options>-Ddoi.baseurlstring=<%= scope.lookupvar('dataverse::dataverse::doi_baseurlstring') %></jvm-options>
+        <jvm-options>-Ddoi.password=<%= scope.lookupvar('dataverse::dataverse::doi_password') %></jvm-options>
+        <jvm-options>-Ddoi.username=<%= scope.lookupvar('dataverse::dataverse::doi_username') %></jvm-options>
 
         <!-- static options -->
         <jvm-options>-client</jvm-options>
@@ -481,7 +481,7 @@
     </monitoring-service>
 </config>
 </configs>
-<property name="administrative.domain.name" value="<%= scope.lookupvar('iqss::dataverse::glassfish_domain_name') %>"></property>
+<property name="administrative.domain.name" value="<%= scope.lookupvar('dataverse::dataverse::glassfish_domain_name') %>"></property>
 <secure-admin special-admin-indicator="718fe3ff-df18-49f8-84a0-3aeedb3250db">
     <secure-admin-principal dn="CN=localhost,OU=GlassFish,O=Oracle Corporation,L=Santa Clara,ST=California,C=US"></secure-admin-principal>
     <secure-admin-principal dn="CN=localhost-instance,OU=GlassFish,O=Oracle Corporation,L=Santa Clara,ST=California,C=US"></secure-admin-principal>

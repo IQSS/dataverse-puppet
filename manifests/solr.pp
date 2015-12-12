@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: iqss::solr
+# == Class: dataverse::solr
 #
 # === Copyright
 #
@@ -47,28 +47,28 @@
 #
 # === Examples
 #
-#   class { iqss:solr
+#   class { dataverse:solr
 #     parent_dir => '/usr/share',
 #   }
 #
 
-class iqss::solr (
-  $core               = $iqss::params::solr_core,
-  $jetty_home         = $iqss::params::solr_jetty_home,
-  $jetty_host         = $iqss::params::solr_jetty_host,
-  $jetty_java_options = $iqss::params::solr_jetty_java_options,
-  $jetty_port         = $iqss::params::solr_jetty_port,
-  $jetty_user         = $iqss::params::solr_jetty_user,
-  $parent_dir         = $iqss::params::solr_parent_dir,
-  $solr_home          = $iqss::params::solr_solr_home,
-  $url                = $iqss::params::solr_url,
-  $version            = $iqss::params::solr_version,
-) inherits iqss::params {
+class dataverse::solr (
+  $core               = $dataverse::params::solr_core,
+  $jetty_home         = $dataverse::params::solr_jetty_home,
+  $jetty_host         = $dataverse::params::solr_jetty_host,
+  $jetty_java_options = $dataverse::params::solr_jetty_java_options,
+  $jetty_port         = $dataverse::params::solr_jetty_port,
+  $jetty_user         = $dataverse::params::solr_jetty_user,
+  $parent_dir         = $dataverse::params::solr_parent_dir,
+  $solr_home          = $dataverse::params::solr_solr_home,
+  $url                = $dataverse::params::solr_url,
+  $version            = $dataverse::params::solr_version,
+) inherits dataverse::params {
 
-  $dataverse_package = $iqss::params::dataverse_package
-  $required_packages = $iqss::params::solr_required_packages
+  $dataverse_package = $dataverse::params::dataverse_package
+  $required_packages = $dataverse::params::solr_required_packages
 
-  anchor{ 'iqss::solr::begin': }
+  anchor{ 'dataverse::solr::begin': }
 
   #if ! defined(Packages[$required_packages]) {
   #  package {
@@ -77,19 +77,19 @@ class iqss::solr (
   #  }
   #}
 
-  class{ 'iqss::solr::install':
-    require => Anchor['iqss::solr::begin'],
+  class{ 'dataverse::solr::install':
+    require => Anchor['dataverse::solr::begin'],
   }
 
-  class{ 'iqss::solr::config':
-    require => Class['iqss::solr::install'],
+  class{ 'dataverse::solr::config':
+    require => Class['dataverse::solr::install'],
   }
 
-  class{ 'iqss::solr::service':
-    subscribe => Class['iqss::solr::config'],
+  class{ 'dataverse::solr::service':
+    subscribe => Class['dataverse::solr::config'],
   }
 
-  anchor{ 'iqss::solr::end':
-    require => Class['iqss::solr::service'],
+  anchor{ 'dataverse::solr::end':
+    require => Class['dataverse::solr::service'],
   }
 }

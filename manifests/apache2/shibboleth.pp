@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Apache2::Shibboleth
+# == Class: Dataverse::Apache2::Shibboleth
 #
 # === Copyright
 #
@@ -13,7 +13,7 @@
 # Shibboleth is not part of this puppet module until it's experimental status is changed to production ready.
 # We therefore only install the packages.
 
-class iqss::apache2::shibboleth {
+class dataverse::apache2::shibboleth {
 
   notify {
     'Shibboleth status experimental':
@@ -42,7 +42,7 @@ class iqss::apache2::shibboleth {
 
   apache::mod { 'shib2':
     id   => 'mod_shib',
-    path => $iqss::apache2::shibboleth_lib,
+    path => $dataverse::apache2::shibboleth_lib,
   }
 
 }

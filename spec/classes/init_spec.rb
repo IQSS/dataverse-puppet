@@ -1,7 +1,7 @@
 require 'spec_helper'
-describe 'iqss' do
+describe 'dataverse' do
 
   context 'with defaults for all parameters' do
-    it { should contain_class('iqss') }
+    it { should contain_class('dataverse') }
   end
 end

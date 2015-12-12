@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Dataverse
+# == Class: Dataverse::Dataverse
 #
 # === Copyright
 #
@@ -24,6 +24,21 @@
 # [files_directory='/home/glassfish/dataverse/files']
 #   The location of the uploaded files and their tabular derivatives.
 #
+# [database_dbname='dvndb']
+#   The name of the database.
+#
+# [database_host='localhost']
+#   The resolvable hostname of the database.
+#
+# [database_password='dvnAppPass']
+#   The database user's password
+#
+# [database_port=5432]
+#   The database port.
+#
+# [database_user='dvnApp']
+#   The username granted control over the database.
+#
 # [doi_baseurlstring='https://ezid.cdlib.org']
 #   The DOI endpoint for the EZID Service.
 #
@@ -42,7 +57,7 @@
 #   Do note that whenever the system needs to form a service URL, by default, it will be formed with https:// and port 443.
 #   I.e. https://{dataverse.fqdn}/
 #
-#   If that does not suit your setup, use the `Iqss::Dataverse::site_url` option.
+#   If that does not suit your setup, use the `Dataverse::Dataverse::site_url` option.
 #
 # [glassfish_domain='domain1']
 #   The domain name.
@@ -115,41 +130,46 @@
 # [site_url='https://localhost:443']
 #   The url to a dataverse web application.
 
-class iqss::dataverse (
-  $auth_password_reset_timeout_in_minutes = $iqss::params::dataverse_auth_password_reset_timeout_in_minutes,
-  $allow_http                             = $iqss::params::allow_http,
-  $files_directory                        = $iqss::params::dataverse_files_directory,
-  $doi_baseurlstring                      = $iqss::params::dataverse_doi_baseurlstring,
-  $doi_username                           = $iqss::params::dataverse_doi_username,
-  $doi_password                           = $iqss::params::dataverse_doi_password,
-  $files_directory                        = $iqss::params::dataverse_files_directory,
-  $fqdn                                   = $iqss::params::dataverse_fqdn,
-  $glassfish_create_domain                = $iqss::params::dataverse_glassfish_create_domain,
-  $glassfish_domain_name                  = $iqss::params::dataverse_glassfish_domain_name,
-  $glassfish_fromaddress                  = $iqss::params::dataverse_glassfish_fromaddress,
-  $glassfish_jvmoption                    = $iqss::params::dataverse_glassfish_jvmoption,
-  $glassfish_mailhost                     = $iqss::params::dataverse_glassfish_mailhost,
-  $glassfish_mailuser                     = $iqss::params::dataverse_glassfish_mailuser,
-  $glassfish_mailproperties               = $iqss::params::dataverse_glassfish_mailproperties,
-  $glassfish_parent_dir                   = $iqss::params::dataverse_glassfish_parent_dir,
-  $glassfish_service_name                 = $iqss::params::dataverse_glassfish_service_name,
-  $glassfish_version                      = $iqss::params::dataverse_glassfish_version,
-  $package                                = $iqss::params::dataverse_package,
-  $port                                   = $iqss::params::dataverse_port,
-  $repository                             = $iqss::params::dataverse_repository,
-  $rserve_host                            = $iqss::params::dataverse_rserve_host,
-  $rserve_password                        = $iqss::params::dataverse_rserve_password,
-  $rserve_port                            = $iqss::params::dataverse_rserve_port,
-  $rserve_user                            = $iqss::params::dataverse_rserve_user,
-  $site_url                               = $iqss::params::dataverse_site_url,
+class dataverse::dataverse (
+  $auth_password_reset_timeout_in_minutes = $dataverse::params::dataverse_auth_password_reset_timeout_in_minutes,
+  $allow_http                             = $dataverse::params::dataverse_allow_http,
+  $files_directory                        = $dataverse::params::dataverse_files_directory,
+  $database_dbname                        = $dataverse::params::database_dbname,
+  $database_host                          = $dataverse::params::dataverse_database_host,
+  $database_password                      = $dataverse::params::database_password,
+  $database_port                          = $dataverse::params::dataverse_database_port,
+  $database_user                          = $dataverse::params::database_user,
+  $doi_baseurlstring                      = $dataverse::params::dataverse_doi_baseurlstring,
+  $doi_username                           = $dataverse::params::dataverse_doi_username,
+  $doi_password                           = $dataverse::params::dataverse_doi_password,
+  $files_directory                        = $dataverse::params::dataverse_files_directory,
+  $fqdn                                   = $dataverse::params::dataverse_fqdn,
+  $glassfish_create_domain                = $dataverse::params::dataverse_glassfish_create_domain,
+  $glassfish_domain_name                  = $dataverse::params::dataverse_glassfish_domain_name,
+  $glassfish_fromaddress                  = $dataverse::params::dataverse_glassfish_fromaddress,
+  $glassfish_jvmoption                    = $dataverse::params::dataverse_glassfish_jvmoption,
+  $glassfish_mailhost                     = $dataverse::params::dataverse_glassfish_mailhost,
+  $glassfish_mailuser                     = $dataverse::params::dataverse_glassfish_mailuser,
+  $glassfish_mailproperties               = $dataverse::params::dataverse_glassfish_mailproperties,
+  $glassfish_parent_dir                   = $dataverse::params::dataverse_glassfish_parent_dir,
+  $glassfish_service_name                 = $dataverse::params::dataverse_glassfish_service_name,
+  $glassfish_version                      = $dataverse::params::dataverse_glassfish_version,
+  $package                                = $dataverse::params::dataverse_package,
+  $port                                   = $dataverse::params::dataverse_port,
+  $repository                             = $dataverse::params::dataverse_repository,
+  $rserve_host                            = $dataverse::params::dataverse_rserve_host,
+  $rserve_password                        = $dataverse::params::dataverse_rserve_password,
+  $rserve_port                            = $dataverse::params::dataverse_rserve_port,
+  $rserve_user                            = $dataverse::params::dataverse_rserve_user,
+  $site_url                               = $dataverse::params::dataverse_site_url,
 
-) inherits iqss::params {
+) inherits dataverse::params {
 
-  $home                            = "${iqss::dataverse::glassfish_parent_dir}/glassfish-${iqss::dataverse::glassfish_version}/glassfish"
-  $domain                          = "${home}/domains/${iqss::dataverse::glassfish_domain_name}"
-  $glassfish_remove_default_domain = $iqss::params::dataverse_glassfish_remove_default_domain
-  $glassfish_tmp_dir               = $iqss::params::dataverse_glassfish_tmp_dir
-  $glassfish_user                  = $iqss::params::dataverse_glassfish_user
+  $home                            = "${dataverse::dataverse::glassfish_parent_dir}/glassfish-${dataverse::dataverse::glassfish_version}/glassfish"
+  $domain                          = "${home}/domains/${dataverse::dataverse::glassfish_domain_name}"
+  $glassfish_remove_default_domain = $dataverse::params::dataverse_glassfish_remove_default_domain
+  $glassfish_tmp_dir               = $dataverse::params::dataverse_glassfish_tmp_dir
+  $glassfish_user                  = $dataverse::params::dataverse_glassfish_user
 
   case $package {
     'dataverse-4.2.1', default: {
@@ -179,13 +199,13 @@ class iqss::dataverse (
       message => $msg ;
   }
 
-  anchor { 'iqss::dataverse::start': }->
-  class { 'iqss::dataverse::install': }->
-  class { 'iqss::dataverse::reload': }->
-  class { 'iqss::dataverse::war': }->
-  class { 'iqss::dataverse::deploy': }->
-  class { 'iqss::dataverse::vhost': }->
-  anchor { 'iqss::dataverse::end': }
+  anchor { 'dataverse::dataverse::start': }->
+  class { 'dataverse::dataverse::install': }->
+  class { 'dataverse::dataverse::reload': }->
+  class { 'dataverse::dataverse::war': }->
+  class { 'dataverse::dataverse::deploy': }->
+  class { 'dataverse::dataverse::vhost': }->
+  anchor { 'dataverse::dataverse::end': }
 
 
 }

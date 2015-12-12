@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Dataverse::Vhost
+# == Class: Dataverse::Dataverse::Vhost
 #
 # === Copyright
 #
@@ -12,18 +12,18 @@
 #
 # Add the Apache virtual host to direct HTTP traffic to the ajp listener.
 
-class iqss::dataverse::vhost {
+class dataverse::dataverse::vhost {
 
-  if ! defined(Class['iqss::apache2']) {
+  if ! defined(Class['dataverse::apache2']) {
     class {
-      'iqss::apache2':
+      'dataverse::apache2':
     }
   }
 
   file {
     '/opt/dataverse/dataverse.conf':
       ensure   => file,
-      source   => "puppet:///modules/iqss/${iqss::dataverse::_package}/conf/httpd/conf.d/dataverse.conf",
+      source   => "puppet:///modules/dataverse/${dataverse::dataverse::_package}/conf/httpd/conf.d/dataverse.conf",
       notify   => Service[$::apache::service_name];
   }
 
@@ -33,7 +33,7 @@ class iqss::dataverse::vhost {
       file {
         "${::apache::confd_dir}/dataverse.conf":
           ensure   => file,
-          content  => template('iqss/dataverse/dataverse.conf.erb'),
+          content  => template('dataverse/dataverse/dataverse.conf.erb'),
           notify   => Service[$::apache::service_name];
       }
     }
@@ -41,7 +41,7 @@ class iqss::dataverse::vhost {
       file {
          "${::apache::vhost_dir}/dataverse.conf":
           ensure   => file,
-          content  => template('iqss/dataverse/dataverse.conf.erb'),
+          content  => template('dataverse/dataverse/dataverse.conf.erb'),
           notify   => Service[$::apache::service_name];
         "${::apache::vhost_enable_dir}/25-dataverse.conf":
           ensure => link,

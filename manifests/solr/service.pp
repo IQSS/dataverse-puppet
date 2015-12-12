@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Solr::Service
+# == Class: Dataverse::Solr::Service
 #
 # === Copyright
 #
@@ -15,18 +15,18 @@
 #
 # Private class. Do not use directly.
 #
-class iqss::solr::service {
-  anchor { 'iqss::solr::service::begin': }->
-  service { $iqss::solr::jetty_user:
+class dataverse::solr::service {
+  anchor { 'dataverse::solr::service::begin': }->
+  service { $dataverse::solr::jetty_user:
     ensure     => running,
     enable     => true,
     path       => '/etc/init.d/',
     hasrestart => true,
-    subscribe  => File["${iqss::solr::solr_home}/${iqss::solr::core}/conf"]
+    subscribe  => File["${dataverse::solr::solr_home}/${dataverse::solr::core}/conf"]
   }
 
   anchor { 'solr::service::end':
-    require => Service[$iqss::solr::jetty_user],
+    require => Service[$dataverse::solr::jetty_user],
   }
 
 }

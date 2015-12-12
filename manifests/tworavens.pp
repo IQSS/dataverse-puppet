@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: iqss::tworavens
+# == Class: dataverse::tworavens
 #
 # === Copyright
 #
@@ -47,28 +47,28 @@
 #
 # === Examples
 #
-#   class { iqss:tworavens
+#   class { dataverse:tworavens
 #     fqdn => 'analysis.domain.org',
 #   }
 
-class iqss::tworavens (
-  $dataverse_fqdn           = $iqss::params::dataverse_fqdn,
-  $dataverse_port           = $iqss::params::dataverse_port,
-  $fqdn                     = $iqss::params::tworavens_fqdn,
-  $package                  = $iqss::params::tworavens_package, # Do not end this value with a slash
-  $parent_dir               = $iqss::params::tworavens_parent_dir, # Do not end this value with a slash
-  $port                     = $iqss::params::tworavens_port,
-  $protocol                 = $iqss::params::tworavens_protocol,
-) inherits iqss::params {
+class dataverse::tworavens (
+  $dataverse_fqdn           = $dataverse::params::dataverse_fqdn,
+  $dataverse_port           = $dataverse::params::dataverse_port,
+  $fqdn                     = $dataverse::params::tworavens_fqdn,
+  $package                  = $dataverse::params::tworavens_package, # Do not end this value with a slash
+  $parent_dir               = $dataverse::params::tworavens_parent_dir, # Do not end this value with a slash
+  $port                     = $dataverse::params::tworavens_port,
+  $protocol                 = $dataverse::params::tworavens_protocol,
+) inherits dataverse::params {
 
   $dataexplore_dir = "${parent_dir}/dataexplore"
-  $mod_r_so_file = $iqss::params::tworavens_mod_r_so_file
-  $rapache_version          = $iqss::params::tworavens_rapache_version
+  $mod_r_so_file = $dataverse::params::tworavens_mod_r_so_file
+  $rapache_version          = $dataverse::params::tworavens_rapache_version
 
 
-  anchor { 'iqss::tworavens::start': }->
-  class { 'iqss::tworavens::install': }->
-  class { 'iqss::tworavens::config': }->
-  anchor { 'iqss::tworavens::end': }
+  anchor { 'dataverse::tworavens::start': }->
+  class { 'dataverse::tworavens::install': }->
+  class { 'dataverse::tworavens::config': }->
+  anchor { 'dataverse::tworavens::end': }
 
 }

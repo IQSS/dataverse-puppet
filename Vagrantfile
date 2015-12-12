@@ -131,7 +131,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 end
 
-    config.vm.synced_folder ".", "/etc/puppet/modules/iqss"
+    config.vm.synced_folder ".", "/etc/puppet/modules/dataverse"
 
 
     config.vm.provision 'shell', path: 'conf/setup.sh', args: [operating_system, environment, '1']

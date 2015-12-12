@@ -53,14 +53,14 @@ host 443. Hence you connect to a running instance from your host machine with ht
 
 That means Dataverse must create URLs with the 9999 port. For example when binding dummy DOI or Handles.
 
-You can override those settings when declaring a class in the example: /etc/puppet/modules/iqss/manifests/example.pp.
+You can override those settings when declaring a class in the example: /etc/puppet/modules/dataverse/manifests/example.pp.
 Another way to try out settings is the hieradata. When you run from vagrant, the Vagrantfile will specified the
 environment parameter as 'development', the configuration in
 
-    /etc/puppet/modules/iqss/conf/hieradata/development.yaml
-        iqss::dataverse::site_url: "https://localhost:9999"
-        iqss::tworavens::dataverse_port: 9999
-        iqss::tworavens::port: 9999
+    /etc/puppet/modules/dataverse/conf/hieradata/development.yaml
+        dataverse::dataverse::site_url: "https://localhost:9999"
+        dataverse::tworavens::dataverse_port: 9999
+        dataverse::tworavens::port: 9999
     
 will replacing the default `443` and deliver `9999` in URL port constructs.
 

@@ -6,4 +6,4 @@
   - "%{::environment}"
   - defaults
 :yaml:
-  :datadir: /etc/puppet/modules/iqss/conf/hieradata
+  :datadir: /etc/puppet/modules/dataverse/conf/hieradata

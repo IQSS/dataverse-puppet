@@ -31,16 +31,16 @@ Valid os values are 'centos-6', 'ubuntu-12' and 'ubuntu-14'.
 
 Default settings like passwords and file locations are hard wired in the puppet module code.
 
-You can override those settings when declaring a class in the example: /etc/puppet/modules/iqss/manifests/example.pp
+You can override those settings when declaring a class in the example: /etc/puppet/modules/dataverse/manifests/example.pp
 
 Another way to try out settings is the hieradata. As you specified the environment parameter as 'masterless', the
 configuration is in a file called masterless.yaml:
 
-    /etc/puppet/modules/iqss/conf/hieradata/masterless.yaml
-        iqss::dataverse::fqdn: "%{::fqdn}"
-        iqss::dataverse::site_url: "https://%{::fqdn}"
-        iqss::tworavens::dataverse_fqdn: "%{::fqdn}"
-        iqss::tworavens::domain:"%{::fqdn}"
+    /etc/puppet/modules/dataverse/conf/hieradata/masterless.yaml
+        dataverse::dataverse::fqdn: "%{::fqdn}"
+        dataverse::dataverse::site_url: "https://%{::fqdn}"
+        dataverse::tworavens::dataverse_fqdn: "%{::fqdn}"
+        dataverse::tworavens::domain:"%{::fqdn}"
 
 which will replacing the default `localhost` with the fqdn of your machine.
 
@@ -55,7 +55,7 @@ startup before you can use it.
 
 Or downloads seem to timeout. Suggestion: check if you are not blocked by a firewall. Or sometimes the internet is just busy. If so, try again, this time direectly with:
 
-    $ sudo puppet apply /etc/puppet/modules/iqss/manifests/example.pp --debug
+    $ sudo puppet apply /etc/puppet/modules/dataverse/manifests/example.pp --debug
 
 ####2. Centos: Execution of '/usr/bin/yum -d 0 -e 0 -y install ...' returned 1 
 
@@ -63,5 +63,5 @@ On Centos you may get the Error: Execution of '/usr/bin/yum -d 0 -e 0 -y install
 
 Here yum reports an error when the package is in fact installed. Should this happen then repeat the provisioning once:
 
-    $ sudo puppet apply /etc/puppet/modules/iqss/manifests/example.pp --debug
+    $ sudo puppet apply /etc/puppet/modules/dataverse/manifests/example.pp --debug
 

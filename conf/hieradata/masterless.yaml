@@ -1,4 +1,4 @@
 ---
-  iqss::dataverse::site_url: "https://%{::fqdn}"
-  iqss::tworavens::dataverse_fqdn: "%{::fqdn}"
-  iqss::tworavens::domain: "%{::fqdn}"
+  dataverse::dataverse::site_url: "https://%{::fqdn}"
+  dataverse::tworavens::dataverse_fqdn: "%{::fqdn}"
+  dataverse::tworavens::domain: "%{::fqdn}"

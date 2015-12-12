@@ -170,7 +170,7 @@ function main {
         # When we provision with vagrant, it will set a mount point to the iqss puppet module from the host.
         if [[ $VAGRANT -eq 0 ]] ; then
             # Then again, if not we install the module from the repository.
-            install_module iqss "iqss-iqss-master.tar.gz" "https://github.com/IQSS/dataverse-puppet/archive/master.tar.gz"
+            install_module dataverse "lwo-dataverse-master.tar.gz" "https://github.com/IQSS/dataverse-puppet/archive/master.tar.gz"
         fi
 
         touch $FIRSTRUN
@@ -183,9 +183,9 @@ function main {
         # Then again if not then we will apply it manually here on the host.
         echo "Running puppet agent"
         if [ ! -e /etc/puppet/hiera.yaml ] ; then
-            ln -s /etc/puppet/modules/iqss/conf/hiera.yaml /etc/puppet/hiera.yaml
+            ln -s /etc/puppet/modules/dataverse/conf/hiera.yaml /etc/puppet/hiera.yaml
         fi
-        puppet apply /etc/puppet/modules/iqss/manifests/example.pp --debug
+        puppet apply /etc/puppet/modules/dataverse/manifests/example.pp --debug
     fi
 }
 

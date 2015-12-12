@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Type: Iqss::Dataverse::Package
+# == Type: Dataverse::Dataverse::Package
 #
 # === Copyright
 #
@@ -22,11 +22,11 @@
 # Note that if the specific version fails to install, we let the procedure to go on anyway and hope the latest version
 # does not break things.
 
-define iqss::rpackager::package (
+define dataverse::rpackager::package (
   $dependencies = true,
   $install_opts = '--no-test-load',
-  $r_path       = $iqss::rpackager::r_path,
-  $repo         = $iqss::rpackager::repo,
+  $r_path       = $dataverse::rpackager::r_path,
+  $repo         = $dataverse::rpackager::repo,
   $version      = 'latest',
 ) {
 
@@ -36,13 +36,13 @@ define iqss::rpackager::package (
 
   exec {
     "install the latest R package ${name}":
-      command => "/bin/rm -rf ${iqss::rpackager::r_site_library}/00LOCK-* ; $r_path --vanilla --slave -e \"install.packages('${name}', lib='${iqss::rpackager::r_site_library}', INSTALL_opts=c('${install_opts}'), repos='${repo}', dependencies=${_dependencies})\" ;
-    /usr/bin/test -d \"${iqss::rpackager::r_site_library}/${name}\"", # Use this test, as a R -e "[command]" never returns a non zero exit status.
+      command => "/bin/rm -rf ${dataverse::rpackager::r_site_library}/00LOCK-* ; $r_path --vanilla --slave -e \"install.packages('${name}', lib='${dataverse::rpackager::r_site_library}', INSTALL_opts=c('${install_opts}'), repos='${repo}', dependencies=${_dependencies})\" ;
+    /usr/bin/test -d \"${dataverse::rpackager::r_site_library}/${name}\"", # Use this test, as a R -e "[command]" never returns a non zero exit status.
       unless  => "$r_path -q -e 'installed.packages()' | grep '\"${name}\"' | grep '\"${version}\"'",
       timeout => 0 ;
     "install R package ${package}":
       require => Exec["install the latest R package ${name}"],
-      command => "/usr/bin/wget -O /tmp/${package} ${archive}/${name}/${package} && /bin/rm -rf ${iqss::rpackager::r_site_library}/${name} && $r_path --vanilla --slave -e \"install.packages('/tmp/${package}', lib='${iqss::rpackager::r_site_library}', INSTALL_opts=c('${install_opts}'), repos=NULL)\"",
+      command => "/usr/bin/wget -O /tmp/${package} ${archive}/${name}/${package} && /bin/rm -rf ${dataverse::rpackager::r_site_library}/${name} && $r_path --vanilla --slave -e \"install.packages('/tmp/${package}', lib='${dataverse::rpackager::r_site_library}', INSTALL_opts=c('${install_opts}'), repos=NULL)\"",
       unless  => ["$r_path -q -e 'installed.packages()' | grep '\"${name}\"' | grep '\"${version}\"'"],
       onlyif  => "/usr/bin/wget --spider ${archive}/${name}/${package}",
       timeout => 0 ;

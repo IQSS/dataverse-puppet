@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Tworavens::Install
+# == Class: Dataverse::Tworavens::Install
 #
 # === Copyright
 #
@@ -13,18 +13,18 @@
 # Download and build the RApache module.
 # Download and install TwoRavens..
 #
-class iqss::tworavens::install {
+class dataverse::tworavens::install {
 
   include 'apache::dev'
-  if ! defined(Class['iqss::apache2']) {
+  if ! defined(Class['dataverse::apache2']) {
     class {
-      'iqss::apache2':
+      'dataverse::apache2':
     }
   }
 
-  if ! defined(Class['iqss::rpackager']) {
+  if ! defined(Class['dataverse::rpackager']) {
     class {
-      'iqss::rpackager':
+      'dataverse::rpackager':
     }
   }
 
@@ -32,15 +32,15 @@ class iqss::tworavens::install {
     '/opt/rapache.sh':
       ensure  => file,
       mode    => 744,
-      content => template('iqss/tworavens/rapache.sh.erb'),
+      content => template('dataverse/tworavens/rapache.sh.erb'),
   }
 
 
   exec {
     'Build the rapache R mod':
-      require => [Class['apache::dev', 'iqss::apache2', 'iqss::rpackager'], File['/opt/rapache.sh']],
+      require => [Class['apache::dev', 'dataverse::apache2', 'dataverse::rpackager'], File['/opt/rapache.sh']],
       command => '/opt/rapache.sh',
-      creates => $iqss::tworavens::mod_r_so_file;
+      creates => $dataverse::tworavens::mod_r_so_file;
   }
 
   apache::mod {
@@ -49,14 +49,14 @@ class iqss::tworavens::install {
 
   file {
     [
-      dirname($iqss::tworavens::dataexplore_dir),
-      $iqss::tworavens::dataexplore_dir,
-      "${ iqss::tworavens::parent_dir }/custom",
-      "${ iqss::tworavens::parent_dir }/custom/pic_dir",
-      "${ iqss::tworavens::parent_dir }/custom/preprocess_dir" ,
-      "${ iqss::tworavens::parent_dir }/custom/log_dir",
+      dirname($dataverse::tworavens::dataexplore_dir),
+      $dataverse::tworavens::dataexplore_dir,
+      "${ dataverse::tworavens::parent_dir }/custom",
+      "${ dataverse::tworavens::parent_dir }/custom/pic_dir",
+      "${ dataverse::tworavens::parent_dir }/custom/preprocess_dir" ,
+      "${ dataverse::tworavens::parent_dir }/custom/log_dir",
     ]:
-      require => Class['iqss::apache2'],
+      require => Class['dataverse::apache2'],
       ensure  => directory,
       owner   => $::apache::user,
       group   => $::apache::user;
@@ -64,7 +64,7 @@ class iqss::tworavens::install {
 
   archive { 'tworavens':
     ensure           => present,
-    url              => $iqss::tworavens::package,
+    url              => $dataverse::tworavens::package,
     target           => '/opt/tworavens',
     follow_redirects => true,
     extension        => 'zip',
@@ -72,9 +72,9 @@ class iqss::tworavens::install {
   }
 
   exec { 'copy TwoRavens master directory':
-    require => [ Archive['tworavens'],  File[$iqss::tworavens::dataexplore_dir]],
-    command => "/usr/bin/rsync -av /opt/tworavens/TwoRavens-*/ $iqss::tworavens::dataexplore_dir",
-    creates => "${ iqss::tworavens::dataexplore_dir }/LICENSE";
+    require => [ Archive['tworavens'],  File[$dataverse::tworavens::dataexplore_dir]],
+    command => "/usr/bin/rsync -av /opt/tworavens/TwoRavens-*/ $dataverse::tworavens::dataexplore_dir",
+    creates => "${ dataverse::tworavens::dataexplore_dir }/LICENSE";
   }
 
 }

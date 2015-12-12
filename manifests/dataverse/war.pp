@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Dataverse::War
+# == Class: Dataverse::Dataverse::War
 #
 # === Copyright
 #
@@ -12,10 +12,10 @@
 #
 # Download the war
 
-class iqss::dataverse::war {
+class dataverse::dataverse::war {
 
 # We only need maven for the development environment
-  if $iqss::dataverse::repository == 'git' {
+  if $dataverse::dataverse::repository == 'git' {
 
     archive { 'maven3':
       ensure           => present,
@@ -52,7 +52,7 @@ class iqss::dataverse::war {
         cwd     => '/usr/src' ;
     }->exec {
       'build the war': # We assume as we run 'local' this is the root of the code base in /dataverse
-        command => "/usr/bin/mvn clean package && rsync -av /usr/src/dataverse/target/${iqss::dataverse::_package}.war /usr/src/${iqss::dataverse::_package}.war",
+        command => "/usr/bin/mvn clean package && rsync -av /usr/src/dataverse/target/${dataverse::dataverse::_package}.war /usr/src/${dataverse::dataverse::_package}.war",
         cwd     => '/usr/src/dataverse' ;
     }
 
@@ -60,8 +60,8 @@ class iqss::dataverse::war {
 
     exec {
       'Download the file': # Note that if this download fails, the file is corrupt. Remove it then.
-        command => "/usr/bin/wget --no-check-certificate -O /usr/src/${iqss::dataverse::_package}.war ${iqss::dataverse::repository}",
-        unless  => "/usr/bin/test -f /usr/src/${iqss::dataverse::_package}.war" ;
+        command => "/usr/bin/wget --no-check-certificate -O /usr/src/${dataverse::dataverse::_package}.war ${dataverse::dataverse::repository}",
+        unless  => "/usr/bin/test -f /usr/src/${dataverse::dataverse::_package}.war" ;
     }
 
   }
@@ -80,7 +80,7 @@ class iqss::dataverse::war {
     '/opt/dataverse':
       ensure  => file,
       recurse => true,
-      source  => "puppet:///modules/iqss/${iqss::dataverse::_package}";
+      source  => "puppet:///modules/dataverse/${dataverse::dataverse::_package}";
   }
 
 }

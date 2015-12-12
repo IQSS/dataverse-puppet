@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Database::Config
+# == Class: Dataverse::Database::Config
 #
 # === Copyright
 #
@@ -12,24 +12,24 @@
 #
 # Create the database, role ( user \ owner ) and access rules.
 
-class iqss::database::config {
+class dataverse::database::config {
 
 # Set the configuration rules.
-  create_resources(postgresql::server::pg_hba_rule, $iqss::database::hba_rule, { })
+  create_resources(postgresql::server::pg_hba_rule, $dataverse::database::hba_rule, { })
 
 
 # Install a user role, database and make the role owner of a database.
   postgresql::server::role {
-    $iqss::database::user:
-      password_hash => postgresql_password($iqss::database::user, $iqss::database::password),
-      login         => $iqss::database::login,
-      superuser     => $iqss::database::superuser,
-      replication   => $iqss::database::replication,
-      createdb      => $iqss::database::createdb,
-      createrole    => $iqss::database::createrole;
+    $dataverse::database::user:
+      password_hash => postgresql_password($dataverse::database::user, $dataverse::database::password),
+      login         => $dataverse::database::login,
+      superuser     => $dataverse::database::superuser,
+      replication   => $dataverse::database::replication,
+      createdb      => $dataverse::database::createdb,
+      createrole    => $dataverse::database::createrole;
   }->postgresql::server::database {
-    $iqss::database::dbname:
-      owner => $iqss::database::user,
+    $dataverse::database::dbname:
+      owner => $dataverse::database::user,
   }
 
 }

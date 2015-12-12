@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Iqss::Database
+# == Class: Dataverse::Database
 #
 # === Copyright
 #
@@ -57,26 +57,26 @@
 # [version='9.3']
 #   The version of PostgreSQL.
 
-class iqss::database (
-  $createdb                = $iqss::params::database_createdb,
-  $createrole              = $iqss::params::database_createrole,
-  $dbname                  = $iqss::params::database_dbname,
-  $encoding                = $iqss::params::database_encoding,
-  $hba_rule                = $iqss::params::database_hba_rule,
-  $listen_addresses        = $iqss::params::database_listen_addresses,
-  $locale                  = $iqss::params::database_locale,
-  $login                   = $iqss::params::database_login,
-  $manage_package_repo     = $iqss::params::database_manage_package_repo,
-  $password                = $iqss::params::database_password,
-  $replication             = $iqss::params::database_replication,
-  $superuser               = $iqss::params::database_superuser,
-  $user                    = $iqss::params::database_user,
-  $version                 = $iqss::params::database_version,
-) inherits iqss::params {
+class dataverse::database (
+  $createdb                = $dataverse::params::database_createdb,
+  $createrole              = $dataverse::params::database_createrole,
+  $dbname                  = $dataverse::params::database_dbname,
+  $encoding                = $dataverse::params::database_encoding,
+  $hba_rule                = $dataverse::params::database_hba_rule,
+  $listen_addresses        = $dataverse::params::database_listen_addresses,
+  $locale                  = $dataverse::params::database_locale,
+  $login                   = $dataverse::params::database_login,
+  $manage_package_repo     = $dataverse::params::database_manage_package_repo,
+  $password                = $dataverse::params::database_password,
+  $replication             = $dataverse::params::database_replication,
+  $superuser               = $dataverse::params::database_superuser,
+  $user                    = $dataverse::params::database_user,
+  $version                 = $dataverse::params::database_version,
+) inherits dataverse::params {
 
-  anchor { 'iqss::database::start': }->
-  class { 'iqss::database::install': }->
-  class { 'iqss::database::config': }->
-  anchor { 'iqss::database::end': }
+  anchor { 'dataverse::database::start': }->
+  class { 'dataverse::database::install': }->
+  class { 'dataverse::database::config': }->
+  anchor { 'dataverse::database::end': }
 
 }
