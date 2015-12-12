@@ -588,12 +588,11 @@ To do
 -----
 
 * Shibboleth
-* The [master-agent example](example/master-agent.md)
 
 Examples
 --------
 
-See the [demo installations](example) of this module.
+See the demo installations in the example folder of this module.
 
 Contributors
 ------------
