@@ -199,13 +199,13 @@ distribution from a repository. Example:
 
     class {
         'dataverse::dataverse':
-            package => 'dataverse-4.2.1',
-            repository => 'https://github.com/IQSS/dataverse/releases/download/v4.2.1/dataverse-4.2.1.war', 
+            package => 'dataverse-4.2.2',
+            repository => 'https://github.com/IQSS/dataverse/releases/download/v4.2.2/dataverse-4.2.2.war', 
     }
     
 This will create three services:
 
-* The Dataverse 4.2.1 distribution plus glassfish service: $ service glassfish start|stop|status
+* The Dataverse 4.2.2 distribution plus glassfish service: $ service glassfish start|stop|status
 * An R-daemon: $ service rserve start|stop|status
 * The Apache web server
 
@@ -316,7 +316,7 @@ The user running the glassfish domain.
 
 The Glassfish J2EE Application server version.
 
-#####`package='dataverse-4.2.1'`
+#####`package='dataverse-4.2.2'`
 
 The release tag: name and version of dataverse 4.
 
@@ -324,7 +324,7 @@ The release tag: name and version of dataverse 4.
 
 The SSL port on which dataverse can be reached.
 
-#####`repository='https://github.com/IQSS/dataverse/releases/download/v4.2.1/dataverse-4.2.1.war'`
+#####`repository='https://github.com/IQSS/dataverse/releases/download/v4.2.2/dataverse-4.2.2.war'`
 
 This indicates there the package comes from. It can be 'git' to build a war from the IQSS repository; or the repository
 url of a Dataverse war file.
