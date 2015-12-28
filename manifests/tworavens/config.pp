@@ -35,6 +35,9 @@ class dataverse::tworavens::config {
           target => "${::apache::vhost_dir}/tworavens-rapache.conf";
       }
     }
+    default: {
+      fail("OSFamily ${::osfamily} is not currently supported.")
+    }
   }
 
 

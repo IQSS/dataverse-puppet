@@ -22,10 +22,10 @@ class dataverse::database::install {
 
 # Install postgresql
   class { 'postgresql::globals':
-    version                        => $dataverse::database::version,
-    manage_package_repo            => $dataverse::database::manage_package_repo,
-    encoding                       => $dataverse::database::encoding,
-    locale                         => $dataverse::database::locale,
+    version             => $dataverse::database::version,
+    manage_package_repo => $dataverse::database::manage_package_repo,
+    encoding            => $dataverse::database::encoding,
+    locale              => $dataverse::database::locale,
   }->class { 'postgresql::server':
     listen_addresses               => $dataverse::database::listen_addresses,
   }

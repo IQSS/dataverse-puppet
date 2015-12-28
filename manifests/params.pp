@@ -85,7 +85,7 @@ class dataverse::params {
   $dataverse_glassfish_version                      = '4.1'
   $dataverse_package                                = 'dataverse-4.2.2'
   $dataverse_port                                   = 443
-  $dataverse_repository                             = "https://github.com/IQSS/dataverse/releases/download/v4.2.2/dataverse-4.2.2.war"
+  $dataverse_repository                             = 'https://github.com/IQSS/dataverse/releases/download/v4.2.2/dataverse-4.2.2.war'
   $dataverse_rserve_host                            = 'localhost'
   $dataverse_rserve_password                        = 'rserve'
   $dataverse_rserve_port                            = 6311
@@ -272,7 +272,7 @@ class dataverse::params {
       }
     }
     default: {
-      fail('OSFamily ${::osfamily} is not currently supported.')
+      fail("OSFamily ${::osfamily} is not currently supported.")
     }
   }
 

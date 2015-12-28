@@ -565,7 +565,7 @@ A list of R packages to install.
 Known issues
 ------------
 
-* Rserve does not start after a puppet run ( it does on boot ). You need to start the service manually with
+* Rserve does not start after a puppet run ( it does on boot ). You need to start the service manually after the first puppet run with
 `service rserve restart`
 * Vagrant installations could have various issues per OS and image. If the machine does not play along, then try out the
 know issues mentioned the [Vagrantfile](Vagrantfile).

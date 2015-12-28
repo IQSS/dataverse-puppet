@@ -29,7 +29,7 @@ class dataverse::apache2::shibboleth {
       $shibboleth::params::shib_package_name: # Defined in the shibboleth module
         ensure  => installed,
         require => Exec['Add yum repository'],
-        notify => Apache::Mod['shib2'],
+        notify  => Apache::Mod['shib2'],
     }
   }
 

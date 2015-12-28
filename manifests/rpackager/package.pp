@@ -36,14 +36,14 @@ define dataverse::rpackager::package (
 
   exec {
     "install the latest R package ${name}":
-      command => "/bin/rm -rf ${dataverse::rpackager::r_site_library}/00LOCK-* ; $r_path --vanilla --slave -e \"install.packages('${name}', lib='${dataverse::rpackager::r_site_library}', INSTALL_opts=c('${install_opts}'), repos='${repo}', dependencies=${_dependencies})\" ;
+      command => "/bin/rm -rf ${dataverse::rpackager::r_site_library}/00LOCK-* ; ${r_path} --vanilla --slave -e \"install.packages('${name}', lib='${dataverse::rpackager::r_site_library}', INSTALL_opts=c('${install_opts}'), repos='${repo}', dependencies=${_dependencies})\" ;
     /usr/bin/test -d \"${dataverse::rpackager::r_site_library}/${name}\"", # Use this test, as a R -e "[command]" never returns a non zero exit status.
-      unless  => "$r_path -q -e 'installed.packages()' | grep '\"${name}\"' | grep '\"${version}\"'",
+      unless  => "${r_path} -q -e 'installed.packages()' | grep '\"${name}\"' | grep '\"${version}\"'",
       timeout => 0 ;
     "install R package ${package}":
       require => Exec["install the latest R package ${name}"],
-      command => "/usr/bin/wget -O /tmp/${package} ${archive}/${name}/${package} && /bin/rm -rf ${dataverse::rpackager::r_site_library}/${name} && $r_path --vanilla --slave -e \"install.packages('/tmp/${package}', lib='${dataverse::rpackager::r_site_library}', INSTALL_opts=c('${install_opts}'), repos=NULL)\"",
-      unless  => ["$r_path -q -e 'installed.packages()' | grep '\"${name}\"' | grep '\"${version}\"'"],
+      command => "/usr/bin/wget -O /tmp/${package} ${archive}/${name}/${package} && /bin/rm -rf ${dataverse::rpackager::r_site_library}/${name} && ${r_path} --vanilla --slave -e \"install.packages('/tmp/${package}', lib='${dataverse::rpackager::r_site_library}', INSTALL_opts=c('${install_opts}'), repos=NULL)\"",
+      unless  => ["${r_path} -q -e 'installed.packages()' | grep '\"${name}\"' | grep '\"${version}\"'"],
       onlyif  => "/usr/bin/wget --spider ${archive}/${name}/${package}",
       timeout => 0 ;
   }

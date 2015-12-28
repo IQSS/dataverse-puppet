@@ -39,7 +39,7 @@ class dataverse::dataverse::vhost {
     }
     'debian': {
       file {
-         "${::apache::vhost_dir}/dataverse.conf":
+        "${::apache::vhost_dir}/dataverse.conf":
           ensure   => file,
           content  => template('dataverse/dataverse/dataverse.conf.erb'),
           notify   => Service[$::apache::service_name];
@@ -47,6 +47,9 @@ class dataverse::dataverse::vhost {
           ensure => link,
           target => "${::apache::vhost_dir}/dataverse.conf";
       }
+    }
+    default: {
+      fail("OSFamily ${::osfamily} is not currently supported.")
     }
   }
 

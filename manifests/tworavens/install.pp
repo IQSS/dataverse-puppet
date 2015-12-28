@@ -31,7 +31,7 @@ class dataverse::tworavens::install {
   file {
     '/opt/rapache.sh':
       ensure  => file,
-      mode    => 744,
+      mode    => '0744',
       content => template('dataverse/tworavens/rapache.sh.erb'),
   }
 
@@ -51,13 +51,13 @@ class dataverse::tworavens::install {
     [
       dirname($dataverse::tworavens::dataexplore_dir),
       $dataverse::tworavens::dataexplore_dir,
-      "${ dataverse::tworavens::parent_dir }/custom",
-      "${ dataverse::tworavens::parent_dir }/custom/pic_dir",
-      "${ dataverse::tworavens::parent_dir }/custom/preprocess_dir" ,
-      "${ dataverse::tworavens::parent_dir }/custom/log_dir",
+      "${dataverse::tworavens::parent_dir}/custom",
+      "${dataverse::tworavens::parent_dir}/custom/pic_dir",
+      "${dataverse::tworavens::parent_dir}/custom/preprocess_dir" ,
+      "${dataverse::tworavens::parent_dir}/custom/log_dir",
     ]:
-      require => Class['dataverse::apache2'],
       ensure  => directory,
+      require => Class['dataverse::apache2'],
       owner   => $::apache::user,
       group   => $::apache::user;
   }
@@ -73,8 +73,8 @@ class dataverse::tworavens::install {
 
   exec { 'copy TwoRavens master directory':
     require => [ Archive['tworavens'],  File[$dataverse::tworavens::dataexplore_dir]],
-    command => "/usr/bin/rsync -av /opt/tworavens/TwoRavens-*/ $dataverse::tworavens::dataexplore_dir",
-    creates => "${ dataverse::tworavens::dataexplore_dir }/LICENSE";
+    command => "/usr/bin/rsync -av /opt/tworavens/TwoRavens-*/ ${dataverse::tworavens::dataexplore_dir}",
+    creates => "${dataverse::tworavens::dataexplore_dir}/LICENSE";
   }
 
 }

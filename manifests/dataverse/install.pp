@@ -29,20 +29,20 @@ class dataverse::dataverse::install {
   file {
     '/usr/bin/asadmin':
       ensure  => file,
-      mode    => 755,
+      mode    => '0755',
       content => template('dataverse/dataverse/asadmin.erb') ;
   }
 
   class { 'glassfish':
-    require                          => File['/usr/bin/asadmin'],
-    user                             => $dataverse::dataverse::glassfish_user,
-    version                          => $dataverse::dataverse::glassfish_version,
-    create_domain                    => $dataverse::dataverse::glassfish_create_domain,
-    parent_dir                       => $dataverse::dataverse::glassfish_parent_dir,
-    remove_default_domain            => $dataverse::dataverse::glassfish_remove_default_domain,
-    domain_name                      => $dataverse::dataverse::glassfish_domain_name,
-    tmp_dir                          => $dataverse::dataverse::glassfish_tmp_dir,
-    service_name                     => $dataverse::dataverse::glassfish_service_name,
+    require               => File['/usr/bin/asadmin'],
+    user                  => $dataverse::dataverse::glassfish_user,
+    version               => $dataverse::dataverse::glassfish_version,
+    create_domain         => $dataverse::dataverse::glassfish_create_domain,
+    parent_dir            => $dataverse::dataverse::glassfish_parent_dir,
+    remove_default_domain => $dataverse::dataverse::glassfish_remove_default_domain,
+    domain_name           => $dataverse::dataverse::glassfish_domain_name,
+    tmp_dir               => $dataverse::dataverse::glassfish_tmp_dir,
+    service_name          => $dataverse::dataverse::glassfish_service_name,
   }->file {
     'deployed':
       path=> "${dataverse::dataverse::domain}/config/domain.deployed.xml",
@@ -70,7 +70,7 @@ class dataverse::dataverse::install {
     "${dataverse::dataverse::home}/lib/${pgdriver}":
       ensure           => present,
       owner            => $dataverse::dataverse::glassfish_user,
-      source           => "puppet:///modules/dataverse/pgdriver/$pgdriver";
+      source           => "puppet:///modules/dataverse/pgdriver/${pgdriver}";
     '/var/log/glassfish':
       ensure => link,
       target => "${dataverse::dataverse::domain}/logs";

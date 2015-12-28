@@ -33,6 +33,9 @@ class dataverse::rpackager::repo {
         key_server => 'hkp://keyserver.ubuntu.com:80',
       }
     }
+    default: {
+      fail("OSFamily ${::osfamily} is not currently supported.")
+    }
   }
 
 }

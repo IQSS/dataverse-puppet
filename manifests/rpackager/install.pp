@@ -17,6 +17,10 @@ class dataverse::rpackager::install {
   package {
     $dataverse::rpackager::rpackager_rstudio_libraries:
       ensure => installed,
+  }->exec {
+    'update R packages':
+      command => "${dataverse::rpackager::r_path} --vanilla --slave -e \"update.packages(checkBuilt = TRUE, ask = FALSE, repos='${dataverse::rpackager::repo}')\"",
+      timeout => 0 ;
   }
 
 }

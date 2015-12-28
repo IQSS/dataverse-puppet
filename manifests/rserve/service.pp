@@ -16,9 +16,11 @@ class dataverse::rserve::service {
 
   user {
     $dataverse::rserve::rserve_user:
-      ensure => present,
-      uid    => $dataverse::rserve::uid,
-      groups => $dataverse::rserve::rserve_user,
+      ensure     => present,
+      uid        => $dataverse::rserve::uid,
+      groups     => $dataverse::rserve::rserve_user,
+      home       => "/home/${dataverse::rserve::rserve_user}",
+      managehome => true,
   }
   group {
     $dataverse::rserve::rserve_user:
@@ -28,16 +30,16 @@ class dataverse::rserve::service {
 
   file {
     '/etc/Rserv.conf':
-      content => template( 'dataverse/rserve/Rserve.conf.erb' ),
       ensure  => present,
+      content => template( 'dataverse/rserve/Rserve.conf.erb' ),
       group   => $dataverse::rserve::rserve_user,
       notify  => Service['rserve'] ,
       owner   => $dataverse::rserve::rserve_user ;
     '/etc/Rserv.pwd':
-      content => "${dataverse::rserve::rserve_user} ${dataverse::rserve::password}",
       ensure  => present,
+      content => "${dataverse::rserve::rserve_user} ${dataverse::rserve::password}",
       group   => $dataverse::rserve::rserve_user,
-      mode    => 400,
+      mode    => '0400',
       notify  => Service['rserve'] ,
       owner   => $dataverse::rserve::rserve_user ;
     '/var/log/rserve/':
@@ -46,8 +48,8 @@ class dataverse::rserve::service {
       owner  => $dataverse::rserve::rserve_user ;
     '/etc/init.d/rserve':
       ensure  => present,
-      content => template( 'dataverse/rserve/rserve-startup.sh.erb' ) ,
-      mode    => 755;
+      content => template( 'dataverse/rserve/rserve-startup.sh' ) ,
+      mode    => '0755';
   }
 
   service {

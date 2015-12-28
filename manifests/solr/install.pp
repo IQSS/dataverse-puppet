@@ -15,7 +15,7 @@
 class dataverse::solr::install {
 
   $package_solr="solr-${dataverse::solr::version}"
-  $solr_url = "${dataverse::solr::url}/${dataverse::solr::version}/$package_solr.zip"
+  $solr_url = "${dataverse::solr::url}/${dataverse::solr::version}/${package_solr}.zip"
 
   anchor{ 'dataverse::solr::install::begin': }
 
@@ -47,7 +47,7 @@ class dataverse::solr::install {
     timeout          => 300,
     require          => User[$dataverse::solr::jetty_user],
   }->exec { 'copy solr':
-    command => "/usr/bin/rsync -av /opt/solr/$package_solr $dataverse::solr::parent_dir",
+    command => "/usr/bin/rsync -av /opt/solr/${package_solr} ${dataverse::solr::parent_dir}",
     creates => $dataverse::solr::solr_home;
   }
 
