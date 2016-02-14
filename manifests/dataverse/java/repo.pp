@@ -14,12 +14,14 @@
 # Ubuntu, but rather than make an exeption for Ubuntu 12, we just use the Oracle installation utility to cover all
 # of the Ubuntu releases.
 #
+# By installing the dataverse module on Ubuntu you implicitly agree to the Oracle Licence agreement.
+#
 # For other OS families we fall back on their repository.
 #
-# === Parameters
+# === Variables
 #
-# [accept_oracle_licence=yes|no]
-#   Indicate 'yes' to accept the Oracle license agreement.
+# [java8_openjdk_package='java-1.8.0-openjdk-devel'|'oracle-java8-installer']
+#  The java package.
 
 class dataverse::dataverse::java::repo {
 
@@ -47,6 +49,11 @@ class dataverse::dataverse::java::repo {
           require => Apt::Source['webupd8team'],
           path    => ['/usr/bin/','/bin/'],
         }
+
+      notify {
+         'accept-java-license':
+           message => 'By installing the dataverse module on Ubuntu you implicitly agree to the Oracle Licence agreement.',
+      }
     }
     default : {
       fail("${::osfamily} not supported by this module.")

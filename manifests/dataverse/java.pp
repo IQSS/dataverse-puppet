@@ -10,11 +10,7 @@
 #
 # Private class. Do not use directly.
 #
-# Install's the appropriate repository and java package.
-# For Ubuntu we will fall back on the build from Oracle. We need not do so for more recent versions of
-# Ubuntu, but rather than make an exeption for Ubuntu 12, we just use the Oracle installation utility.
-#
-# For Centos we fall back on its own repository.
+# Install java 1.8
 
 class dataverse::dataverse::java {
 

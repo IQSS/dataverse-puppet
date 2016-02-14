@@ -42,9 +42,6 @@
 # [dataverse_package]
 #   The package name and version of dataverse.
 #
-# [required_packages]
-#   Solr dependencies ( java ) that must be installed.
-#
 # === Examples
 #
 #   class { dataverse:solr
@@ -66,16 +63,8 @@ class dataverse::solr (
 ) inherits dataverse::params {
 
   $dataverse_package = $dataverse::params::dataverse_package
-  $required_packages = $dataverse::params::solr_required_packages
 
   anchor{ 'dataverse::solr::begin': }
-
-  #if ! defined(Packages[$required_packages]) {
-  #  package {
-  #    $required_packages:
-  #      ensure => installed,
-  #  }
-  #}
 
   class{ 'dataverse::solr::install':
     require => Anchor['dataverse::solr::begin'],

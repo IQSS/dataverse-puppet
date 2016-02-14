@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Dataverse::Dataverse::Java::Repo
+# == Class: Dataverse::Dataverse::Java::Install
 #
 # === Copyright
 #
@@ -14,7 +14,7 @@
 
 class dataverse::dataverse::java::install {
 
-    class { 'java':
+    class { '::java':
       package => $dataverse::dataverse::java::repo::java8_openjdk_package,
     }
 

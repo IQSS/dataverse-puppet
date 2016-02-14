@@ -162,6 +162,7 @@ function main {
         # Install the non forged modules we need. These are declared in metadata.json.
         puppet module install camptocamp-archive --version 0.7.4
         puppet module install fatmcgav-glassfish --version 0.6.0
+        puppet module install puppetlabs-java --version 1.4.3
         puppet module install jefferyb-shibboleth --version 0.3.1
         puppet module install puppetlabs-apache --version 1.5.0
         puppet module install puppetlabs-postgresql --version 4.3.0

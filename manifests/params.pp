@@ -164,7 +164,6 @@ class dataverse::params {
 # Here we determine package names and versions based on the OS
   case $::osfamily {
     'redhat': {
-      $solr_required_packages  = ['java-1.7.0-openjdk']
       $apache2_mods = [  'apache::mod::alias',
         'apache::mod::auth_basic',
         'apache::mod::authn_file',
@@ -198,7 +197,6 @@ class dataverse::params {
       $rpackager_r_site_library = '/usr/lib64/R/library'
     }
     'debian': {
-      $solr_required_packages = ['openjdk-7-jre']
       $rpackager_rstudio_libraries = $::lsbdistcodename ? {
         'trusty' => [
           'r-base',
