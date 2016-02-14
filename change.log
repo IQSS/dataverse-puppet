@@ -1,6 +1,11 @@
 [BRANCH RELEASE] [date]
  - [New or deprecated item.]
 
+1.0.2 February 2016
+  - add 4.2.3 and 4.2.4 configuration. Set 4.2.4 as the default.
+  - apply java 1.8.
+  - configure jhove.conf with the absolute path variable to the schema location.
+
 1.0.1 December 2015
   - add 4.2.2 configuration and set it as the default.
   - more consistent code after a http://puppet-lint.com/ check.

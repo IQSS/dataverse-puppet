@@ -38,6 +38,7 @@ class dataverse::dataverse::install {
     user                  => $dataverse::dataverse::glassfish_user,
     version               => $dataverse::dataverse::glassfish_version,
     create_domain         => $dataverse::dataverse::glassfish_create_domain,
+    manage_java           => $dataverse::dataverse::glassfish_manage_java,
     parent_dir            => $dataverse::dataverse::glassfish_parent_dir,
     remove_default_domain => $dataverse::dataverse::glassfish_remove_default_domain,
     domain_name           => $dataverse::dataverse::glassfish_domain_name,
@@ -65,8 +66,12 @@ class dataverse::dataverse::install {
       source => 'puppet:///modules/dataverse/glassfish-grizzly-extra-all.jar';
     "${dataverse::dataverse::domain}/config/jhove.conf":
       ensure => present,
+      content => template('dataverse/dataverse/jhove.xml.erb'),
+      owner   => $dataverse::dataverse::glassfish_user;
+    "${dataverse::dataverse::domain}/config/jhoveConfig.xsd":
+      ensure => present,
       owner  => $dataverse::dataverse::glassfish_user,
-      source => "puppet:///modules/dataverse/${dataverse::dataverse::_package}/conf/jhove/jhove.conf";
+      source => "puppet:///modules/dataverse/${dataverse::dataverse::_package}/conf/jhove/jhoveConfig.xsd";
     "${dataverse::dataverse::home}/lib/${pgdriver}":
       ensure           => present,
       owner            => $dataverse::dataverse::glassfish_user,

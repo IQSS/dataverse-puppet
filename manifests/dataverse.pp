@@ -75,6 +75,9 @@
 # [glassfish_mailproperties={'username' => 'a username', 'password' => 'a password'}
 #   Key-value pairs sent with to the mail relay, such as credentials.
 #
+# [glassfish_manage_java=false|true]
+#   Java installation is managed by glassfish.
+#
 # [glassfish_parent_dir='/home/glassfish']
 #   The Glassfish parent directory.
 #
@@ -151,6 +154,7 @@ class dataverse::dataverse (
   $glassfish_mailhost                     = $dataverse::params::dataverse_glassfish_mailhost,
   $glassfish_mailuser                     = $dataverse::params::dataverse_glassfish_mailuser,
   $glassfish_mailproperties               = $dataverse::params::dataverse_glassfish_mailproperties,
+  $glassfish_manage_java                  = $dataverse::params::dataverse_glassfish_manage_java,
   $glassfish_parent_dir                   = $dataverse::params::dataverse_glassfish_parent_dir,
   $glassfish_service_name                 = $dataverse::params::dataverse_glassfish_service_name,
   $glassfish_version                      = $dataverse::params::dataverse_glassfish_version,
@@ -172,7 +176,15 @@ class dataverse::dataverse (
   $glassfish_user                  = $dataverse::params::dataverse_glassfish_user
 
   case $package {
-    'dataverse-4.2.2', default: {
+    'dataverse-4.2.4', default: {
+      $_package = 'dataverse-4.2.4'
+      $msg = 'This is a patch release to address issues with harvested dataset links and correct the behavior of zip downloads when selecting restricted files to which you do not have permission. There are a few other corrections such as fixing the :ZipDownloadLimit setting, allowing a Dataverse installation administrator to adjust the maximum amount of data that can be downloaded at one time.'
+    }
+    'dataverse-4.2.3': {
+      $_package = 'dataverse-4.2.3'
+      $msg = 'This release is small in scope; it\'s mostly about a technology upgrade that includes moving to Java 8 and upgrading to Prime Faces 5.3. We have fixed a number of issues, including making the file ingest page refresh more reliable.'
+    }
+    'dataverse-4.2.2': {
       $_package = 'dataverse-4.2.2'
       $msg='Dataverse v4.2.2 is focused on improving performance of the Dataverse page and Files facet. Additionally, several important support issues were addressed.'
     }
@@ -204,6 +216,7 @@ class dataverse::dataverse (
   }
 
   anchor { 'dataverse::dataverse::start': }->
+  class { 'dataverse::dataverse::java': }->
   class { 'dataverse::dataverse::install': }->
   class { 'dataverse::dataverse::reload': }->
   class { 'dataverse::dataverse::war': }->

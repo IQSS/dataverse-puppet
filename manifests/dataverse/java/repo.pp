@@ -1,0 +1,56 @@
+# = Puppet module for dataverse.
+# == Class: Dataverse::Dataverse::Java::Repo
+#
+# === Copyright
+#
+# Puppet module for dataverse.
+# GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+#
+# === Description
+#
+# Private class. Do not use directly.
+#
+# For Ubuntu we will fall back on the build from Oracle. We need not do so for more recent versions of
+# Ubuntu, but rather than make an exeption for Ubuntu 12, we just use the Oracle installation utility to cover all
+# of the Ubuntu releases.
+#
+# For other OS families we fall back on their repository.
+#
+# === Parameters
+#
+# [accept_oracle_licence=yes|no]
+#   Indicate 'yes' to accept the Oracle license agreement.
+
+class dataverse::dataverse::java::repo {
+
+# Set package names based on Operating System...
+  case $::osfamily {
+    'RedHat' : {
+      $java8_openjdk_package = 'java-1.8.0-openjdk-devel'
+    }
+    'Debian' : {
+      $java8_openjdk_package = 'oracle-java8-installer'
+
+      include apt
+      apt::source { 'webupd8team':
+        comment    => 'Oracle Java 8 installer',
+        key        => 'EEA14886',
+        key_server => 'hkp://keyserver.ubuntu.com:80',
+        location   => 'http://ppa.launchpad.net/webupd8team/java/ubuntu',
+        release    => $lsbdistcodename,
+        repos      => 'main',
+      }
+
+        exec { 'accept-java-license':
+          unless  => "update-alternatives --list java|grep java-8-oracle 2>/dev/null",
+          command => 'echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections',
+          require => Apt::Source['webupd8team'],
+          path    => ['/usr/bin/','/bin/'],
+        }
+    }
+    default : {
+      fail("${::osfamily} not supported by this module.")
+    }
+  }
+
+}
