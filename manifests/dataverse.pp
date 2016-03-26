@@ -108,13 +108,13 @@
 # [glassfish_user='glassfish']
 #   The user running the glassfish domain.
 #
-# [package='dataverse-4.2.2|dataverse-4.2.1'|dataverse-4.2|dataverse-4.1|dataverse-4.0.1|dataverse-4.0]
+# [package='dataverse-4.3|dataverse-4.2.4|dataverse-4.2.3|dataverse-4.2.2|dataverse-4.2.1'|dataverse-4.2|dataverse-4.1|dataverse-4.0.1|dataverse-4.0]
 #   The release tag: name and version of dataverse.
 #
 # [port=443]
 #   The SSL port on which dataverse can be reached.
 #
-# [repository='https://github.com/IQSS/dataverse/releases/download/v4.0.1/dataverse-4.0.1.war']
+# [repository='https://github.com/IQSS/dataverse/releases/download/v4.3/dataverse-4.3.war']
 #   This indicates there the package comes from. It can be 'git' to build a war from the IQSS repository master branch;
 #   or the repository url of a Dataverse war file.
 #
@@ -176,7 +176,10 @@ class dataverse::dataverse (
   $glassfish_user                  = $dataverse::params::dataverse_glassfish_user
 
   case $package {
-    'dataverse-4.2.4', default: {
+    'dataverse-4.3', default:
+      $_package = 'dataverse-4.3'
+      $msg = 'This release added one major feature, DataCite API support and several bug fixes and feature enhancements'
+    'dataverse-4.2.4': {
       $_package = 'dataverse-4.2.4'
       $msg = 'This is a patch release to address issues with harvested dataset links and correct the behavior of zip downloads when selecting restricted files to which you do not have permission. There are a few other corrections such as fixing the :ZipDownloadLimit setting, allowing a Dataverse installation administrator to adjust the maximum amount of data that can be downloaded at one time.'
     }
@@ -186,19 +189,19 @@ class dataverse::dataverse (
     }
     'dataverse-4.2.2': {
       $_package = 'dataverse-4.2.2'
-      $msg='Dataverse v4.2.2 is focused on improving performance of the Dataverse page and Files facet. Additionally, several important support issues were addressed.'
+      $msg = 'Dataverse v4.2.2 is focused on improving performance of the Dataverse page and Files facet. Additionally, several important support issues were addressed.'
     }
     'dataverse-4.2.1': {
       $_package = 'dataverse-4.2.1'
-      $msg='Dataverse v4.2.1 is focused on improving performance of the dataset page and system stability by greatly reducing the number database calls made and limiting to 25 the number of files displayed on initialization. In addition, the SWORD API performance was improved to allow retrieval of file listings with large numbers of files.'
+      $msg = 'Dataverse v4.2.1 is focused on improving performance of the dataset page and system stability by greatly reducing the number database calls made and limiting to 25 the number of files displayed on initialization. In addition, the SWORD API performance was improved to allow retrieval of file listings with large numbers of files.'
     }
     'dataverse-4.2': {
       $_package = 'dataverse-4.2'
-      $msg='Dataverse v4.2 is focused on improving performance of the files and permissions pages as well as adding batch editing of files.'
+      $msg = 'Dataverse v4.2 is focused on improving performance of the files and permissions pages as well as adding batch editing of files.'
     }
     'dataverse-4.1': {
       $_package = $_package
-      $msg= 'Dataverse v4.1 is a minor release that contains two notable features: My Data and a manage groups UI. Bug fixes include: an updated Two Ravens installer, user guide updates, several API fixes, and a patch to the Grizzly subsystem that was preventing us from fronting Glassfish by Apache.'
+      $msg = 'Dataverse v4.1 is a minor release that contains two notable features: My Data and a manage groups UI. Bug fixes include: an updated Two Ravens installer, user guide updates, several API fixes, and a patch to the Grizzly subsystem that was preventing us from fronting Glassfish by Apache.'
     }
     'dataverse-4.0.1': {
       $_package = $_package
@@ -206,7 +209,7 @@ class dataverse::dataverse (
     }
     'dataverse-4.0': {
       $_package = $_package
-      $msg='Dataverse 4.0 is completely rewritten and focused on improving usability, extending support to multiple disciplines, enhanced API support, and an improved permissions model. This list of new features and changes is not exhaustive, see the user guides and GitHub project for more information.'
+      $msg = 'Dataverse 4.0 is completely rewritten and focused on improving usability, extending support to multiple disciplines, enhanced API support, and an improved permissions model. This list of new features and changes is not exhaustive, see the user guides and GitHub project for more information.'
     }
   }
 

@@ -27,7 +27,7 @@ The Dataverse module allows you to install Dataverse with Puppet.
 License
 -------
 
-GPLv3 - Copyright (C) 2015 International Institute of Social History <socialhistory.org>.
+GPLv3 - Copyright (C) 2015-2016 International Institute of Social History <socialhistory.org>.
 
 Version numbering
 ------------------
@@ -69,6 +69,7 @@ Setup
 Before you begin
 ----------------
 
+* take a look at the known issues
 * unzip must be installed on the OS.
 * The solr installation does not provision java. Install the latter when you apply this class without Dataverse::Dataverse 
 * Import the SQL statements in reference_data.sql if you install the database on a different machine than Dataverse::Dataverse.
@@ -81,14 +82,28 @@ Configuring your infrastructure
 To install Dataverse and TwoRavens with all the out-of-the-box settings use:
 
     class {
+      'dataverse::java':      # Java if the host has not got 1.8 already.
+    }
+
+    class {
+      'dataverse::solr':      # Solr
+        require => Class['dataverse::java'],
+    }
+
+    class {
+      'dataverse::database':  # Our database
+    }
+
+    class {
       'dataverse::rserve':    # RServe
-    }->class {
-      'dataverse::database':  # Our PostgreSQL database
-    }->class {
-      'dataverse::solr':      # Apache Solr 4
-    }->class {
-      'dataverse::dataverse': # Dataverse ( Glassfish and war )
-    }->class {
+    }
+
+    class {
+      'dataverse::dataverse': # Dataverse
+        require => Class['dataverse::database', 'dataverse::java'],
+    }
+
+    class {
       'dataverse::tworavens': # TwoRavens add-on
     }
     
@@ -110,6 +125,7 @@ This module modifies configuration files and directories with the following publ
 
 * [Class: Dataverse::Database](#class-dataverse::database)
 * [Class: Dataverse::Dataverse](#class-dataverse::dataverse)
+* [Class: Dataverse::Java](#class-dataverse::java)
 * [Class: Dataverse::Rserve](#class-dataverse::rserve)
 * [Class: Dataverse::Solr](#class-dataverse::solr)
 * [Class: Dataverse::TwoRavens](#class-dataverse::tworavens)
@@ -316,7 +332,7 @@ The user running the glassfish domain.
 
 The Glassfish J2EE Application server version.
 
-#####`package='dataverse-4.2.4'`
+#####`package='dataverse-4.3'`
 
 The release tag: name and version of dataverse 4.
 
@@ -324,7 +340,7 @@ The release tag: name and version of dataverse 4.
 
 The SSL port on which dataverse can be reached.
 
-#####`repository='https://github.com/IQSS/dataverse/releases/download/v4.2.4/dataverse-4.2.4.war'`
+#####`repository='https://github.com/IQSS/dataverse/releases/download/v4.3/dataverse-4.3.war'`
 
 This indicates there the package comes from. It can be 'git' to build a war from the IQSS repository; or the repository
 url of a Dataverse war file.
@@ -348,6 +364,10 @@ The username that can access the Rserce service.
 #####`site_url='https://localhost:443'`
 
 The url to a dataverse web application.
+
+####Class: Dataverse::Java
+
+Installs Java 1.8 and sets the alternative to 1.8.
 
 ####Class: Dataverse::Rserve
 
@@ -567,6 +587,8 @@ Known issues
 
 * Rserve does not start after a puppet run ( it does on boot ). You need to start the service manually after the first puppet run with
 `service rserve restart`
+* If you have a lower-than Java 1.8 version, the first puppet run may not be able to set the alternative to 1.8.
+If this happens either rerun puppet or set the Java alternative package to 1.8 manually.
 * Vagrant installations could have various issues per OS and image. If the machine does not play along, then try out the
 know issues mentioned the [Vagrantfile](Vagrantfile).
 * If you run Vagrant and install TwoRavens with a localhost domain, the application that runs on the client host will

@@ -21,18 +21,24 @@
 # does not break things.
 
 define dataverse::rpackager::package (
-  $contriburl    = $dataverse::rpackager::contriburl,
+  $contriburl   = $dataverse::rpackager::contriburl,
   $dependencies = true,
   $install_opts = '--no-test-load',
   $r_path       = $dataverse::rpackager::r_path,
+  $r_repos      = $dataverse::rpackager::r_repos,
   $version      = 'latest',
 ) {
 
   $_dependencies = $dependencies ? { true => 'T', default => 'F' }
 
+  $_contriburl_repos = $contriburl ? {
+    undef => "repos='${r_repos}'",
+    default => "contriburl='${contriburl}'"
+  }
+
   exec {
     "install the latest R package ${name}":
-      command => "/bin/rm -rf ${dataverse::rpackager::r_site_library}/00LOCK-* ; ${r_path} --vanilla --slave -e \"install.packages('${name}', lib='${dataverse::rpackager::r_site_library}', INSTALL_opts=c('${install_opts}'), contriburl='${contriburl}', dependencies=${_dependencies})\"",
+      command => "/bin/rm -rf ${dataverse::rpackager::r_site_library}/00LOCK-* ; ${r_path} --vanilla --slave -e \"install.packages('${name}', ${_contriburl_repos}, dependencies=${_dependencies}, INSTALL_opts=c('${install_opts}'), lib='${dataverse::rpackager::r_site_library}')\" ; /usr/bin/test -d \"${dataverse::rpackager::r_site_library}/${name}\"", # Use this test, as a R -e "[command]" never returns a non zero exit status.",
       unless  => "/usr/bin/test -d \"${dataverse::rpackager::r_site_library}/${name}\"",
       timeout => 600 ;
   }

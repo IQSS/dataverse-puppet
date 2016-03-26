@@ -20,11 +20,14 @@
 #
 # === Variables
 #
-# [packages_zelig='https://github.com/IQSS/Zelig/archive/master.zip']
-#   The url to the Zelig package.
+# [contriburl='https://cran.r-project.org/src/contrib/Archive/']
+#   The url to the custom R packages.
 #
 # [r_path='/usr/bin/R']
 #   The location of the R binary.
+#
+# [r_repos='https://cran.r-project.org/']
+#   The R package repository.
 #
 # [r_site_library]
 #   The library folder for installed R packages.
@@ -35,8 +38,9 @@
 class dataverse::rpackager (
 ) inherits dataverse::params {
 
-  $r_contriburl      = $dataverse::params::r_contriburl
+  $contriburl        = $dataverse::params::contriburl
   $r_path            = $dataverse::params::r_path
+  $r_repos           = $dataverse::params::r_repos
   $r_site_library    = $dataverse::params::rpackager_r_site_library
   $rstudio_libraries = $dataverse::params::rpackager_rstudio_libraries
 

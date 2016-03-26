@@ -84,9 +84,9 @@ class dataverse::params {
   $dataverse_glassfish_tmp_dir                      = '/opt/glassfish'
   $dataverse_glassfish_user                         = 'glassfish'
   $dataverse_glassfish_version                      = '4.1'
-  $dataverse_package                                = 'dataverse-4.2.4'
+  $dataverse_package                                = 'dataverse-4.3'
   $dataverse_port                                   = 443
-  $dataverse_repository                             = 'https://github.com/IQSS/dataverse/releases/download/v4.2.4/dataverse-4.2.4.war'
+  $dataverse_repository                             = 'https://github.com/IQSS/dataverse/releases/download/v4.3/dataverse-4.3.war'
   $dataverse_rserve_host                            = 'localhost'
   $dataverse_rserve_password                        = 'rserve'
   $dataverse_rserve_port                            = 6311
@@ -113,8 +113,8 @@ class dataverse::params {
     'Rgraphviz' => { contriburl => 'http://bioconductor.org/packages/3.2/bioc/src/contrib/', version => '2.14.0' }
   }
 
-  $r_contriburl                                     = 'https://cran.r-project.org/src/contrib/Archive/'
   $r_path                                           = '/usr/bin/R'
+  $r_repos                                          = 'http://cran.r-project.org'
   $rpackager_packages_zelig                         = 'https://github.com/IQSS/Zelig/archive/master.zip'
 
 
