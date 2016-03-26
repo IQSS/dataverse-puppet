@@ -108,7 +108,7 @@ class dataverse::params {
     'R2HTML'    => { version => '2.3.1' },
     'rjson'     => { version => '0.2.15' },
     'VGAM'      => { version => '0.9-8' },
-    'MCMCpack'  => { version => '1.3-4' },
+    'MCMCpack'  => { version => '1.3-4', req => ['graph', 'Rgraphviz']},
     'graph'     => { contriburl => 'http://bioconductor.org/packages/3.2/bioc/src/contrib/', version => '1.48.0' },
     'Rgraphviz' => { contriburl => 'http://bioconductor.org/packages/3.2/bioc/src/contrib/', version => '2.14.0' }
   }

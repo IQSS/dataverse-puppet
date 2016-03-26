@@ -24,6 +24,7 @@ define dataverse::rpackager::package (
   $contriburl   = $dataverse::rpackager::contriburl,
   $dependencies = true,
   $install_opts = '--no-test-load',
+  $req          = [],
   $r_path       = $dataverse::rpackager::r_path,
   $r_repos      = $dataverse::rpackager::r_repos,
   $version      = 'latest',
@@ -37,8 +38,9 @@ define dataverse::rpackager::package (
   }
 
   exec {
-    "install the latest R package ${name}":
+    "R-package-${name}":
       command => "/bin/rm -rf ${dataverse::rpackager::r_site_library}/00LOCK-* ; ${r_path} --vanilla --slave -e \"install.packages('${name}', ${_contriburl_repos}, dependencies=${_dependencies}, INSTALL_opts=c('${install_opts}'), lib='${dataverse::rpackager::r_site_library}')\" ; /usr/bin/test -d \"${dataverse::rpackager::r_site_library}/${name}\"", # Use this test, as a R -e "[command]" never returns a non zero exit status.",
+      require => Dataverse::Rpackager::Package[$req],
       unless  => "/usr/bin/test -d \"${dataverse::rpackager::r_site_library}/${name}\"",
       timeout => 600 ;
   }

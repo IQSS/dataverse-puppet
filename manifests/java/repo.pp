@@ -34,7 +34,7 @@ class dataverse::java::repo {
     }
     'Debian' : {
       $package = 'oracle-java8-installer'
-      $java_alternative = 'java-1.8.0'
+      $java_alternative = 'java-8-oracle'
       $java_alternative_path = '/usr/lib/jvm/java-8-oracle/bin/java'
 
       include ::apt

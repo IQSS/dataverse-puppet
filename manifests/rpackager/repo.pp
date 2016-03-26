@@ -31,7 +31,7 @@ class dataverse::rpackager::repo {
         comment    => 'This is the Ubuntu Debian repository for R and its packages',
         key        => 'E298A3A825C0D65DFD57CBB651716619E084DAB9',
         key_server => 'hkp://keyserver.ubuntu.com:80',
-        location   => "${dataverse::rpackager::repo}/bin/linux/ubuntu",
+        location   => "${dataverse::rpackager::r_repos}/bin/linux/ubuntu",
         release    => "${::lsbdistcodename}/",
         repos      => '',
       }

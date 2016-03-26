@@ -176,9 +176,10 @@ class dataverse::dataverse (
   $glassfish_user                  = $dataverse::params::dataverse_glassfish_user
 
   case $package {
-    'dataverse-4.3', default:
+    'dataverse-4.3', default: {
       $_package = 'dataverse-4.3'
       $msg = 'This release added one major feature, DataCite API support and several bug fixes and feature enhancements'
+    }
     'dataverse-4.2.4': {
       $_package = 'dataverse-4.2.4'
       $msg = 'This is a patch release to address issues with harvested dataset links and correct the behavior of zip downloads when selecting restricted files to which you do not have permission. There are a few other corrections such as fixing the :ZipDownloadLimit setting, allowing a Dataverse installation administrator to adjust the maximum amount of data that can be downloaded at one time.'
