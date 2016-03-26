@@ -78,6 +78,7 @@ class dataverse::params {
     'password' => 'a password'
   }
   $dataverse_glassfish_mailuser                     = 'dataversenotify'
+  $dataverse_glassfish_manage_java                  = false
   $dataverse_glassfish_remove_default_domain        = false
   $dataverse_glassfish_service_name                 = 'glassfish'
   $dataverse_glassfish_tmp_dir                      = '/opt/glassfish'
@@ -92,7 +93,7 @@ class dataverse::params {
   $dataverse_rserve_user                            = 'rserve'
   $dataverse_site_url                               = "https://${dataverse_fqdn}:${dataverse_port}"
 
-  $rpackager_packages                               = {
+  $tworavens_packages                               = {
     'AER'       => { version => '1.2-4' },
     'Amelia'    => { version => '1.7.3' },
     'DescTools' => { version => '0.99.13' },
@@ -104,16 +105,17 @@ class dataverse::params {
     'quantreg'  => { version => '5.19' },
     'Rook'      => { version => '1.1-1' },
     'RCurl'     => { version => '1.95-4.7' },
-    'Rserve'    => { version => '1.7-3' },
     'R2HTML'    => { version => '2.3.1' },
     'rjson'     => { version => '0.2.15' },
     'VGAM'      => { version => '0.9-8' },
-    'MCMCpack'  => { version => '1.3-3' }
+    'MCMCpack'  => { version => '1.3-4' },
+    'graph'     => { contriburl => 'http://bioconductor.org/packages/3.2/bioc/src/contrib/', version => '1.48.0' },
+    'Rgraphviz' => { contriburl => 'http://bioconductor.org/packages/3.2/bioc/src/contrib/', version => '2.14.0' }
   }
 
+  $r_contriburl                                     = 'https://cran.r-project.org/src/contrib/Archive/'
   $r_path                                           = '/usr/bin/R'
   $rpackager_packages_zelig                         = 'https://github.com/IQSS/Zelig/archive/master.zip'
-  $rpackager_repo                                   = 'http://cran.r-project.org'
 
 
   $rserve_auth                                      = 'required'

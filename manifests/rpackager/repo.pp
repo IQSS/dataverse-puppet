@@ -26,7 +26,7 @@ class dataverse::rpackager::repo {
     'debian': {
       # The repo wants it like this:
       # deb http://cran.r-project.org/bin/linux/ubuntu [release]/ [empty repo]
-      include apt
+      include ::apt
       apt::source { 'cran':
         comment    => 'This is the Ubuntu Debian repository for R and its packages',
         key        => 'E298A3A825C0D65DFD57CBB651716619E084DAB9',

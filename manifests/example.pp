@@ -11,13 +11,27 @@
 # A manifest to combine the configuration plus data and apply it to a host.
 
 class {
-  'dataverse::rserve':    # RServe
-}->class {
-  'dataverse::database':  # Our database
-}->class {
+  'dataverse::java':      # Java
+}
+
+class {
   'dataverse::solr':      # Solr
-}->class {
+    require => Class['dataverse::java'],
+}
+
+class {
+  'dataverse::database':  # Our database
+}
+
+class {
+  'dataverse::rserve':    # RServe
+}
+
+class {
   'dataverse::dataverse': # Dataverse
-}->class {
+    require => Class['dataverse::database', 'dataverse::java'],
+}
+
+class {
   'dataverse::tworavens': # TwoRavens add-on
 }

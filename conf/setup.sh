@@ -179,9 +179,8 @@ function main {
         echo "Repositories are already updated and puppet modules are installed. To update and reinstall, remove the file ${FIRSTRUN}"
     fi
 
-    # When we provision with vagrant, it will use it's puppet provisioner to apply the module.
     if [[ $VAGRANT -eq 0 ]] ; then
-        # Then again if not then we will apply it manually here on the host.
+        # Apply puppet on the host.
         echo "Running puppet agent"
         if [ ! -e /etc/puppet/hiera.yaml ] ; then
             ln -s /etc/puppet/modules/dataverse/conf/hiera.yaml /etc/puppet/hiera.yaml

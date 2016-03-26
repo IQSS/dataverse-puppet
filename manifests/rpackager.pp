@@ -15,9 +15,6 @@
 #
 # === Parameters
 #
-# [repo='http://cran.r-project.org'|mirror]
-#   The repository to download the packages from.
-#
 # [packages]
 #   A list of R packages to install.
 #
@@ -36,11 +33,9 @@
 #   A list of R library dependencies to install.
 
 class dataverse::rpackager (
-  $repo              = $dataverse::params::rpackager_repo,
-  $packages          = $dataverse::params::rpackager_packages,
 ) inherits dataverse::params {
 
-  $packages_zelig    = $dataverse::params::rpackager_packages_zelig
+  $r_contriburl      = $dataverse::params::r_contriburl
   $r_path            = $dataverse::params::r_path
   $r_site_library    = $dataverse::params::rpackager_r_site_library
   $rstudio_libraries = $dataverse::params::rpackager_rstudio_libraries
@@ -48,7 +43,6 @@ class dataverse::rpackager (
   anchor { 'dataverse::rpackager::start': }->
   class { 'dataverse::rpackager::repo': }->
   class { 'dataverse::rpackager::install': }->
-  class { 'dataverse::rpackager::packages': }->
   anchor { 'dataverse::rpackager::end': }
 
 }

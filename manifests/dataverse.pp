@@ -216,7 +216,6 @@ class dataverse::dataverse (
   }
 
   anchor { 'dataverse::dataverse::start': }->
-  class { 'dataverse::dataverse::java': }->
   class { 'dataverse::dataverse::install': }->
   class { 'dataverse::dataverse::reload': }->
   class { 'dataverse::dataverse::war': }->

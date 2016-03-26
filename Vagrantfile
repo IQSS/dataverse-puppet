@@ -1,5 +1,5 @@
 # Vagrant shell provisioning script
-# Tested with Vagrant 1.7.2 for Ubuntu 12.04, 14.04 and Centos 6.5
+# Tested with Vagrant 1.8.1 for vms with OS Ubuntu 12.04, 14.04 and Centos 6.5
 #
 # Usage
 # -----
@@ -39,7 +39,7 @@
 # The virtual box cannot mount with /vagrant to your host filesystem.
 # Suggestion #1: add a symbolic link in the client and reload the VM.
 # On your VM:
-# $ sudo ln -s /opt/VBoxGuestAdditions-4.3.10/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions
+# $ sudo ln -s /opt/VBoxGuestAdditions-[the version that is here]/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions
 # On our host:
 # $ vagrant reload
 # Then provision on your host

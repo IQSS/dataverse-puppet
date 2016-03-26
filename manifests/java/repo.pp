@@ -1,5 +1,5 @@
 # = Puppet module for dataverse.
-# == Class: Dataverse::Dataverse::Java::Repo
+# == Class: Dataverse::Java::Repo
 #
 # === Copyright
 #
@@ -23,17 +23,21 @@
 # [java8_openjdk_package='java-1.8.0-openjdk-devel'|'oracle-java8-installer']
 #  The java package.
 
-class dataverse::dataverse::java::repo {
+class dataverse::java::repo {
 
 # Set package names based on Operating System...
   case $::osfamily {
     'RedHat' : {
-      $java8_openjdk_package = 'java-1.8.0-openjdk-devel'
+      $package = 'java-1.8.0-openjdk-devel'
+      $java_alternative = 'java-1.8.0'
+      $java_alternative_path = '/usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java'
     }
     'Debian' : {
-      $java8_openjdk_package = 'oracle-java8-installer'
+      $package = 'oracle-java8-installer'
+      $java_alternative = 'java-1.8.0'
+      $java_alternative_path = '/usr/lib/jvm/java-8-oracle/bin/java'
 
-      include apt
+      include ::apt
       apt::source { 'webupd8team':
         comment    => 'Oracle Java 8 installer',
         key        => 'EEA14886',
@@ -43,16 +47,16 @@ class dataverse::dataverse::java::repo {
         repos      => 'main',
       }
 
-        exec { 'accept-java-license':
-          unless  => "update-alternatives --list java|grep java-8-oracle 2>/dev/null",
-          command => 'echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections',
-          require => Apt::Source['webupd8team'],
-          path    => ['/usr/bin/','/bin/'],
-        }
+      exec { 'accept-java-license':
+        unless  => "update-alternatives --list java|grep java-8-oracle 2>/dev/null",
+        command => 'echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections',
+        require => Apt::Source['webupd8team'],
+        path    => ['/usr/bin/','/bin/'],
+      }
 
       notify {
-         'accept-java-license':
-           message => 'By installing the dataverse module on Ubuntu you implicitly agree to the Oracle Licence agreement.',
+        'accept-java-license':
+          message => 'By installing the dataverse module on Ubuntu you implicitly agree with the terms in the Oracle Licence agreement.',
       }
     }
     default : {

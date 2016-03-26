@@ -110,14 +110,25 @@ class dataverse::rserve (
 ) inherits dataverse::params {
 
 
+# Install R if not done so before.
   if ! defined(Class['dataverse::rpackager']) {
     class {
       'dataverse::rpackager':
     }
   }
 
+# Install RServe
+  dataverse::rpackager::package {
+    'Rserve':
+      require => Class['dataverse::rpackager'],
+      version => '1.7-2',
+  }
+
   class { 'dataverse::rserve::service':
-    require => Class['dataverse::rpackager'];
+    require => [
+      Class['dataverse::rpackager'],
+      dataverse::rpackager::package['Rserve'],
+    ];
   }
 
 }

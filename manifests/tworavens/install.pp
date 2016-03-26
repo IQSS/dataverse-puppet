@@ -28,6 +28,11 @@ class dataverse::tworavens::install {
     }
   }
 
+  class {
+    'dataverse::tworavens::packages':
+      require => Class['dataverse::rpackager'],
+  }
+
   file {
     '/opt/rapache.sh':
       ensure  => file,
@@ -74,7 +79,6 @@ class dataverse::tworavens::install {
   exec { 'copy TwoRavens master directory':
     require => [ Archive['tworavens'],  File[$dataverse::tworavens::dataexplore_dir]],
     command => "/usr/bin/rsync -av /opt/tworavens/TwoRavens-*/ ${dataverse::tworavens::dataexplore_dir}",
-    creates => "${dataverse::tworavens::dataexplore_dir}/LICENSE";
   }
 
 }
