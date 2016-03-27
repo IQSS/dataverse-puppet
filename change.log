@@ -1,9 +1,9 @@
 [BRANCH RELEASE] [date]
  - [New or deprecated item.]
 
-1.0.2 February 2016
-  - add 4.2.3 and 4.2.4 configuration. Set 4.2.4 as the default.
-  - apply java 1.8.
+1.0.2 March 2016
+  - add 4.3, 4.2.4 and 4.2.3 configuration. Set 4.3 as the default.
+  - apply java 1.8 and set is as the default alternative.
   - configure jhove.conf with the absolute path variable to the schema location.
 
 1.0.1 December 2015

@@ -80,6 +80,7 @@ class dataverse::dataverse::war {
     '/opt/dataverse':
       ensure  => file,
       recurse => true,
+      mode => '755',
       source  => "puppet:///modules/dataverse/${dataverse::dataverse::_package}";
   }
 
