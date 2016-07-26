@@ -332,7 +332,7 @@ The user running the glassfish domain.
 
 The Glassfish J2EE Application server version.
 
-#####`package='dataverse-4.3'`
+#####`package='dataverse-4.4'`
 
 The release tag: name and version of dataverse 4.
 
@@ -340,7 +340,7 @@ The release tag: name and version of dataverse 4.
 
 The SSL port on which dataverse can be reached.
 
-#####`repository='https://github.com/IQSS/dataverse/releases/download/v4.3/dataverse-4.3.war'`
+#####`repository='https://github.com/IQSS/dataverse/releases/download/v4.4/dataverse-4.4.war'`
 
 This indicates there the package comes from. It can be 'git' to build a war from the IQSS repository; or the repository
 url of a Dataverse war file.

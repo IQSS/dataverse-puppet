@@ -108,13 +108,13 @@
 # [glassfish_user='glassfish']
 #   The user running the glassfish domain.
 #
-# [package='dataverse-4.3|dataverse-4.2.4|dataverse-4.2.3|dataverse-4.2.2|dataverse-4.2.1'|dataverse-4.2|dataverse-4.1|dataverse-4.0.1|dataverse-4.0]
+# [package='dataverse-4.4|dataverse-4.3.1|dataverse-4.3|dataverse-4.2.4|dataverse-4.2.3|dataverse-4.2.2|dataverse-4.2.1'|dataverse-4.2|dataverse-4.1|dataverse-4.0.1|dataverse-4.0]
 #   The release tag: name and version of dataverse.
 #
 # [port=443]
 #   The SSL port on which dataverse can be reached.
 #
-# [repository='https://github.com/IQSS/dataverse/releases/download/v4.3/dataverse-4.3.war']
+# [repository='https://github.com/IQSS/dataverse/releases/download/v4.4/dataverse-4.4.war']
 #   This indicates there the package comes from. It can be 'git' to build a war from the IQSS repository master branch;
 #   or the repository url of a Dataverse war file.
 #
@@ -176,9 +176,13 @@ class dataverse::dataverse (
   $glassfish_user                  = $dataverse::params::dataverse_glassfish_user
 
   case $package {
-    'dataverse-4.3', default: {
-      $_package = 'dataverse-4.3'
-      $msg = 'This release added one major feature, DataCite API support and several bug fixes and feature enhancements'
+    'dataverse-4.4', default: {
+      $_package = 'dataverse-4.4'
+      $msg = 'This release contains feature enhancements for embedding content using widgets, downloading guestbook data for a dataverse in a consolidated fashion, and introduces a new feature, support for remote authentication using Shibboleth.'
+    }
+    'dataverse-4.3.1': {
+      $_package = 'dataverse-4.3.1'
+      $msg = 'This release is a small patch release to address a potential security issue discovered by Andy Boughton. It also includes some unrelated minor changes.'
     }
     'dataverse-4.2.4': {
       $_package = 'dataverse-4.2.4'

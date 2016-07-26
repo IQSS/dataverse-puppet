@@ -84,9 +84,9 @@ class dataverse::params {
   $dataverse_glassfish_tmp_dir                      = '/opt/glassfish'
   $dataverse_glassfish_user                         = 'glassfish'
   $dataverse_glassfish_version                      = '4.1'
-  $dataverse_package                                = 'dataverse-4.3'
+  $dataverse_package                                = 'dataverse-4.4'
   $dataverse_port                                   = 443
-  $dataverse_repository                             = 'https://github.com/IQSS/dataverse/releases/download/v4.3/dataverse-4.3.war'
+  $dataverse_repository                             = 'https://github.com/IQSS/dataverse/releases/download/v4.4/dataverse-4.4.war'
   $dataverse_rserve_host                            = 'localhost'
   $dataverse_rserve_password                        = 'rserve'
   $dataverse_rserve_port                            = 6311
