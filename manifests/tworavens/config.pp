@@ -81,22 +81,17 @@ class dataverse::tworavens::config {
       ensure  => present,
       path    => "${dataverse::tworavens::dataexplore_dir}/rook/rookutils.R",
       line    => "url <- paste('${dataverse::tworavens::protocol}://${dataverse::tworavens::fqdn}:${dataverse::tworavens::port}/custom/preprocess_dir/preprocessSubset_',sessionid,'.txt',sep='')",
-      match   => 'dataverse-demo.iq.harvard.edu/custom/preprocess_dir/preprocessSubset_';
+      match   => 'beta.dataverse.org/custom/preprocess_dir/preprocessSubset_';
     'rookutils imagevector':
       ensure  => present,
       path    => "${dataverse::tworavens::dataexplore_dir}/rook/rookutils.R",
       line    => "imageVector[[qicount]]<<-paste('${dataverse::tworavens::protocol}://${dataverse::tworavens::fqdn}:${dataverse::tworavens::port}/custom/pic_dir/', mysessionid,'_',mymodelcount,qicount,'.png', sep = '')",
-      match   => 'dataverse-demo.iq.harvard.edu/custom/pic_dir/';
+      match   => 'beta.dataverse.org/custom/pic_dir/';
     'app_ddi production':
       ensure  => present,
       path    => "${dataverse::tworavens::dataexplore_dir}/app_ddi.js",
       line    => 'var production=true;',
       match   => 'production=false';
-    'app_ddi hostname':
-      ensure  => present,
-      path    => "${dataverse::tworavens::dataexplore_dir}/app_ddi.js",
-      line    => "hostname='${dataverse::tworavens::dataverse_fqdn}:${dataverse::tworavens::dataverse_port}';",
-      match   => 'hostname="dataverse-demo.iq.harvard.edu"';
     'app_ddi production_dataverse_url':
       ensure  => present,
       path    => "${dataverse::tworavens::dataexplore_dir}/app_ddi.js",
@@ -106,7 +101,7 @@ class dataverse::tworavens::config {
       ensure  => present,
       path    => "${dataverse::tworavens::dataexplore_dir}/app_ddi.js",
       line    => "var rappURL = '${dataverse::tworavens::protocol}://${dataverse::tworavens::fqdn}:${dataverse::tworavens::port}/custom/';",
-      match   => 'var rappURL = "https://dataverse-demo.iq.harvard.edu/custom/"';
+      match   => 'var rappURL = "https://beta.dataverse.org/custom/"';
   }
 
 }

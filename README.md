@@ -587,7 +587,7 @@ Known issues
 
 * Rserve does not start after a puppet run ( it does on boot ). You need to start the service manually after the first puppet run with
 `service rserve restart`
-* If you have a lower-than Java 1.8 version, the first puppet run may not be able to set the alternative to 1.8.
+* Ubuntu: if you have a lower-than Java 1.8 version, the first puppet run may not be able to set the alternative to 1.8.
 If this happens either rerun puppet or set the Java alternative package to 1.8 manually.
 * Vagrant installations could have various issues per OS and image. If the machine does not play along, then try out the
 know issues mentioned the [Vagrantfile](Vagrantfile).

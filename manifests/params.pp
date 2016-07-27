@@ -155,7 +155,7 @@ class dataverse::params {
   $tworavens_dataverse_fqdn                         = 'localhost'
   $tworavens_dataverse_port                         = 443
   $tworavens_fqdn                                   = 'localhost'
-  $tworavens_package                                = 'https://github.com/IQSS/TwoRavens/archive/master.zip'
+  $tworavens_package                                = 'https://github.com/IQSS/TwoRavens/archive/97950ebf19801362725b51008b340333593986fd.zip'
   $tworavens_parent_dir                             = '/var/www/html'
   $tworavens_port                                   = 443
   $tworavens_protocol                               = 'https'
